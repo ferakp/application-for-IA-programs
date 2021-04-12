@@ -8,6 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "aurelia-animator-css": "^1.0.4",
     "aurelia-bootstrapper": "^2.3.3"
   },
