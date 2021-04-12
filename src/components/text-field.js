@@ -23,6 +23,9 @@ export class TextField {
   for;
 
   @bindable
+  inputClickCallback;
+
+  @bindable
   firstLetterUpperCase;
 
   @bindable
@@ -55,12 +58,18 @@ export class TextField {
       this.value[0] !== this.value[0].toUpperCase()
     ) {
       // Use timeout until solution is found
-      setTimeout(() => this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1), 200);
+      setTimeout(() => {
+        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
+      }, 200);
     }
   }
 
   // This function is called by icon container when ?-icon is clicked
   tooltipClicked() {}
+
+  inputElementClicked() {
+    if (this.inputClickCallback) this.inputClickCallback();
+  }
 
   clearButtonClicked() {
     this.value = "";
