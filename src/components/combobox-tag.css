@@ -1,0 +1,100 @@
+.combobox__transparent-bg-color {
+  background-color: transparent !important;
+}
+
+.combobox__transparent-bg-color:hover {
+  background-color: transparent !important;
+}
+
+.combobox__suffix-container {
+  background-color: transparent !important;
+}
+
+.combobox__suffix-container-link {
+  background-color: transparent !important;
+  text-decoration: none !important;
+}
+
+.combobox__pointer-cursor {
+  cursor: pointer;
+}
+
+.combobox__drop-down-icon-list {
+  font-size: 26px;
+  color: rgba(5, 5, 5, 0.61);
+  background-color: transparent !important;
+}
+
+.combobox__container {
+  flex: 1;
+}
+
+.combobox__container:hover .combobox__drop-down-icon-list {
+  animation-name: comboboxBlueHighlight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes comboboxBlueHighlight {
+  from {
+    color: rgba(5, 5, 5, 0.61);
+  }
+
+  to {
+    color: #58c1f5;
+  }
+}
+
+.combobox__drop-down-list-container {
+  position: relative;
+}
+
+.combobox__drop-down-list {
+  display: flex;
+  position: absolute;
+  z-index: 500;
+  height: auto;
+  min-height: 40px;
+  width: 100%;
+  max-height: 40vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.151);
+  border-radius: 2%;
+}
+
+.combobox__drop-down-list > div {
+  margin-top: 5px;
+}
+
+.combobox__drop-down-list div:last-child {
+  margin-bottom: 5px;
+}
+
+.combobox__drop-down-list-item {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 0;
+  border-radius: 3%;
+  flex: 1;
+  min-height: 35px;
+}
+
+.combobox__drop-down-list-item:hover {
+  background-color: rgba(8, 8, 245, 0.274);
+  cursor: pointer;
+}
+
+.combobox__drop-down-list-item-content {
+  margin: 0;
+  padding: 0;
+
+  margin-left: 10px;
+  color: #212529cb;
+  font-size: 1rem;
+  font-weight: 400;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
