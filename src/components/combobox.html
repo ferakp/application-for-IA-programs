@@ -3,7 +3,7 @@
   <require from="./combobox.css"></require>
 
   <!--Content-->
-  <div class="combobox__container">
+  <div class="combobox__container d-flex" ref="comboboxUpperContainer">
     <text-field
       ref="comboboxTextField"
       class="combobox__text-field"
@@ -15,9 +15,10 @@
       disable.to-view="disable"
       error-message.to-view="errorMessage"
       required.to-view="required"
-      value.two-way="value & throttle"
+      value.two-way="value"
       hide-suffix-container.to-view="hideSuffixContainer"
       for.to-view="for"
+      input-click-callback.to-view="_inputElementClicked"
     >
       <div
         class="combobox__suffix-container"
@@ -25,7 +26,7 @@
         ref="comboboxSuffixContainer"
       >
         <a
-          class="combobox__transparent-bg-color d-flex align-items-center m-2 text-decoration-none"
+          class="combobox__suffix-container-link combobox__transparent-bg-color d-flex align-items-center m-2 text-decoration-none"
           click.trigger="dropDownListIconClicked()"
           ><i
             class="combobox__drop-down-icon-list fas fa-angle-down combobox__transparent-bg-color text-decoration-none combobox__pointer-cursor"
@@ -38,12 +39,13 @@
         ref="dropDownListContainer"
       >
         <div
-          class="combobox__drop-down-list d-flex flex-column"
+          ref="dropDownList"
+          class="combobox__drop-down-list flex-column"
           show.bind="dropDownListOpened"
         >
           <div
             class="combobox__drop-down-list-item d-flex align-items-center"
-            repeat.for="item of _combobox_items"
+            repeat.for="item of _comboboxItems"
             click.trigger="itemSelected(item)"
           >
             <p class="combobox__drop-down-list-item-content">${item}</p>

@@ -25,14 +25,15 @@
         class="text-field__input-element"
         disabled="${disable === true ? true : undefined}"
         placeholder.to-view="placeholder"
-        value.two-way="value & throttle"
+        value.two-way="value"
         type="${allowOnlyNumbers === true ? 'number' : 'text'}"
+        click.delegate="inputElementClicked()"
       />
       <div
         class="text-field__input-icons-container d-flex flex-row-reserve ml-auto"
       >
         <a
-          class="text-field__transparent-bg-color d-flex align-items-center m-2 text-decoration-none"
+          class="text-field__input-icons-container-link text-field__transparent-bg-color align-items-center m-2 text-decoration-none"
           show.bind="activateClearButton"
           click.trigger="clearButtonClicked()"
           ><i

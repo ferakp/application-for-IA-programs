@@ -103,6 +103,10 @@ export class Combobox {
     this.dropDownListOpened = false;
   }
 
+  _inputElementClicked = async () => {
+    if (!this.dropDownListOpened) this.dropDownListOpened = true;
+  };
+
   /**
    * CHANGED FUNCTIONS
    */
@@ -115,14 +119,16 @@ export class Combobox {
       this.applyFiltering();
     } else {
       let tempItems = await this.dataProvider(this.value);
-      if (this._isReturnedItemsValid(tempItems)) this._comboboxItems = tempItems;
+      if (this._isReturnedItemsValid(tempItems))
+        this._comboboxItems = tempItems;
     }
   }
 
   async dropDownListOpenedChanged(newValue, oldValue) {
     if (!oldValue && newValue && this.dataProvider) {
       let tempItems = await this.dataProvider(this.value);
-      if (this._isReturnedItemsValid(tempItems)) this._comboboxItems = tempItems;
+      if (this._isReturnedItemsValid(tempItems))
+        this._comboboxItems = tempItems;
     }
   }
 
@@ -149,7 +155,8 @@ export class Combobox {
     if (this.value && this._itemsAreValid) {
       const tempValidItems = [];
       this.items.forEach((e) => {
-        if (e.toLowerCase().includes(this.value.toLowerCase())) tempValidItems.push(e);
+        if (e.toLowerCase().includes(this.value.toLowerCase()))
+          tempValidItems.push(e);
       });
       this._comboboxItems = tempValidItems;
     } else if (this._itemsAreValid) {
@@ -160,7 +167,10 @@ export class Combobox {
   applyCustomFiltering() {
     if (this._itemsAreValid) {
       const customFilterItems = this.customFilter(this.value, this.items);
-      if (!this._isArrayEmpty(customFilterItems) && this._isReturnedItemsValid(customFilterItems)) {
+      if (
+        !this._isArrayEmpty(customFilterItems) &&
+        this._isReturnedItemsValid(customFilterItems)
+      ) {
         this._comboboxItems = customFilterItems;
       } else {
         this._comboboxItems = [];
@@ -187,10 +197,5 @@ export class Combobox {
 
   _isArrayEmpty(array) {
     return Array.isArray(array) && array.length === 0;
-  }
-
-  _has(nodeList, selector) {
-    console.log(Array.from(nodeList).filter((e) => e.querySelector(selector)));
-    return Array.from(nodeList).filter((e) => e.querySelector(selector));
   }
 }
