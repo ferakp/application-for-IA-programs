@@ -1,6 +1,4 @@
 import { inject, bindable } from "aurelia-framework";
-import $ from "jquery";
-import { thisExpression } from "@babel/types";
 
 export class Combobox {
   @bindable
