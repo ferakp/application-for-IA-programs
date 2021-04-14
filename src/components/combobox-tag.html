@@ -20,7 +20,7 @@
       for.to-view="for"
       input-click-callback.to-view="_inputElementClicked"
     >
-      <div class="combobox__prefix-container">
+      <div class="combobox__prefix-container" slot="prefix-container">
         <div
           repeat.for="tag of selections"
           class="combobox__tag"
@@ -28,7 +28,7 @@
           <p class="combobox_tag-label">${tag}</p>
           <i
             class="fas fa-times combobox__tag-close-icon"
-            click.delegate="deleteTag($index)"
+            click.delegate="_deleteTag($index)"
           ></i>
         </div>
       </div>
