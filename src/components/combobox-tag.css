@@ -101,10 +101,11 @@
 
 .combobox__prefix-container {
   display: flex;
-  flex: 1;
   min-height: 40px;
   flex-direction: row;
   overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 70%;
 }
 
 .combobox_tag-label {
@@ -136,5 +137,10 @@
   margin-right: 10px;
   cursor: pointer;
   background-color: transparent !important;
+}
+
+.combobox_tag-close-icon-link {
+  background-color: transparent !important;
+  text-decoration: none;
 }
 

@@ -85,6 +85,13 @@ export class ComboboxTag {
    * LISTENERS (CLICKED/SELECTED) FUNCTIONS
    */
 
+  _inputElementEnterPressed = async () => {
+    if (this.value.trim().length > 0) {
+      this.selections.push(this.value.trim());
+      this.value = "";
+    }
+  };
+
   dropDownListIconClicked() {
     this.dropDownListOpened = !this.dropDownListOpened;
   }
@@ -107,7 +114,8 @@ export class ComboboxTag {
   };
 
   _deleteTag = async (index) => {
-    this.selections.splice(index);
+    console.log("called delete tag");
+    this.selections.splice(index, 1);
   };
 
   /**
@@ -122,6 +130,7 @@ export class ComboboxTag {
       isDataProviderCalled = true;
     }
     if (!this.dataProvider) {
+      if (newValue.length > 0) this.dropDownListOpened = true;
       // Routing filtering
       this.applyFiltering();
     } else if (!isDataProviderCalled) {
@@ -161,9 +170,9 @@ export class ComboboxTag {
    */
 
   applyFiltering() {
-    console.log("called ", this._currentFilter);
     if (this._currentFilter)
       this._comboboxItems = this._currentFilter(this.value, this.items);
+    if (this._comboboxItems.length === 0) this.dropDownListOpened = false;
   }
 
   _defaultFilter = (value, items) => {
