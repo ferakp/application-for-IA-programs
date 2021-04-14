@@ -114,7 +114,6 @@ export class ComboboxTag {
   };
 
   _deleteTag = async (index) => {
-    console.log("called delete tag");
     this.selections.splice(index, 1);
   };
 
