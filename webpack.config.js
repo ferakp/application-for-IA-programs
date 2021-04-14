@@ -1,3 +1,4 @@
+const babelPolyfill = require('@babel/polyfill');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -48,7 +49,8 @@ module.exports = ({ production } = {}, {extractCss, analyze, tests, hmr, port, h
   entry: {
     app: [
       // Uncomment next line if you need to support IE11
-      // 'promise-polyfill/src/polyfill',
+      '@babel/polyfill',
+      'promise-polyfill/src/polyfill',
       'aurelia-bootstrapper'
     ]
   },

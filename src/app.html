@@ -19,6 +19,7 @@
         </text-field>
         <checkbox class="m-2" name="Checkbox label"></checkbox>
         <combobox
+        class="m-2"
         label="Kunta"
         placeholder="Valitse"
         show-clear-button.bind="true"
@@ -32,6 +33,14 @@
         hide-suffix-container.bind="false"
         items.to-view="items"
         ></combobox>
+        <combobox-tag
+        class="m-2"
+        for="Testing"
+        label="Combobox Tag"
+        placeholder="...."
+        show-clear-button.bind="true"
+        items.to-view="itemsComboboxTag"
+        ></combobox-tag>
       </div>
     </div>
   </div>

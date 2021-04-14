@@ -17,6 +17,9 @@ export class TextField {
   errorMessage;
 
   @bindable
+  inputEnterCallback;
+
+  @bindable
   placeholder;
 
   @bindable
@@ -44,6 +47,14 @@ export class TextField {
 
   activateClearButton = false;
 
+  attached() {
+    this.textFieldInputElement.addEventListener("keyup", (e) => {
+      if (e.keyCode === 13) {
+        this.inputEnterPressed();
+      }
+    });
+  }
+
   /**
    * Changes the hasBeenEdited property to true when user writes something into the input element
    * @param {string} newValue the new value of value attribute
@@ -66,6 +77,10 @@ export class TextField {
 
   // This function is called by icon container when ?-icon is clicked
   tooltipClicked() {}
+
+  inputEnterPressed() {
+    if (this.inputEnterCallback) this.inputEnterCallback();
+  }
 
   inputElementClicked() {
     if (this.inputClickCallback) this.inputClickCallback();

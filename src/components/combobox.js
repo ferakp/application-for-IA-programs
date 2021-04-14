@@ -80,8 +80,8 @@ export class Combobox {
       let container = this.comboboxUpperContainer.parentElement;
       if (
         this.dropDownListOpened &&
-        container !== event.target &&
-        !container.contains(event.target)
+        container !== e.target &&
+        !container.contains(e.target)
       ) {
         this.dropDownListOpened = false;
       }

@@ -1,0 +1,146 @@
+.combobox__transparent-bg-color {
+  background-color: transparent !important;
+}
+
+.combobox__transparent-bg-color:hover {
+  background-color: transparent !important;
+}
+
+.combobox__suffix-container {
+  background-color: transparent !important;
+}
+
+.combobox__suffix-container-link {
+  background-color: transparent !important;
+  text-decoration: none !important;
+}
+
+.combobox__pointer-cursor {
+  cursor: pointer;
+}
+
+.combobox__drop-down-icon-list {
+  font-size: 26px;
+  color: rgba(5, 5, 5, 0.61);
+  background-color: transparent !important;
+}
+
+.combobox__container {
+  flex: 1;
+}
+
+.combobox__container:hover .combobox__drop-down-icon-list {
+  animation-name: comboboxBlueHighlight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes comboboxBlueHighlight {
+  from {
+    color: rgba(5, 5, 5, 0.61);
+  }
+
+  to {
+    color: #58c1f5;
+  }
+}
+
+.combobox__drop-down-list-container {
+  position: relative;
+}
+
+.combobox__drop-down-list {
+  display: flex;
+  position: absolute;
+  z-index: 500;
+  height: auto;
+  min-height: 40px;
+  width: 100%;
+  max-height: 40vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.151);
+  border-radius: 2%;
+}
+
+.combobox__drop-down-list > div {
+  margin-top: 5px;
+}
+
+.combobox__drop-down-list div:last-child {
+  margin-bottom: 5px;
+}
+
+.combobox__drop-down-list-item {
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 0;
+  border-radius: 3%;
+  flex: 1;
+  min-height: 35px;
+}
+
+.combobox__drop-down-list-item:hover {
+  background-color: rgba(8, 8, 245, 0.274);
+  cursor: pointer;
+}
+
+.combobox__drop-down-list-item-content {
+  margin: 0;
+  padding: 0;
+
+  margin-left: 10px;
+  color: #212529cb;
+  font-size: 1rem;
+  font-weight: 400;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.combobox__prefix-container {
+  display: flex;
+  min-height: 40px;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 70%;
+}
+
+.combobox_tag-label {
+  margin-right: 5px;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: transparent !important;
+  margin: 2px 10px 2px 10px;
+  padding: 0;
+  font-size: 13px;
+  font-family: sans, Arial;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.combobox__tag {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: #e4e4e4 !important;
+  align-items: center;
+  height: 32px;
+  border-radius: 25px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+}
+
+.combobox__tag-close-icon {
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: transparent !important;
+}
+
+.combobox_tag-close-icon-link {
+  background-color: transparent !important;
+  text-decoration: none;
+}
+
