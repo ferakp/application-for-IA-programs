@@ -70,8 +70,6 @@ export class ComboboxTag {
 
   _comboboxItems = [];
 
-  _currentFilter;
-
   attached() {
     this.isAttached = true;
     this.initialize();
@@ -169,8 +167,8 @@ export class ComboboxTag {
    */
 
   applyFiltering() {
-    if (this._currentFilter)
-      this._comboboxItems = this._currentFilter(this.value, this.items);
+    const currentFilter = this.customFilter ?? this._defaultFilter;
+    this._comboboxItems = currentFilter(this.value, this.items);
     if (this._comboboxItems.length === 0) this.dropDownListOpened = false;
   }
 

@@ -1,4 +1,4 @@
-import { inject, bindable } from "aurelia-framework";
+import { inject, bindable } from 'aurelia-framework';
 
 export class Combobox {
   @bindable
@@ -65,8 +65,6 @@ export class Combobox {
 
   isAttached = false;
 
-  _itemsAreValid = false;
-
   _comboboxItems = [];
 
   attached() {
@@ -75,17 +73,7 @@ export class Combobox {
   }
 
   initialize() {
-    // A listener for closing the drop down list whenever anything outside of it is clicked
-    document.body.addEventListener("mouseup", (e) => {
-      let container = this.comboboxUpperContainer.parentElement;
-      if (
-        this.dropDownListOpened &&
-        container !== e.target &&
-        !container.contains(e.target)
-      ) {
-        this.dropDownListOpened = false;
-      }
-    });
+    this.customerFilterChanged();
   }
 
   /**
@@ -102,7 +90,15 @@ export class Combobox {
   }
 
   _inputElementClicked = async () => {
-    if (!this.dropDownListOpened) this.dropDownListOpened = true;
+    this.applyFiltering();
+    this.dropDownListOpened = true;
+  };
+
+  _outsideDropDownClicked = (event) => {
+    const container = this.comboboxUpperContainer.parentElement;
+    if (container !== event.target && !container.contains(event.target)) {
+      this.dropDownListOpened = false;
+    }
   };
 
   /**
@@ -110,34 +106,44 @@ export class Combobox {
    */
 
   async valueChanged(newValue, oldValue) {
+    let isDataProviderCalled = false;
     // Open drop down list when value is not empty
-    if (newValue.length === 1) this.dropDownListOpened = true;
+    if (!this.dropDownListOpened && newValue.length === 1) {
+      this.dropDownListOpened = true;
+      isDataProviderCalled = true;
+    }
     if (!this.dataProvider) {
       // Routing filtering
       this.applyFiltering();
-    } else {
-      let tempItems = await this.dataProvider(this.value);
-      if (this._isReturnedItemsValid(tempItems))
-        this._comboboxItems = tempItems;
+    } else if (!isDataProviderCalled) {
+      const tempItems = await this.dataProvider(this.value);
+      this._comboboxItems = tempItems;
     }
   }
 
-  async dropDownListOpenedChanged(newValue, oldValue) {
-    if (!oldValue && newValue && this.dataProvider) {
-      let tempItems = await this.dataProvider(this.value);
-      if (this._isReturnedItemsValid(tempItems))
-        this._comboboxItems = tempItems;
+  async dropDownListOpenedChanged(newValue) {
+    if (newValue) document.body.addEventListener('mouseup', this._outsideDropDownClicked);
+    else {
+      document.body.removeEventListener(
+        'mouseup',
+        this._outsideDropDownClicked,
+      );
+    }
+    if (newValue && this.dataProvider) {
+      const tempItems = await this.dataProvider(this.value);
+      this._comboboxItems = tempItems;
     }
   }
 
   async itemsChanged(newValue) {
     // Return if data provider is provided
     if (this.dataProvider) return;
-    // If items attribute has an array of items, move them to the _comboboxItems (view)
-    if (Array.isArray(newValue)) {
-      this._checkItemsValidity(newValue);
-      if (this._itemsAreValid) this.applyFiltering();
-    }
+    this.applyFiltering();
+  }
+
+  customerFilterChanged() {
+    if (!this.customFilter) this._currentFilter = this._defaultFilter;
+    else this._currentFilter = this.customFilter;
   }
 
   /**
@@ -145,55 +151,19 @@ export class Combobox {
    */
 
   applyFiltering() {
-    if (!this.customFilter) this.applyDefaultFiltering();
-    else this.applyCustomFiltering();
+    const currentFilter = this.customFilter ?? this._defaultFilter;
+    this._comboboxItems = currentFilter(this.value, this.items);
+    if (this._comboboxItems.length === 0) this.dropDownListOpened = false;
   }
 
-  applyDefaultFiltering() {
-    if (this.value && this._itemsAreValid) {
+  _defaultFilter = (value, items) => {
+    if (value) {
       const tempValidItems = [];
-      this.items.forEach((e) => {
-        if (e.toLowerCase().includes(this.value.toLowerCase()))
-          tempValidItems.push(e);
+      items.forEach((e) => {
+        if (e.toLowerCase().includes(value.toLowerCase())) tempValidItems.push(e);
       });
-      this._comboboxItems = tempValidItems;
-    } else if (this._itemsAreValid) {
-      this._comboboxItems = this.items;
+      return tempValidItems;
     }
-  }
-
-  applyCustomFiltering() {
-    if (this._itemsAreValid) {
-      const customFilterItems = this.customFilter(this.value, this.items);
-      if (
-        !this._isArrayEmpty(customFilterItems) &&
-        this._isReturnedItemsValid(customFilterItems)
-      ) {
-        this._comboboxItems = customFilterItems;
-      } else {
-        this._comboboxItems = [];
-      }
-    }
-  }
-
-  /**
-   * VALIDATION AND UTILITY FUNCTIONS
-   */
-
-  _checkItemsValidity(newItems) {
-    if (Array.isArray(newItems)) {
-      this._itemsAreValid = !newItems.some((e) => typeof e !== "string");
-    } else this._itemsAreValid = false;
-  }
-
-  _isReturnedItemsValid(customFilterItems) {
-    if (Array.isArray(customFilterItems)) {
-      return !customFilterItems.some((e) => typeof e !== "string");
-    }
-    return false;
-  }
-
-  _isArrayEmpty(array) {
-    return Array.isArray(array) && array.length === 0;
-  }
+    return items;
+  };
 }
