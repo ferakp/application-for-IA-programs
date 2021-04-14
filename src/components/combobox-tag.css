@@ -98,3 +98,43 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.combobox__prefix-container {
+  display: flex;
+  flex: 1;
+  min-height: 40px;
+  flex-direction: row;
+  overflow-x: auto;
+}
+
+.combobox_tag-label {
+  margin-right: 5px;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: transparent !important;
+  margin: 2px 10px 2px 10px;
+  padding: 0;
+  font-size: 13px;
+  font-family: sans, Arial;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.combobox__tag {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  background-color: #e4e4e4 !important;
+  align-items: center;
+  height: 32px;
+  border-radius: 25px;
+  margin-bottom: 3px;
+  margin-right: 5px;
+}
+
+.combobox__tag-close-icon {
+  color: white;
+  margin-right: 10px;
+  cursor: pointer;
+  background-color: transparent !important;
+}
+
