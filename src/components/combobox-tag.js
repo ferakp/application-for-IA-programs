@@ -14,7 +14,7 @@ export class ComboboxTag {
   value;
 
   @bindable
-  selections = ["Mika"];
+  selections;
 
   @bindable
   language;
@@ -155,11 +155,6 @@ export class ComboboxTag {
     // Return if data provider is provided
     if (this.dataProvider) return;
     this.applyFiltering();
-  }
-
-  customerFilterChanged() {
-    if (!this.customFilter) this._currentFilter = this._defaultFilter;
-    else this._currentFilter = this.customFilter;
   }
 
   /**
