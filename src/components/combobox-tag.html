@@ -3,10 +3,10 @@
   <require from="./combobox-tag.css"></require>
 
   <!--Content-->
-  <div class="combobox__container d-flex" ref="comboboxUpperContainer">
+  <div class="combobox-tag__container d-flex" ref="comboboxTagUpperContainer">
     <text-field
       ref="comboboxTextField"
-      class="combobox__text-field"
+      class="d-flex combobox-tag__text-field"
       placeholder.to-view="placeholder"
       label.to-view="label"
       show-clear-button.to-view="showClearButton"
@@ -21,45 +21,51 @@
       input-click-callback.to-view="_inputElementClicked"
       input-enter-callback.to-view="_inputElementEnterPressed"
     >
-      <div class="combobox__prefix-container" slot="prefix-container" show.bind="selections.length > 0 ? true : false">
-        <div repeat.for="tag of selections" class="combobox__tag">
+      <div
+        class="combobox-tag__prefix-container"
+        slot="prefix-container"
+        show.bind="selections.length > 0 ? true : false"
+      >
+        <div repeat.for="tag of selections" class="combobox-tag__tag">
           <p class="combobox_tag-label">${tag}</p>
           <a
             class="combobox_tag-close-icon-link"
             click.trigger="_deleteTag($index)"
-            ><i class="fas fa-times combobox__tag-close-icon"></i
+            ><i class="fas fa-times combobox-tag__tag-close-icon"></i
           ></a>
         </div>
       </div>
       <div
-        class="combobox__suffix-container"
+        class="combobox-tag__suffix-container"
         slot="suffix-container"
         ref="comboboxSuffixContainer"
       >
         <a
-          class="combobox__suffix-container-link combobox__transparent-bg-color d-flex align-items-center m-2 text-decoration-none"
+          class="combobox-tag__suffix-container-link combobox-tag__transparent-bg-color d-flex align-items-center m-2 text-decoration-none"
           click.trigger="dropDownListIconClicked()"
           ><i
-            class="combobox__drop-down-icon-list fas fa-angle-down combobox__transparent-bg-color text-decoration-none combobox__pointer-cursor"
+            class="combobox-tag__drop-down-icon-list fas fa-angle-down combobox-tag__transparent-bg-color text-decoration-none combobox-tag__pointer-cursor"
           ></i
         ></a>
       </div>
       <div
-        class="combobox__drop-down-list-container"
+        class="combobox-tag__drop-down-list-container"
         slot="drop-down-list-container"
         ref="dropDownListContainer"
       >
-        <div
-          ref="dropDownList"
-          class="combobox__drop-down-list flex-column"
-          show.bind="dropDownListOpened"
-        >
+        <div class="combobox-tag__drop-down-list-container-skipper d-flex">
           <div
-            class="combobox__drop-down-list-item d-flex align-items-center"
-            repeat.for="item of _comboboxItems"
-            click.trigger="itemSelected(item)"
+            ref="dropDownList"
+            class="combobox-tag__drop-down-list flex-column"
+            show.bind="dropDownListOpened"
           >
-            <p class="combobox__drop-down-list-item-content">${item}</p>
+            <div
+              class="combobox-tag__drop-down-list-item d-flex align-items-center"
+              repeat.for="item of _comboboxItems"
+              click.trigger="itemSelected(item)"
+            >
+              <p class="combobox-tag__drop-down-list-item-content">${item}</p>
+            </div>
           </div>
         </div>
       </div>
