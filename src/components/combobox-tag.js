@@ -1,4 +1,4 @@
-import { inject, bindable } from "aurelia-framework";
+import { bindable } from 'aurelia-framework';
 
 export class ComboboxTag {
   @bindable
@@ -30,6 +30,12 @@ export class ComboboxTag {
 
   @bindable
   items;
+
+  @bindable
+  enableDuplicateSelections;
+
+  @bindable
+  enableCustomValues;
 
   @bindable
   showClearButton;
@@ -75,9 +81,7 @@ export class ComboboxTag {
     this.initialize();
   }
 
-  initialize() {
-    this.customerFilterChanged();
-  }
+  initialize() {}
 
   /**
    * LISTENERS (CLICKED/SELECTED) FUNCTIONS
@@ -85,8 +89,10 @@ export class ComboboxTag {
 
   _inputElementEnterPressed = async () => {
     if (this.value.trim().length > 0) {
-      this.selections.push(this.value.trim());
-      this.value = "";
+      if (this.enableCustomValues) this.itemSelected(this.value.trim());
+      else if (this._comboboxItems.indexOf(this.value.trim()) >= 0) {
+        this.itemSelected(this.value.trim());
+      }
     }
   };
 
@@ -95,7 +101,17 @@ export class ComboboxTag {
   }
 
   itemSelected(newValue) {
-    this.selections.push(newValue);
+    // selections must be an array
+    if (!Array.isArray(this.selections)) this.selections = [];
+    if (!this.enableDuplicateSelections) {
+      if (!(this.selections.indexOf(newValue) >= 0)) {
+        this.selections.push(newValue);
+        this.value = '';
+      }
+    } else {
+      this.selections.push(newValue);
+      this.value = '';
+    }
     this.dropDownListOpened = false;
   }
 
@@ -105,7 +121,7 @@ export class ComboboxTag {
   };
 
   _outsideDropDownClicked = (event) => {
-    const container = this.comboboxUpperContainer.parentElement;
+    const container = this.comboboxTagUpperContainer.parentElement;
     if (container !== event.target && !container.contains(event.target)) {
       this.dropDownListOpened = false;
     }
@@ -137,12 +153,11 @@ export class ComboboxTag {
   }
 
   async dropDownListOpenedChanged(newValue) {
-    if (newValue)
-      document.body.addEventListener("mouseup", this._outsideDropDownClicked);
+    if (newValue) document.body.addEventListener('mouseup', this._outsideDropDownClicked);
     else {
       document.body.removeEventListener(
-        "mouseup",
-        this._outsideDropDownClicked
+        'mouseup',
+        this._outsideDropDownClicked,
       );
     }
     if (newValue && this.dataProvider) {
@@ -164,15 +179,14 @@ export class ComboboxTag {
   applyFiltering() {
     const currentFilter = this.customFilter ?? this._defaultFilter;
     this._comboboxItems = currentFilter(this.value, this.items);
-    if (this._comboboxItems.length === 0) this.dropDownListOpened = false;
+    if (this._comboboxItems && this._comboboxItems.length === 0) this.dropDownListOpened = false;
   }
 
   _defaultFilter = (value, items) => {
     if (value) {
       const tempValidItems = [];
       items.forEach((e) => {
-        if (e.toLowerCase().includes(value.toLowerCase()))
-          tempValidItems.push(e);
+        if (e.toLowerCase().includes(value.toLowerCase())) tempValidItems.push(e);
       });
       return tempValidItems;
     }
