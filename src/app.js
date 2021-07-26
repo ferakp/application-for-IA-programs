@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import './components/cs-navbar.js';
 
 export class App {
   message = 'Hello World!';
