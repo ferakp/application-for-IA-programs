@@ -326,7 +326,7 @@ class CustomNavbar extends HTMLElement {
                               }
                   
                           }
-                          @media screen and (max-width: 820px) {
+                          @media screen and (max-width: 50px) {
                               .custom-nav-item {
                                   margin-left: 10px;
                                   
