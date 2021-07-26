@@ -1,7 +1,7 @@
 import { bindable } from 'aurelia-framework';
 
 
-export class ControlPanel {
+export class DashboardNav {
 
   @bindable
   disable;

@@ -4,49 +4,6 @@
 
   <!-- Child components-->
 
-  <cs-navbar ref="navBar"></cs-navbar> 
-  <div class="app__container">
-    <div class="app__left-window">
-      <div class="app__control-panel-container d-flex justify-content-center">
-        <control-panel></control-panel>
-      </div>
-      <text-field
-        class="mb-3"
-        label="Otsikko"
-        placeholder="Kirjoita teksti tähän"
-        show-clear-button.bind="true"
-        disable.bind="false"
-        first-letter-upper-case.bind="true"
-        allow-only-numbers.bind="false"
-      >
-      </text-field>
-      <checkbox class="m-2" name="Checkbox label"></checkbox>
-      <combobox
-        class="m-2"
-        label="Kunta"
-        placeholder="Valitse"
-        show-clear-button.bind="true"
-        required.bind="true"
-        language="en"
-        for="municipality"
-        first-letter-upper-case.bind="true"
-        allow-only-numbers.bind="false"
-        disable.bind="false"
-        disable-custom-values.bind="false"
-        hide-suffix-container.bind="false"
-        items.to-view="items"
-      ></combobox>
-      <combobox-tag
-        class="m-2"
-        for="Testing"
-        label="Combobox Tag"
-        placeholder="...."
-        show-clear-button.bind="true"
-        items.to-view="itemsComboboxTag"
-      ></combobox-tag>
-    </div>
-    <div class="app__right-window">
-
-    </div>
-  </div>
+  <cs-navbar ref="navBar"></cs-navbar>
+  <router-view></router-view>
 </template>
