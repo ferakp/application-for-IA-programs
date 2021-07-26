@@ -4,21 +4,24 @@
 
   <!-- Child components-->
 
-  <div class="container-fluid">
-    <div clas="row">
-      <div class="col-md-3 mt-4">
-        <text-field
-          class="mb-3"
-          label="Otsikko"
-          placeholder="Kirjoita teksti tähän"
-          show-clear-button.bind="true"
-          disable.bind="false"
-          first-letter-upper-case.bind="true"
-          allow-only-numbers.bind="false"
-        >
-        </text-field>
-        <checkbox class="m-2" name="Checkbox label"></checkbox>
-        <combobox
+  <div class="app__container">
+    <div class="app__left-window">
+      <div class="app__control-panel-container d-flex justify-content-center">
+        <p class="app__left-window-title h3">Hallintapaneeli</p>
+        
+      </div>
+      <text-field
+        class="mb-3"
+        label="Otsikko"
+        placeholder="Kirjoita teksti tähän"
+        show-clear-button.bind="true"
+        disable.bind="false"
+        first-letter-upper-case.bind="true"
+        allow-only-numbers.bind="false"
+      >
+      </text-field>
+      <checkbox class="m-2" name="Checkbox label"></checkbox>
+      <combobox
         class="m-2"
         label="Kunta"
         placeholder="Valitse"
@@ -32,16 +35,18 @@
         disable-custom-values.bind="false"
         hide-suffix-container.bind="false"
         items.to-view="items"
-        ></combobox>
-        <combobox-tag
+      ></combobox>
+      <combobox-tag
         class="m-2"
         for="Testing"
         label="Combobox Tag"
         placeholder="...."
         show-clear-button.bind="true"
         items.to-view="itemsComboboxTag"
-        ></combobox-tag>
-      </div>
+      ></combobox-tag>
+    </div>
+    <div class="app__right-window">
+
     </div>
   </div>
 </template>

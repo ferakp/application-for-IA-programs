@@ -1,9 +1,50 @@
+body {
+  height: 100vh;
+  width: 100vw;
+}
+
 text-field {
   display: flex;
   flex: 1;
 }
 
-body {
+combobox {
   display: flex;
   flex: 1;
 }
+
+combobox-tag {
+  display: flex;
+  flex: 1;
+}
+
+checkbox {
+  display: flex;
+  flex: 1;
+}
+
+.app__container {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1;
+  height: 100%;
+}
+
+.app__left-window {
+  display: flex;
+  flex-flow: column wrap;
+  flex: 0 0 50%;
+}
+
+.app__right-window {
+  display: flex;
+  flex: 0 0 50%;
+}
+
+/**LEFT WINDOW**/
+
+.app__control-panel-container {
+  flex: 1;
+  padding-top: 5px;
+}
+
