@@ -1,0 +1,9 @@
+dashboard-nav {
+  flex: 1;
+  justify-content: center;
+}
+
+.app__left-window-title {
+  max-height: 30px;
+  opacity: 0.8;
+}
