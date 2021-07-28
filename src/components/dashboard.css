@@ -7,7 +7,6 @@
   display: flex;
   flex-flow: row nowrap;
   flex: 1;
-  height: 100%;
 }
 
 /**LEFT WINDOW**/
@@ -16,6 +15,10 @@
   display: flex;
   flex-flow: column wrap;
   flex: 0 0 50%;
+}
+
+.dashboard__console-container {
+  flex: 1;
 }
 
 /**RIGHT WINDOW**/

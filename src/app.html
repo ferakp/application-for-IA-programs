@@ -4,6 +4,10 @@
 
   <!-- Child components-->
 
-  <cs-navbar ref="navBar"></cs-navbar>
-  <router-view></router-view>
+  <div class="app__container">
+    <div class="app__nav d-flex">
+      <cs-navbar ref="navBar"></cs-navbar>
+    </div>
+    <router-view></router-view>
+  </div>
 </template>
