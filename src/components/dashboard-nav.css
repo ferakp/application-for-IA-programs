@@ -1,9 +1,10 @@
 dashboard-nav {
   flex: 1;
   justify-content: left;
+  flex-direction: column;
 }
 
-.app__left-window-title {
+.dashboard-nav__title {
   margin-left: 10px;
   max-height: 30px;
   opacity: 0.8;
