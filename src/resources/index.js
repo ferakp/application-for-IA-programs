@@ -7,6 +7,8 @@ export function configure(config) {
       PLATFORM.moduleName('../components/checkbox'),
       PLATFORM.moduleName('../components/combobox'),
       PLATFORM.moduleName('../components/combobox-tag'),
+      PLATFORM.moduleName('../components/dashboard-nav'),
+      PLATFORM.moduleName('../components/console'),
     ]
   );
 }
