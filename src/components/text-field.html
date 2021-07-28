@@ -4,7 +4,7 @@
 
   <!--Child components-->
   <div class="text-field__container">
-    <div class="text-field__label-container mb-2">
+    <div class="text-field__label-container mb-2" show.bind="!minimalMode">
       <p class="text-field__label-element m-0 mr-auto">
         ${label}<span class="text-field__required" if.bind="required"
           >&nbsp; &#42;</span

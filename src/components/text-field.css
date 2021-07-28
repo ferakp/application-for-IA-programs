@@ -114,7 +114,7 @@
   display: flex;
   flex: 1;
   flex-direction: row;
-  min-height: 38px;
+  max-height: 39px;
 }
 
 .text-field__container input {
@@ -123,6 +123,7 @@
 
   box-shadow: none;
   border: none;
+  max-height: 38px;
 }
 
 .text-field__container input:focus {
