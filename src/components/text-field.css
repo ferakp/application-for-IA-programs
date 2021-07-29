@@ -3,7 +3,6 @@
   display: flex;
   flex: 1;
   flex-direction: column;
-  min-height: 56px;
 }
 
 .text-field__transparent-bg-color {
@@ -24,7 +23,7 @@
 
 .text-field__normal-border {
   width: 100%;
-  border-bottom: 1px solid #c0bebe;
+  border-bottom: 3px solid #000000;
 }
 
 .text-field__error-message {
@@ -41,6 +40,12 @@
   max-height: 29px;
   transition: max-height 1s ease;
   overflow: hidden;
+}
+
+.text-field__container .text-field__input-container * {
+  animation-name: textFieldInputHighlight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
 .text-field__container:hover .text-field__input-container * {
@@ -86,7 +91,7 @@
 }
 
 .text-field__icon-clear {
-  font-size: 22px;
+  font-size: 20px;
   color: rgba(5, 5, 5, 0.61);
 }
 
@@ -114,7 +119,8 @@
   display: flex;
   flex: 1;
   flex-direction: row;
-  max-height: 39px;
+  max-height: 35px;
+  min-height: 35px;
 }
 
 .text-field__container input {
@@ -156,7 +162,7 @@ input[type=number] {
   }
 
   to {
-    background-color: #85d0f515;
+    background-color: #dff2345f;
   }
 }
 
@@ -166,6 +172,6 @@ input[type=number] {
   }
 
   to {
-    color: #58c1f5;
+    color: #f3e890c6;
   }
 }

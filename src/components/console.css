@@ -1,3 +1,22 @@
 console {
   flex: 1;
+  flex-direction: column-reverse;
+  height: 100%;
+}
+
+console text-field {
+  max-height: 39px;
+  margin-bottom: 15px;
+}
+
+.console__message-container {
+  flex-direction: column-reverse;
+}
+
+.console__prefix-arrow {
+  font-size: 22px;
+}
+
+.console__prefix-container {
+  padding-right: 10px;
 }

@@ -15,10 +15,13 @@
   display: flex;
   flex-flow: column wrap;
   flex: 0 0 50%;
+  margin-left: 5px;
 }
 
 .dashboard__console-container {
   flex: 1;
+  align-items: stretch;
+  flex-direction: column;
 }
 
 /**RIGHT WINDOW**/
