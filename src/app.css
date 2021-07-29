@@ -24,7 +24,6 @@ body {
 router-view {
   display: flex;
   flex: 1;
-  height: 100%;
 }
 
 text-field {

@@ -4,12 +4,19 @@
 
   <!-- Content -->
   <text-field
-    class="mb-3"
+    class="console__text-field"
     placeholder=" "
     show-clear-button.bind="true"
     disable.bind="false"
     allow-only-numbers.bind="false"
     minimal-mode.bind="true"
   >
+  <div slot="prefix-container" class="console__prefix-container d-flex align-items-center">
+    <i class="console__prefix-arrow fas fa-angle-right"></i>
+  </div>
   </text-field>
+  <div class="console__message-container d-flex">
+    <console-message repeat.for="message of messages" message.to-view="message">
+    </console-message>
+  </div>
 </template>
