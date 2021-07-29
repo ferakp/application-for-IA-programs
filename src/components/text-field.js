@@ -43,6 +43,9 @@ export class TextField {
   @bindable
   hideSuffixContainer = false;
 
+  @bindable
+  minimalMode = false;
+
   hasBeenEdited = false;
 
   activateClearButton = false;

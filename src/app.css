@@ -1,6 +1,30 @@
 body {
   height: 100vh;
   width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.app__container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: stretch;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+.app__nav {
+  max-height: 70px;
+  flex: 1;
+  overflow-y: hidden;
+}
+
+router-view {
+  display: flex;
+  flex: 1;
+  height: 100%;
 }
 
 text-field {
@@ -23,24 +47,8 @@ checkbox {
   flex: 1;
 }
 
-.app__container {
-  display: flex;
-  flex-flow: row nowrap;
-  flex: 1;
-  height: 100%;
+/** GLOBAL STYLES ***/
+
+.ctpoh:hover {
+  cursor: pointer;
 }
-
-.app__left-window {
-  display: flex;
-  flex-flow: column wrap;
-  flex: 0 0 50%;
-}
-
-.app__right-window {
-  display: flex;
-  flex: 0 0 50%;
-}
-
-/**LEFT WINDOW**/
-
-

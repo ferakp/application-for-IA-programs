@@ -1,11 +1,22 @@
 dashboard-nav {
   flex: 1;
   justify-content: left;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 .dashboard-nav__title {
   margin-left: 10px;
   max-height: 30px;
-  opacity: 0.8;
+  opacity: 0.6;
+}
+
+.dashboard-nav__menu-container {
+  margin-left: auto;
+  align-items: center;
+}
+
+.dashboard-nav__expand-icon {
+  font-size: 1.2rem;
+  color: rgba(3, 3, 160, 0.679);
 }

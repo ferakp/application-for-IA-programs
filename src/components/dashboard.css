@@ -1,3 +1,29 @@
-.dashboard__control-panel-container {
+.dashboard__nav-container{
   padding-top: 5px;
+  flex-direction: column;
+}
+
+.dashboard__container {
+  display: flex;
+  flex-flow: row nowrap;
+  flex: 1;
+}
+
+/**LEFT WINDOW**/
+
+.dashboard__left-window {
+  display: flex;
+  flex-flow: column wrap;
+  flex: 0 0 50%;
+}
+
+.dashboard__console-container {
+  flex: 1;
+}
+
+/**RIGHT WINDOW**/
+
+.dashboard__right-window {
+  display: flex;
+  flex: 0 0 50%;
 }
