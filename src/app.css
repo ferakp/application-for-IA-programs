@@ -51,3 +51,15 @@ checkbox {
 .ctpoh:hover {
   cursor: pointer;
 }
+
+.bg-color-red {
+  background-color: red;
+}
+
+.bg-color-green {
+  background-color: green;
+}
+
+.bg-color-blue {
+  background-color: blue;
+}

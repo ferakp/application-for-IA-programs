@@ -10,7 +10,6 @@ console-message {
   width: 4px;
   height: 13px;
   margin-right: 5px;
-  background-color: red;
 }
 
 .console-message__text {
