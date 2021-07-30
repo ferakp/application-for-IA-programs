@@ -11,5 +11,6 @@ export class Console {
   messages = [];
 
   attached(){
+    this.messages.push({text: "This is a test!"});
   }
 }
