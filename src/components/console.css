@@ -12,6 +12,11 @@ console text-field {
 .console__message-container {
   flex-direction: column-reverse;
   justify-content: right;
+  margin-bottom: 10px;
+}
+
+.console-message__text {
+  margin-bottom: 5px;
 }
 
 .console__prefix-arrow {
