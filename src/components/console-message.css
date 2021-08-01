@@ -1,8 +1,25 @@
 console-message {
   display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  justify-content: left;
+}
+
+.console-message__content-container {
   flex-direction: row;
   align-items: center;
-  margin-top: 8px;
+}
+
+.console-message__head-container {
+  flex-direction: row;
+  align-items: center;
+  padding-left: 8px;
+}
+
+.console-message__time {
+  font-size: 14px;
+  color: gray;
+  opacity: 0.8;
 }
 
 .console-message__row-start-sign {

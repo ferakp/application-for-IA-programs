@@ -10,6 +10,7 @@ export class ConsoleMessage {
 
   attached(){
     this._text = this.message.text;
+    this._time = this.message.time;
   }
 
 

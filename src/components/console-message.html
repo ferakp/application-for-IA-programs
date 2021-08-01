@@ -3,6 +3,12 @@
   <require from="./console-message.css"></require>
 
   <!-- Content -->
-  <div class="console-message__row-start-sign bg-color-${message.color}"></div>
-  <p class="console-message__text">${_text}</p>
+  <div class="console-message__head-container">
+    <p class="console-message__time d-flex m-0 p-0">${_time}</p>
+  </div>
+  <div class="console-message__content-container d-flex">
+    <div class="console-message__row-start-sign bg-color-${message.color} opacity-half"></div>
+    <p class="console-message__text">${_text}</p>
+  </div>
+  
 </template>
