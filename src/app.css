@@ -63,3 +63,7 @@ checkbox {
 .bg-color-blue {
   background-color: blue;
 }
+
+.opacity-half {
+  opacity: 0.5;
+}
