@@ -34,3 +34,7 @@ terminal-line {
   padding: 0px;
   margin: 0px;
 }
+
+.terminal-line__delete-icon {
+  margin-left: auto;
+}
