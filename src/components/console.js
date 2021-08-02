@@ -4,12 +4,17 @@ export class Console {
   @bindable
   disable;
 
-  /**
-   * items are type of object with at least two attributes: id and text
-   */
-  messages = [];
+  @bindable
+  value;
+
+  @bindable
+  inputElement;
+
+  @bindable
+  messages;
 
   attached() {
+    if (!this.messages) this.messages = [];
     // Test
     this.messages.push({
       text: "This is just a test.",
