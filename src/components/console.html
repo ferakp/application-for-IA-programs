@@ -10,13 +10,15 @@
     disable.bind="false"
     allow-only-numbers.bind="false"
     minimal-mode.bind="true"
+    value.two-way="value"
+    input-enter-callback.to-view="_enterPressed"
   >
   <div slot="prefix-container" class="console__prefix-container d-flex align-items-center">
     <i class="console__prefix-arrow fas fa-angle-right"></i>
   </div>
   </text-field>
   <div class="console__message-container d-flex">
-    <console-message repeat.for="message of messages" message.to-view="message">
-    </console-message>
+    <terminal-line repeat.for="terminalLine of terminalLines" terminal-line.to-view="terminalLine">
+    </terminal-line>
   </div>
 </template>
