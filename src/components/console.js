@@ -15,40 +15,30 @@ export class Console {
 
   attached() {
     if (!this.terminalLines) this.terminalLines = [];
-    // Test
-    this.terminalLines.push({
-      text: "This is just a test.",
-      color: "red",
-      time: this._getFullDate(),
-    });
-    this.terminalLines.push({
-      text: "This message has a green row-sign.",
-      color: "green",
-      time: this._getFullDate(),
-    });
-    this.terminalLines.push({
-      text: "This is a message with blue color row-sign.",
-      color: "blue",
-      time: this._getFullDate(),
-    });
   }
 
-  _getFullDate() {
-    let date = new Date();
-    const tempDate =
-      date.getDate() +
-      "." +
-      (date.getMonth() + 1) +
-      "." +
-      date.getFullYear() +
-      " " +
-      date.getHours() +
-      ":" +
-      date.getMinutes();
-    return tempDate;
+  _enterPressed = () => {
+    this.terminalLines.push(this._getNewTerminalLine());
+    this.value = "";
   }
 
-  _enterPressed() {
+  _getNewTerminalLine(){
+    if(typeof this.value === 'string') {
+      let terminalLine = {text:this.value, time: new Date(), id: this._getNewId(), color: this._getRandomColor()}
+      return terminalLine;
+    }
+  }
 
+  _getNewId() {
+    if(this.terminalLines.length > 0) return this.terminalLines[this.terminalLines.length-1].id + 1;
+    else return Math.random() * 1000;
+  }
+
+  _getRandomColor(){
+    let red = 255 * Math.random();
+    let green = 255 * Math.random();
+    let blue = 255 * Math.random();
+    let alpha = Math.random() + 0.1;
+    return 'rgba('+red+","+green+","+blue+"," + alpha+")";
   }
 }
