@@ -10,7 +10,7 @@ console text-field {
 }
 
 .console__message-container {
-  flex-direction: column-reverse;
+  flex-direction: column;
   justify-content: right;
   margin-bottom: 10px;
 }

@@ -38,7 +38,7 @@ export class Console {
     let red = 255 * Math.random();
     let green = 255 * Math.random();
     let blue = 255 * Math.random();
-    let alpha = Math.random() + 0.1;
+    let alpha = Math.random() + 0.2;
     return 'rgba('+red+","+green+","+blue+"," + alpha+")";
   }
 }
