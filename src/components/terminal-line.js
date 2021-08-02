@@ -1,18 +1,21 @@
 import { bindable } from "aurelia-framework";
 
 export class TerminalLine {
-  
   @bindable
   terminalLine;
+
+  @bindable
+  deleteTerminalLineCallback;
 
   _id;
   _text;
   _color;
 
-  attached(){
+  attached() {
     this._text = this.terminalLine.text;
     this._time = this._formatWave(this.terminalLine.time);
     this._color = this.terminalLine.color;
+    this._id = this.terminalLine.id;
   }
 
   _formatWave(date) {
@@ -29,4 +32,8 @@ export class TerminalLine {
     return tempDate;
   }
 
+  _deleteLine() {
+    if (this.deleteTerminalLineCallback)
+      this.deleteTerminalLineCallback(this._id);
+  }
 }
