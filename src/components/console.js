@@ -11,22 +11,22 @@ export class Console {
   inputElement;
 
   @bindable
-  messages;
+  terminalLines;
 
   attached() {
-    if (!this.messages) this.messages = [];
+    if (!this.terminalLines) this.terminalLines = [];
     // Test
-    this.messages.push({
+    this.terminalLines.push({
       text: "This is just a test.",
       color: "red",
       time: this._getFullDate(),
     });
-    this.messages.push({
+    this.terminalLines.push({
       text: "This message has a green row-sign.",
       color: "green",
       time: this._getFullDate(),
     });
-    this.messages.push({
+    this.terminalLines.push({
       text: "This is a message with blue color row-sign.",
       color: "blue",
       time: this._getFullDate(),
@@ -46,5 +46,9 @@ export class Console {
       ":" +
       date.getMinutes();
     return tempDate;
+  }
+
+  _enterPressed() {
+
   }
 }
