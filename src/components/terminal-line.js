@@ -15,6 +15,7 @@ export class TerminalLine {
     this._text = this.terminalLine.text;
     this._time = this._formatWave(this.terminalLine.time);
     this._color = this.terminalLine.color;
+    this._id = this.terminalLine.id;
   }
 
   _formatWave(date) {

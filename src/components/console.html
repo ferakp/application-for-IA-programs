@@ -18,7 +18,7 @@
   </div>
   </text-field>
   <div class="console__message-container d-flex">
-    <terminal-line repeat.for="terminalLine of terminalLines" terminal-line.to-view="terminalLine">
+    <terminal-line repeat.for="terminalLine of terminalLines" terminal-line.to-view="terminalLine" delete-terminal-line-callback.to-view="_deleteTerminalLine">
     </terminal-line>
   </div>
 </template>
