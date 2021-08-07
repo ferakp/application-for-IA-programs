@@ -35,6 +35,10 @@ terminal-line {
   margin: 0px;
 }
 
-.terminal-line__icon-span {
+.terminal-line__icons-container {
   margin-left: auto;
+}
+
+.terminal-line__icon-span {
+  margin-left: 10px;
 }
