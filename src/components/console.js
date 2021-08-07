@@ -24,7 +24,6 @@ export class Console {
 
   _openInfo = (id) => {
     // Open wiki window with given id
-    console.log("Open ", id);
   }
 
   _deleteTerminalLine = (id) => {
