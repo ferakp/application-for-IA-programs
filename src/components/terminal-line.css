@@ -35,7 +35,7 @@ terminal-line {
   margin: 0px;
 }
 
-.terminal-line__delete-icon {
+.terminal-line__default-icon {
   font-size: 14px;
   color: gray;
 }

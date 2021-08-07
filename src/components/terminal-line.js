@@ -7,6 +7,9 @@ export class TerminalLine {
   @bindable
   deleteTerminalLineCallback;
 
+  @bindable
+  openInfoCallback;
+
   _id;
   _text;
   _color;
@@ -35,5 +38,9 @@ export class TerminalLine {
   _deleteLine() {
     if (this.deleteTerminalLineCallback)
       this.deleteTerminalLineCallback(this._id);
+  }
+
+  _openInfo() {
+    if (this.openInfoCallback) this.openInfoCallback(this._id);
   }
 }
