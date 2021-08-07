@@ -13,12 +13,20 @@
     value.two-way="value"
     input-enter-callback.to-view="_enterPressed"
   >
-  <div slot="prefix-container" class="console__prefix-container d-flex align-items-center">
-    <i class="console__prefix-arrow fas fa-angle-right"></i>
-  </div>
+    <div
+      slot="prefix-container"
+      class="console__prefix-container d-flex align-items-center"
+    >
+      <i class="console__prefix-arrow fas fa-angle-right"></i>
+    </div>
   </text-field>
   <div class="console__message-container d-flex">
-    <terminal-line repeat.for="terminalLine of terminalLines" terminal-line.to-view="terminalLine" delete-terminal-line-callback.to-view="_deleteTerminalLine">
+    <terminal-line
+      repeat.for="terminalLine of terminalLines"
+      terminal-line.to-view="terminalLine"
+      delete-terminal-line-callback.to-view="_deleteTerminalLine"
+      open-info-callback.to-view="_openInfo"
+    >
     </terminal-line>
   </div>
 </template>
