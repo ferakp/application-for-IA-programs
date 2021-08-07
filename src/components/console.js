@@ -22,6 +22,10 @@ export class Console {
     this.value = "";
   };
 
+  _openInfo = (id) => {
+    // Open wiki window with given id
+  }
+
   _deleteTerminalLine = (id) => {
     if (typeof id === "number") {
       for (let i = 0; i < this.terminalLines.length; i++) {

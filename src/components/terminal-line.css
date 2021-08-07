@@ -35,11 +35,10 @@ terminal-line {
   margin: 0px;
 }
 
-.terminal-line__delete-icon {
-  font-size: 14px;
-  color: gray;
+.terminal-line__icons-container {
+  margin-left: auto;
 }
 
 .terminal-line__icon-span {
-  margin-left: auto;
+  margin-left: 10px;
 }
