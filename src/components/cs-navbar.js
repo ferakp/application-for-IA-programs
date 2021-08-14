@@ -1,207 +1,206 @@
 /*
-* Class for <cs-navbar> element
-*/
+ * Class for <cs-navbar> element
+ */
 class CustomNavbar extends HTMLElement {
-
   constructor() {
-      super();
+    super();
 
-      this._linkEventHandlers = [];
+    this._linkEventHandlers = [];
 
-      // Sets shadow root
-      this._shadowRoot = this.attachShadow({ mode: "open" });
+    // Sets shadow root
+    this._shadowRoot = this.attachShadow({ mode: "open" });
 
-      // Adds main icon and list for it
-      let mainIconList = document.createElement("ul");
-      mainIconList.className = "custom-nav custom-nav-main-icon-list";
-      this._shadowRoot.appendChild(mainIconList);
+    // Adds main icon and list for it
+    let mainIconList = document.createElement("ul");
+    mainIconList.className = "custom-nav custom-nav-main-icon-list";
+    this._shadowRoot.appendChild(mainIconList);
 
+    // Adds list for links
+    let navLinks = document.createElement("ul");
+    navLinks.className = "custom-nav custom-nav-links";
+    this._shadowRoot.appendChild(navLinks);
 
-      // Adds list for links
-      let navLinks = document.createElement("ul");
-      navLinks.className = "custom-nav custom-nav-links";
-      this._shadowRoot.appendChild(navLinks);
+    // Adds list for the icons of the right corner
+    let iconList = document.createElement("ul");
+    iconList.className = "custom-nav custom-nav-icons-list stick-right-corner";
+    this._shadowRoot.appendChild(iconList);
 
-      // Adds list for the icons of the right corner
-      let iconList = document.createElement("ul");
-      iconList.className = "custom-nav custom-nav-icons-list stick-right-corner";
-      this._shadowRoot.appendChild(iconList);
+    // Adds trigram button(reponsive menu) and list for it
+    let trigramList = document.createElement("ul");
+    trigramList.className = "custom-nav custom-nav-trigram-list";
+    let trigramListItem = document.createElement("li");
+    trigramListItem.className = "custom-nav-item disable-hover";
+    let trigramButton = document.createElement("button");
+    trigramButton.addEventListener("click", this.menuButtonClicked);
+    trigramButton.className = "custom-nav-trigram-button";
+    trigramButton.innerHTML = "&#9776;";
+    trigramListItem.appendChild(trigramButton);
+    trigramList.appendChild(trigramListItem);
+    this._shadowRoot.appendChild(trigramList);
 
-      // Adds trigram button(reponsive menu) and list for it
-      let trigramList = document.createElement("ul");
-      trigramList.className = "custom-nav custom-nav-trigram-list";
-      let trigramListItem = document.createElement("li");
-      trigramListItem.className = "custom-nav-item disable-hover";
-      let trigramButton = document.createElement("button");
-      trigramButton.addEventListener("click", this.menuButtonClicked);
-      trigramButton.className = "custom-nav-trigram-button";
-      trigramButton.innerHTML = "&#9776;";
-      trigramListItem.appendChild(trigramButton);
-      trigramList.appendChild(trigramListItem);
-      this._shadowRoot.appendChild(trigramList);
-
-      // Adds default styles
-      this._style = document.createElement("style");
-      this.initializeStyle(this._style);
-
-
+    // Adds default styles
+    this._style = document.createElement("style");
+    this.initializeStyle(this._style);
   }
 
-
-
   /*
-  * This is called when the element has been attached to DOM
-  * It set an ID for the element if it doesn't exist and then attaches event handlers for nav links
-  */
+   * This is called when the element has been attached to DOM
+   * It set an ID for the element if it doesn't exist and then attaches event handlers for nav links
+   */
   connectedCallback() {
-      if (this._id === undefined || this._id === null) {
-          if (this.getAttribute("id")) this._id = this.getAttribute("id");
-          else {
-              let id = "juiaxasdiueia" + (Math.random() * Math.random() * Math.random() * Math.random()).toString(24).substring(3);
-              this.setAttribute("id", id);
-              this._id = id;
-          }
-          for (let navItem of this._shadowRoot.querySelector(".custom-nav-links").children) {
-              navItem.children[0].setAttribute("onclick", "document.getElementById('" + this._id + "').linkClicked(this);")
-          }
+    if (this._id === undefined || this._id === null) {
+      if (this.getAttribute("id")) this._id = this.getAttribute("id");
+      else {
+        let id =
+          "juiaxasdiueia" +
+          (Math.random() * Math.random() * Math.random() * Math.random())
+            .toString(24)
+            .substring(3);
+        this.setAttribute("id", id);
+        this._id = id;
       }
-  };
-
-
-
+      for (let navItem of this._shadowRoot.querySelector(".custom-nav-links")
+        .children) {
+        navItem.children[0].setAttribute(
+          "onclick",
+          "document.getElementById('" + this._id + "').linkClicked(this);"
+        );
+      }
+    }
+  }
 
   /*
-  * Properties and methods for menu
-  */
-
+   * Properties and methods for menu
+   */
 
   /*
-  * Event called each time the menu toggle (trigram) is clicked
-  * Provides basic features for opening and closing responsive menu 
-  * Adds additionally transition style for height (animation) 
-  */
+   * Event called each time the menu toggle (trigram) is clicked
+   * Provides basic features for opening and closing responsive menu
+   * Adds additionally transition style for height (animation)
+   */
   menuButtonClicked = () => {
-      let element = this._shadowRoot.querySelector(".custom-nav-links");
-      if (element.style.display === "none" || element.style.display == "") {
-          this.style.transition = "height 1s ease-in-out";
-          this.style.height = (element.children.length * 55) + "px";
-          element.style.display = "flex";
-      } else {
-          this.style.height = "";
-          element.style.display = "none";
-      }
+    let element = this._shadowRoot.querySelector(".custom-nav-links");
+    if (element.style.display === "none" || element.style.display == "") {
+      this.style.transition = "height 1s ease-in-out";
+      this.style.height = element.children.length * 55 + "px";
+      element.style.display = "flex";
+    } else {
+      this.style.height = "";
+      element.style.display = "none";
+    }
   };
 
-
+  /*
+   * Custom properties and methods
+   */
 
   /*
-  * Custom properties and methods
-  */
-
-
-  /*
-  * Adds main icon
-  * @param{string} iconClassName the Font Awesome icon's name (prefix included)
-  * return void
-  */
+   * Adds main icon
+   * @param{string} iconClassName the Font Awesome icon's name (prefix included)
+   * return void
+   */
   addMainFAIcon = (iconClassName) => {
-      let navItem = document.createElement("li");
-      navItem.className = "custom-nav-item disable-hover";
+    let navItem = document.createElement("li");
+    navItem.className = "custom-nav-item disable-hover";
 
-      let slot = document.createElement("slot");
-      slot.setAttribute("name", "mainIcon");
-      navItem.appendChild(slot);
-      this._shadowRoot.querySelectorAll(".custom-nav-main-icon-list")[0].appendChild(navItem);
+    let slot = document.createElement("slot");
+    slot.setAttribute("name", "mainIcon");
+    navItem.appendChild(slot);
+    this._shadowRoot
+      .querySelectorAll(".custom-nav-main-icon-list")[0]
+      .appendChild(navItem);
 
-      let icon = document.createElement("i");
-      icon.setAttribute("slot", "mainIcon");
-      icon.className = "custom-nav-icon " + iconClassName;
-      this.appendChild(icon);
+    let icon = document.createElement("i");
+    icon.setAttribute("slot", "mainIcon");
+    icon.className = "custom-nav-icon " + iconClassName;
+    this.appendChild(icon);
   };
 
-
   /*
-  * Adds nav (menu) item | example -> addLink("Home", "https://localhost/home")
-  * @param{string} linkName the name of the given link
-  * @param{string} linkAddress the href of the given address
-  * return void
-  */
+   * Adds nav (menu) item | example -> addLink("Home", "https://localhost/home")
+   * @param{string} linkName the name of the given link
+   * @param{string} linkAddress the href of the given address
+   * return void
+   */
   addLink = (linkName, linkAddress) => {
-      let navItem = document.createElement("li");
-      navItem.className = "custom-nav-item";
+    let navItem = document.createElement("li");
+    navItem.className = "custom-nav-item";
 
-      let link = document.createElement("a");
-      link.innerHTML = linkName;
-      link.setAttribute("name", linkName);
-      link.className = "custom-nav-link";
-      if (linkAddress) link.href = linkAddress;
-      navItem.appendChild(link);
+    let link = document.createElement("a");
+    link.innerHTML = linkName;
+    link.setAttribute("name", linkName);
+    link.className = "custom-nav-link";
+    if (linkAddress) link.href = linkAddress;
+    navItem.appendChild(link);
 
-      this._shadowRoot.querySelectorAll(".custom-nav-links")[0].appendChild(navItem);
+    this._shadowRoot
+      .querySelectorAll(".custom-nav-links")[0]
+      .appendChild(navItem);
   };
 
-
   /*
-  * Adds nav (menu) item | example -> addFAIcon("fas fab fa-linkedin")
-  * @param{string} iconClassName the Font Awesome icon's name (prefix included)
-  * @param{string} address optional parameter attaching link to icon
-  * return void
-  */
+   * Adds nav (menu) item | example -> addFAIcon("fas fab fa-linkedin")
+   * @param{string} iconClassName the Font Awesome icon's name (prefix included)
+   * @param{string} address optional parameter attaching link to icon
+   * return void
+   */
   addFAIcon = (iconClassName, address) => {
-      let navItem = document.createElement("li");
-      navItem.className = "custom-nav-item minimize-right-margin minimize-top-margin";
+    let navItem = document.createElement("li");
+    navItem.className =
+      "custom-nav-item minimize-right-margin minimize-top-margin";
 
-      let slot = document.createElement("slot");
-      let slotName = "custom-icon" + this._shadowRoot.querySelectorAll(".custom-nav-icons-list")[0].children.length;
-      slot.setAttribute("name", slotName);
-      navItem.appendChild(slot);
-      this._shadowRoot.querySelectorAll(".custom-nav-icons-list")[0].appendChild(navItem);
+    let slot = document.createElement("slot");
+    let slotName =
+      "custom-icon" +
+      this._shadowRoot.querySelectorAll(".custom-nav-icons-list")[0].children
+        .length;
+    slot.setAttribute("name", slotName);
+    navItem.appendChild(slot);
+    this._shadowRoot
+      .querySelectorAll(".custom-nav-icons-list")[0]
+      .appendChild(navItem);
 
-      let link = document.createElement("a");
-      link.href = address || "#";
-      if (!address && address != null && address.includes("http")) link.setAttribute("target", "_blank");
-      link.className = "custom-nav-icon ";
-      link.setAttribute("slot", slotName);
+    let link = document.createElement("a");
+    link.href = address || "#";
+    if (!address && address != null && address.includes("http"))
+      link.setAttribute("target", "_blank");
+    link.className = "custom-nav-icon ";
+    link.setAttribute("slot", slotName);
 
-      let icon = document.createElement("i");
-      icon.className = iconClassName;
-      link.appendChild(icon);
+    let icon = document.createElement("i");
+    icon.className = iconClassName;
+    link.appendChild(icon);
 
-      this.appendChild(link);
+    this.appendChild(link);
   };
 
-
   /*
-  * Registers event handler for links
-  * param{function} callback - the callback which will be called when link is clicked
-  */
+   * Registers event handler for links
+   * param{function} callback - the callback which will be called when link is clicked
+   */
   registerEventHandlerForLinks = (callback) => {
-      this._linkEventHandlers.push(callback);
+    this._linkEventHandlers.push(callback);
   };
 
-
-
   /*
-  * Each time when nav link is clicked this function is called
-  * @param{HTMLElement} element - the element clicked
-  */
+   * Each time when nav link is clicked this function is called
+   * @param{HTMLElement} element - the element clicked
+   */
   linkClicked = (element) => {
-      for (let callback of this._linkEventHandlers) {
-          try {
-              callback(element);
-          } catch (err) {
-              console.log("Error occured while callin callbacks");
-          }
-
+    for (let callback of this._linkEventHandlers) {
+      try {
+        callback(element);
+      } catch (err) {
+        console.log("Error occured while callin callbacks");
       }
+    }
   };
 
-
   /*
-  * Adds default styles
-  */
+   * Adds default styles
+   */
   initializeStyle = (style) => {
-      style.innerText = `
+    style.innerText = `
                           * {
                               box-sizing: border-box;
                               font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
@@ -349,11 +348,13 @@ class CustomNavbar extends HTMLElement {
                               }
                           }`;
 
-      this._shadowRoot.appendChild(style);
-  }
-
-
+    this._shadowRoot.appendChild(style);
+  };
 }
 
 // Registers custom element as cs-navbar
-customElements.define("cs-navbar", CustomNavbar);
+try {
+  customElements.define("cs-navbar", CustomNavbar);
+} catch (err) {
+  //console.log(err);
+}
