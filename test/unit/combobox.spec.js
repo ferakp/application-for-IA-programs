@@ -6,11 +6,6 @@ describe("Stage App Component", () => {
   let component;
   let parentViewModel = {};
 
-
-  let resetPrentViewModel = () => {
-    parentViewModel = {};
-  }
-
   beforeEach(() => {
     component = StageComponent.withResources(
       PLATFORM.moduleName("../../src/components/combobox")
