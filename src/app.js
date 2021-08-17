@@ -1,58 +1,61 @@
-import '@babel/polyfill';
-import './components/cs-navbar';
+import "@babel/polyfill";
+import "./components/cs-navbar";
+import { PLATFORM } from "aurelia-pal";
 
 class AuthorizeStep {
   run(navigationInstruction, next) {
     if (
       navigationInstruction
         .getAllInstructions()
-        .some((i) => i.config.settings.roles.indexOf('admin') !== -1)
+        .some((i) => i.config.settings.roles.indexOf("admin") !== -1)
     ) {
       const isAdmin = /* insert magic here */ false;
       if (!isAdmin) {
-        return next.cancel(new Redirect('koti'));
+        return next.cancel(new Redirect("koti"));
       }
     }
     return next();
   }
 }
 
-
 export class App {
-
-  constructor(){
-
-  }
+  constructor() {}
 
   attached() {
-    this.navBar.addMainFAIcon("fas fa-square-root-alt");
-    this.navBar.addLink("Dashboard", "/dashboard");
+    if (this.navBar) {
+      try {
+        this.navBar.addMainFAIcon("fas fa-square-root-alt");
+        this.navBar.addLink("Dashboard", "/dashboard");
+      } catch (err) {
+        // skip
+      }
+    }
   }
 
   configureRouter(config, router) {
     config.options.pushState = true;
-    config.title = 'IA Simulation';
-    config.addPipelineStep('authorize', AuthorizeStep);
+    config.title = "IA Simulation";
+    config.addPipelineStep("authorize", AuthorizeStep);
     config.settings = {
-      roles: ['admin', 'user'],
+      roles: ["admin", "user"],
     };
     config.map([
       {
-        route: ['', 'dashboard'],
-        name: 'Dashboard',
-        moduleId: PLATFORM.moduleName('./components/dashboard'),
+        route: ["", "dashboard"],
+        name: "Dashboard",
+        moduleId: PLATFORM.moduleName("./components/dashboard"),
         nav: true,
-        title: 'Dashboard',
+        title: "Dashboard",
         settings: {
           roles: [],
         },
       },
       {
-        route: 'instructions',
-        name: 'Instructions',
-        moduleId: PLATFORM.moduleName('./components/instructions'),
+        route: "instructions",
+        name: "Instructions",
+        moduleId: PLATFORM.moduleName("./components/instructions"),
         nav: true,
-        title: 'Instructions',
+        title: "Instructions",
         settings: {
           roles: [],
         },
@@ -60,5 +63,4 @@ export class App {
     ]);
     this.router = router;
   }
-  
 }

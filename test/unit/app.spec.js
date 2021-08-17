@@ -7,16 +7,16 @@ describe('Stage App Component', () => {
 
   beforeEach(() => {
     component = StageComponent
-      .withResources(PLATFORM.moduleName('app'))
+      .withResources(PLATFORM.moduleName('../../src/app'))
       .inView('<app></app>');
   });
 
   afterEach(() => component.dispose());
 
-  it('should render message', done => {
+  it('should exist', done => {
     component.create(bootstrap).then(() => {
-      const view = component.element;
-      expect(view.textContent.trim()).toBe('Hello World!');
+      const app = document.querySelector("app");
+      expect(app.children.length).toBe(1);
       done();
     }).catch(e => {
       fail(e);

@@ -1,4 +1,4 @@
-import { inject, bindable } from 'aurelia-framework';
+import { bindable } from 'aurelia-framework';
 
 export class Combobox {
   @bindable
@@ -39,9 +39,8 @@ export class Combobox {
 
   /**
    * Function with following parameters
-   * @param {number} pageNumber page number (=index)
-   * @param {number} pageSize number of items fetched at a time from the dataprovider.
-   * @param {string} filter filter
+   * @param {string} value filter
+   * @returns {array} response
    */
   @bindable
   dataProvider;
