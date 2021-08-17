@@ -109,4 +109,22 @@ describe("Stage App Component", () => {
         done();
       });
   });
+
+  it("filters drop down list items correctly when the input element is clicked", (done) => {
+    parentViewModel.items = ["aa", "bb"];
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel.value = "";
+        component.viewModel.heavyMode = false;
+        await 1;
+        await component.viewModel._inputElementClicked();
+        expect(component.viewModel._comboboxItems).toEqual(["aa", "bb"]);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
 });
