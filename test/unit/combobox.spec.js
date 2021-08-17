@@ -1,18 +1,22 @@
 import { bootstrap } from "aurelia-bootstrapper";
 import { StageComponent } from "aurelia-testing";
 import { PLATFORM } from "aurelia-pal";
-import { Combobox } from "../../src/components/combobox.js";
 
 describe("Stage App Component", () => {
   let component;
   let parentViewModel = {};
+
+
+  let resetPrentViewModel = () => {
+    parentViewModel = {};
+  }
 
   beforeEach(() => {
     component = StageComponent.withResources(
       PLATFORM.moduleName("../../src/components/combobox")
     )
       .inView(
-        '<combobox items.to-view="items" placeholder.to-view="placeholder" label.to-view="label" value.two-way="value" custom-filter.to-view="customFilter"></combobox>'
+        '<combobox items.to-view="items" placeholder.to-view="placeholder" label.to-view="label" value.two-way="value" custom-filter.to-view="customFilter" data-provider.to-view="dataProvider"></combobox>'
       )
       .boundTo(parentViewModel);
   });
@@ -136,12 +140,12 @@ describe("Stage App Component", () => {
   it("filters drop down list items correctly with a custom filter", (done) => {
     parentViewModel.items = ["aa", "bb", "cc"];
     parentViewModel.customFilter = (value, items) => {
-      if(!Array.isArray(items)) return [];
-      else if(!value) return items;
+      if (!Array.isArray(items)) return [];
+      else if (!value) return items;
       else {
         return items.filter((e) => e === value);
       }
-    }
+    };
     component
       .create(bootstrap)
       .then(async () => {
@@ -156,6 +160,43 @@ describe("Stage App Component", () => {
         component.viewModel.value = "cc";
         await component.viewModel._inputElementClicked();
         expect(component.viewModel._comboboxItems).toEqual(["cc"]);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
+  it("filters drop down list items correctly with a custom data provider", (done) => {
+    parentViewModel.items = null;
+    parentViewModel.dataProvider = async (value) => {
+      const items = ["abc", "dfeg", "jhsh"];
+      if (!value) return items;
+      else {
+        return items.filter((e) => e.includes(value));
+      }
+    };
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel.value = "";
+        await component.viewModel._inputElementClicked();
+        expect(component.viewModel._comboboxItems).toEqual([
+          "abc",
+          "dfeg",
+          "jhsh",
+        ]);
+        component.viewModel.dropDownListIconClicked();
+        component.viewModel.value = "c";
+        await component.viewModel._inputElementClicked();
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual(["abc"]);
+        component.viewModel.dropDownListIconClicked();
+        component.viewModel.value = "jh";
+        await component.viewModel._inputElementClicked();
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual(["jhsh"]);
         done();
       })
       .catch((e) => {
