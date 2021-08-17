@@ -49,4 +49,25 @@ describe("Stage App Component", () => {
         done();
       });
   });
+
+  it("chooses correct item when user scroll items and press enter", (done) => {
+    parentViewModel.items = ["aa", "bb"];
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel._focusedIndex = 0;
+        await component.viewModel._inputElementEnterPressed();
+        expect(component.viewModel.value).toEqual("aa");
+        component.viewModel.value = "";
+        await 1;
+        component.viewModel._focusedIndex = 1;
+        await component.viewModel._inputElementEnterPressed();
+        expect(component.viewModel.value).toEqual("bb");
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
 });
