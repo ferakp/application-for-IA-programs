@@ -70,4 +70,21 @@ describe("Stage App Component", () => {
         done();
       });
   });
+
+  it("controls drop down list appearence correctly when drop down list icon is clicked", (done) => {
+    parentViewModel.items = ["aa", "bb"];
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel.dropDownListIconClicked();
+        expect(component.viewModel.dropDownListOpened).toEqual(true);
+        component.viewModel.dropDownListIconClicked();
+        expect(component.viewModel.dropDownListOpened).toEqual(false);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
 });
