@@ -33,5 +33,20 @@ describe("Stage App Component", () => {
       });
   });
 
-
+  it("handles/reads the items attribute correctly", (done) => {
+    parentViewModel.items = ["aa", "bb"];
+    component
+      .create(bootstrap)
+      .then(() => {
+        const cmb = document.querySelector("combobox");
+        expect(
+          cmb.querySelectorAll(".combobox__drop-down-list-item-content").length
+        ).toBe(2);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
 });
