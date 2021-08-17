@@ -132,4 +132,35 @@ describe("Stage App Component", () => {
         done();
       });
   });
+
+  it("filters drop down list items correctly with a custom filter", (done) => {
+    parentViewModel.items = ["aa", "bb", "cc"];
+    parentViewModel.customFilter = (value, items) => {
+      if(!Array.isArray(items)) return [];
+      else if(!value) return items;
+      else {
+        return items.filter((e) => e === value);
+      }
+    }
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel.value = "";
+        await component.viewModel._inputElementClicked();
+        expect(component.viewModel._comboboxItems).toEqual(["aa", "bb", "cc"]);
+        component.viewModel.dropDownListIconClicked();
+        component.viewModel.value = "c";
+        await component.viewModel._inputElementClicked();
+        expect(component.viewModel._comboboxItems).toEqual([]);
+        component.viewModel.dropDownListIconClicked();
+        component.viewModel.value = "cc";
+        await component.viewModel._inputElementClicked();
+        expect(component.viewModel._comboboxItems).toEqual(["cc"]);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
 });
