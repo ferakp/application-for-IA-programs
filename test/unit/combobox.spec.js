@@ -110,8 +110,8 @@ describe("Stage App Component", () => {
       });
   });
 
-  it("filters drop down list items correctly when the input element is clicked", (done) => {
-    parentViewModel.items = ["aa", "bb"];
+  it("filters drop down list items correctly when input element is clicked", (done) => {
+    parentViewModel.items = ["aa", "bb", "cc"];
     component
       .create(bootstrap)
       .then(async () => {
@@ -119,7 +119,12 @@ describe("Stage App Component", () => {
         component.viewModel.heavyMode = false;
         await 1;
         await component.viewModel._inputElementClicked();
-        expect(component.viewModel._comboboxItems).toEqual(["aa", "bb"]);
+        expect(component.viewModel._comboboxItems).toEqual(["aa", "bb", "cc"]);
+        component.viewModel.dropDownListIconClicked();
+        component.viewModel.value = "c";
+        await 1;
+        await component.viewModel._inputElementClicked();
+        expect(component.viewModel._comboboxItems).toEqual(["cc"]);
         done();
       })
       .catch((e) => {
