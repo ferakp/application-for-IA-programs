@@ -87,4 +87,26 @@ describe("Stage App Component", () => {
         done();
       });
   });
+
+  it("filters drop down list items correcly when the value is changed", (done) => {
+    parentViewModel.items = ["aa", "bb"];
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel.value = "a";
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual(["aa"]);
+        component.viewModel.value = "b";
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual(["bb"]);
+        component.viewModel.value = "";
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual(["aa", "bb"]);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
 });
