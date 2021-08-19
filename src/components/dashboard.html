@@ -4,16 +4,16 @@
 
   <!-- Child components-->
   <div class="dashboard__container">
-    <div class="dashboard__left-window">
+    <div class="dashboard__left-window ${expansionMode === true ? 'dashboard__expanded-window' : ''}">
       <div class="dashboard__nav-container d-flex">
-        <dashboard-nav class="d-flex"></dashboard-nav>
+        <dashboard-nav class="d-flex" expand.two-way="expansionMode"></dashboard-nav>
         <hr>
       </div>
       <div class="dashboard__console-container">
         <console class="dashboard__console d-flex"></console>
       </div>
     </div>
-    <div class="dashboard__right-window">
+    <div class="dashboard__right-window ${expansionMode === true ? 'dashboard__hide-window' : ''}">
 
     </div>
   </div>

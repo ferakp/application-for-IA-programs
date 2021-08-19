@@ -16,6 +16,7 @@
   flex-flow: column wrap;
   flex: 0 0 50%;
   margin-left: 5px;
+  transition: flex 1s;
 }
 
 .dashboard__console-container {
@@ -24,9 +25,21 @@
   flex-direction: column;
 }
 
+.dashboard__expanded-window{
+  flex: 1;
+  transition: flex 1s;
+  margin-right: 5px;
+}
+
 /**RIGHT WINDOW**/
 
 .dashboard__right-window {
   display: flex;
   flex: 0 0 50%;
+  transition: flex 1s;
+}
+
+.dashboard__hide-window{
+  flex: 0 0 0%;
+  transition: flex 1s;
 }
