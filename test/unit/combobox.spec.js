@@ -24,6 +24,7 @@ describe("Stage App Component", () => {
       .then(() => {
         const cmb = document.querySelector("combobox");
         expect(cmb.children[0].className).toContain("combobox__container");
+        expect(cmb.querySelector("text-field").querySelectorAll(".text-field__input-element").length).toBe(1);
         done();
       })
       .catch((e) => {
@@ -32,7 +33,7 @@ describe("Stage App Component", () => {
       });
   });
 
-  it("handles/reads the items attribute correctly", (done) => {
+  it("items attribute - prints items correctly in drop down list container", (done) => {
     parentViewModel.items = ["aa", "bb"];
     component
       .create(bootstrap)
@@ -41,27 +42,6 @@ describe("Stage App Component", () => {
         expect(
           cmb.querySelectorAll(".combobox__drop-down-list-item-content").length
         ).toBe(2);
-        done();
-      })
-      .catch((e) => {
-        fail(e);
-        done();
-      });
-  });
-
-  it("chooses correct item when user scroll items and press enter", (done) => {
-    parentViewModel.items = ["aa", "bb"];
-    component
-      .create(bootstrap)
-      .then(async () => {
-        component.viewModel._focusedIndex = 0;
-        await component.viewModel._inputElementEnterPressed();
-        expect(component.viewModel.value).toEqual("aa");
-        component.viewModel.value = "";
-        await 1;
-        component.viewModel._focusedIndex = 1;
-        await component.viewModel._inputElementEnterPressed();
-        expect(component.viewModel.value).toEqual("bb");
         done();
       })
       .catch((e) => {
@@ -177,6 +157,7 @@ describe("Stage App Component", () => {
       .then(async () => {
         component.viewModel.value = "";
         await component.viewModel._inputElementClicked();
+        await 1;
         expect(component.viewModel._comboboxItems).toEqual([
           "abc",
           "dfeg",
