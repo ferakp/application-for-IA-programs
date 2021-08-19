@@ -7,6 +7,11 @@ export class DashboardNav {
   disable;
 
   @bindable
-  hide;
+  expand = false;
+
+  _expandWindow = () => {
+    if(!this.expand) this.expand = false;
+    this.expand = !this.expand;
+  }
 
 }
