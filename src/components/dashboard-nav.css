@@ -20,3 +20,25 @@ dashboard-nav {
   font-size: 1.2rem;
   color: rgba(3, 3, 160, 0.679);
 }
+
+.dashboard-nav__expand-link:hover .dashboard-nav__expand-tooltip-container {
+  display: flex;
+  cursor: pointer;
+}
+
+.dashboard-nav__expand-tooltip-container {
+  position: relative;
+  display: none;
+  background-color: black;
+}
+
+.dashboard-nav__expand-tooltip-text {
+  position: absolute;
+  left: -45px;
+  top: -25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+  background-color: black;
+  font-size: 13px;
+}

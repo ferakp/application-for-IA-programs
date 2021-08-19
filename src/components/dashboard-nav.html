@@ -5,7 +5,10 @@
   <!-- Child components-->
   <p class="dashboard-nav__title h4 mt-2">Terminal</p>
   <div class="dashboard-nav__menu-container d-flex flex-row-reverse">
-    <a click.trigger="_expandWindow()">
+    <a class="dashboard-nav__expand-link" click.trigger="_expandWindow()">
+      <div class="dashboard-nav__expand-tooltip-container">
+        <p class="dashboard-nav__expand-tooltip-text">${expand === true ? 'Minimize' : 'Expand'}</p>
+      </div>
       <i class="dashboard-nav__expand-icon ctpoh fas fa-arrows-alt-h"></i>
     </a>
   </div>
