@@ -14,7 +14,7 @@
 .dashboard__left-window {
   display: flex;
   flex-flow: column wrap;
-  flex: 0 0 50%;
+  flex: 0 0 40%;
   margin-left: 5px;
   transition: flex 1s;
 }
@@ -35,7 +35,7 @@
 
 .dashboard__right-window {
   display: flex;
-  flex: 0 0 50%;
+  flex: 0 0 60%;
   transition: flex 1s;
 }
 
