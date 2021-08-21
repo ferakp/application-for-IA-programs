@@ -1,0 +1,14 @@
+.dashboard-menu__container {
+  margin-left: 10px;
+  border-left: 2px solid rgba(77, 77, 255, 0.508);
+}
+
+.dashboard-menu__item {
+  cursor: pointer;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.dashboard-menu__item-icon {
+  font-size: 1.8rem;
+}
