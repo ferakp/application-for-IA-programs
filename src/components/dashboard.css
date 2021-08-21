@@ -37,6 +37,7 @@
   display: flex;
   flex: 0 0 60%;
   transition: flex 1s;
+  align-items: center;
 }
 
 .dashboard__hide-window{
