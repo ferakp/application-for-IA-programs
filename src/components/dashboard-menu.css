@@ -5,18 +5,23 @@ dashboard-menu {
 
 .dashboard-menu__container {
   margin-left: 10px;
-  border-left: 2px solid #343a40;
+  border-left: 2px solid #343a4096;
 }
 
 .dashboard-menu__item {
+  opacity: 0.8;
   cursor: pointer;
   text-decoration: none;
   margin-left: 5px;
 }
 
+.dashboard-menu__item:hover {
+  opacity: 1;
+  transition: all 0.5s;
+}
+
 .dashboard-menu__item:hover .dashboard-menu__item-icon {
   color: black;
-  font-size: 2.3rem;
   transition: all 0.5s;
 }
 
