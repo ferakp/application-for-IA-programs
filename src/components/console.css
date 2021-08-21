@@ -21,6 +21,7 @@ console text-field {
 
 .console__prefix-arrow {
   font-size: 22px;
+  background-color: transparent !important;
 }
 
 .console__prefix-container {
