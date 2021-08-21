@@ -43,3 +43,16 @@
   flex: 0 0 0%;
   transition: flex 1s;
 }
+
+.dashboard__right-window-menu {
+  margin-left: 10px;
+}
+
+.dashboard__right-window-menu-item {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.dashboard__right-window-menu-item-icon {
+  font-size: 1.8rem;
+}
