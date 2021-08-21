@@ -13,12 +13,8 @@
         <console class="dashboard__console d-flex"></console>
       </div>
     </div>
-    <div class="dashboard__right-window flex-row ${expansionMode === true ? 'dashboard__hide-window' : ''}">
-      <div class="dashboard__right-window-menu flex-column">
-        <a class="dashboard__right-window-menu-item">
-          <i class="dashboard__right-window-menu-item-icon fas fa-cubes"></i>
-        </a>
-      </div>
+    <div class="dashboard__right-window d-flex flex-row ${expansionMode === true ? 'dashboard__hide-window' : ''}">
+      <dashboard-menu></dashboard-menu>
     </div>
   </div>
 </template>
