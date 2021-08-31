@@ -33,7 +33,7 @@ describe("Stage App Component", () => {
       });
   });
 
-  it("items attribute - prints items correctly in drop down list container", (done) => {
+  it("prints items correctly in drop down list container (item attribute)", (done) => {
     parentViewModel.items = ["aa", "bb"];
     component
       .create(bootstrap)
