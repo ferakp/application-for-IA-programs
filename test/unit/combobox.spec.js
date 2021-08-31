@@ -68,6 +68,23 @@ describe("Stage App Component", () => {
       });
   });
 
+  it("controls drop down list visibility (dropDownListOpened controller)", (done) => {
+    parentViewModel.items = ["aa", "bb"];
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel.dropDownListIconClicked();
+        expect(component.viewModel.dropDownListOpened).toEqual(true);
+        component.viewModel.dropDownListIconClicked();
+        expect(component.viewModel.dropDownListOpened).toEqual(false);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
   it("filters drop down list items correcly when the value is changed", (done) => {
     parentViewModel.items = ["aa", "bb"];
     component
