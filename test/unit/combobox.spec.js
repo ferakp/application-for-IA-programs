@@ -50,14 +50,15 @@ describe("Stage App Component", () => {
       });
   });
 
-  it("controls drop down list appearence correctly when drop down list icon is clicked", (done) => {
+  it("controls drop down list visibility (arrow down icon)", (done) => {
     parentViewModel.items = ["aa", "bb"];
     component
       .create(bootstrap)
       .then(async () => {
-        component.viewModel.dropDownListIconClicked();
+        const cmb = document.querySelector("combobox");
+        cmb.querySelector(".combobox__suffix-container-link ").click();
         expect(component.viewModel.dropDownListOpened).toEqual(true);
-        component.viewModel.dropDownListIconClicked();
+        cmb.querySelector(".combobox__suffix-container-link ").click();
         expect(component.viewModel.dropDownListOpened).toEqual(false);
         done();
       })
