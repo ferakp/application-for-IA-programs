@@ -11,7 +11,7 @@ describe("Stage App Component", () => {
       PLATFORM.moduleName("../../src/components/combobox")
     )
       .inView(
-        '<combobox items.to-view="items" placeholder.to-view="placeholder" label.to-view="label" value.two-way="value" custom-filter.to-view="customFilter" data-provider.to-view="dataProvider"></combobox>'
+        '<combobox items.to-view="items" placeholder.to-view="placeholder" label.to-view="label" value.two-way="value" custom-filter.to-view="customFilter" data-provider.to-view="dataProvider" required.to-view="required"></combobox>'
       )
       .boundTo(parentViewModel);
   });
@@ -41,7 +41,7 @@ describe("Stage App Component", () => {
    * Attributes
    */
 
-   it("displays label name correctly (label attribute)", (done) => {
+  it("displays label correctly (label attribute)", (done) => {
     parentViewModel.label = "Label";
     component
       .create(bootstrap)
@@ -50,6 +50,24 @@ describe("Stage App Component", () => {
         expect(
           cmb.querySelector(".text-field__label-element").textContent.trim()
         ).toBe("Label");
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
+  it("displays required sign correctly (required attribute)", (done) => {
+    parentViewModel.label = "Label";
+    parentViewModel.required = true;
+    component
+      .create(bootstrap)
+      .then(() => {
+        const cmb = document.querySelector("combobox");
+        expect(
+          cmb.querySelector(".text-field__required").textContent.trim()
+        ).toBe("*");
         done();
       })
       .catch((e) => {
