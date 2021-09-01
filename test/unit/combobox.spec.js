@@ -11,7 +11,7 @@ describe("Stage App Component", () => {
       PLATFORM.moduleName("../../src/components/combobox")
     )
       .inView(
-        '<combobox items.to-view="items" placeholder.to-view="placeholder" label.to-view="label" value.two-way="value" custom-filter.to-view="customFilter" data-provider.to-view="dataProvider" required.to-view="required"></combobox>'
+        '<combobox items.to-view="items" error-message.to-view="errorMessage" placeholder.to-view="placeholder" label.to-view="label" value.two-way="value" custom-filter.to-view="customFilter" data-provider.to-view="dataProvider" required.to-view="required"></combobox>'
       )
       .boundTo(parentViewModel);
   });
@@ -76,7 +76,62 @@ describe("Stage App Component", () => {
       });
   });
 
+  it("displays value correctly (value attribute)", (done) => {
+    parentViewModel.value = "value-";
+    component
+      .create(bootstrap)
+      .then(() => {
+        const cmb = document.querySelector("combobox");
+        expect(
+          cmb.querySelector(".text-field__input-element").value
+        ).toBe("value-");
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
+  it("displays errorMessage correctly (errorMessage attribute)", (done) => {
+    parentViewModel.errorMessage = "Error!";
+    component
+      .create(bootstrap)
+      .then(async () => {
+        const cmb = document.querySelector("combobox");
+        cmb.querySelector(".text-field__input-element").value = "activate hasBeenEdited controller";
+        expect(
+          cmb.querySelector(".text-field__error-message").textContent.trim()
+        ).toBe("Error!");
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
+
+  it("displays placeholder correctly (placeholder attribute)", (done) => {
+    parentViewModel.value = "";
+    parentViewModel.placeholder = "a2m_1test_!1";
+    component
+      .create(bootstrap)
+      .then(() => {
+        const cmb = document.querySelector("combobox");
+        expect(
+          cmb.querySelector(".text-field__input-element").getAttribute("placeholder")
+        ).toBe("a2m_1test_!1");
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
   it("prints items correctly in drop down list container (item attribute)", (done) => {
+    parentViewModel.value = "";
     parentViewModel.items = ["aa", "bb"];
     component
       .create(bootstrap)
