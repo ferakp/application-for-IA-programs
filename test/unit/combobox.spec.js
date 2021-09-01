@@ -24,7 +24,32 @@ describe("Stage App Component", () => {
       .then(() => {
         const cmb = document.querySelector("combobox");
         expect(cmb.children[0].className).toContain("combobox__container");
-        expect(cmb.querySelector("text-field").querySelectorAll(".text-field__input-element").length).toBe(1);
+        expect(
+          cmb
+            .querySelector("text-field")
+            .querySelectorAll(".text-field__input-element").length
+        ).toBe(1);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
+  /**
+   * Attributes
+   */
+
+   it("displays label name correctly (label attribute)", (done) => {
+    parentViewModel.label = "Label";
+    component
+      .create(bootstrap)
+      .then(() => {
+        const cmb = document.querySelector("combobox");
+        expect(
+          cmb.querySelector(".text-field__label-element").textContent.trim()
+        ).toBe("Label");
         done();
       })
       .catch((e) => {
@@ -50,6 +75,10 @@ describe("Stage App Component", () => {
       });
   });
 
+  /**
+   * Elements
+   */
+
   it("controls drop down list visibility (arrow down icon)", (done) => {
     parentViewModel.items = ["aa", "bb"];
     component
@@ -68,6 +97,10 @@ describe("Stage App Component", () => {
       });
   });
 
+  /**
+   * Functions
+   */
+
   it("controls drop down list visibility (dropDownListOpened controller)", (done) => {
     parentViewModel.items = ["aa", "bb"];
     component
@@ -85,7 +118,7 @@ describe("Stage App Component", () => {
       });
   });
 
-  it("filters drop down list items correcly when the value is changed", (done) => {
+  it("filters drop down list items when new value is set", (done) => {
     parentViewModel.items = ["aa", "bb"];
     component
       .create(bootstrap)
