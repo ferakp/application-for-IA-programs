@@ -82,9 +82,9 @@ describe("Stage App Component", () => {
       .create(bootstrap)
       .then(() => {
         const cmb = document.querySelector("combobox");
-        expect(
-          cmb.querySelector(".text-field__input-element").value
-        ).toBe("value-");
+        expect(cmb.querySelector(".text-field__input-element").value).toBe(
+          "value-"
+        );
         done();
       })
       .catch((e) => {
@@ -93,13 +93,14 @@ describe("Stage App Component", () => {
       });
   });
 
-  it("displays errorMessage correctly (errorMessage attribute)", (done) => {
+  it("displays error message correctly (errorMessage attribute)", (done) => {
     parentViewModel.errorMessage = "Error!";
     component
       .create(bootstrap)
       .then(async () => {
         const cmb = document.querySelector("combobox");
-        cmb.querySelector(".text-field__input-element").value = "activate hasBeenEdited controller";
+        cmb.querySelector(".text-field__input-element").value =
+          "activate hasBeenEdited controller";
         expect(
           cmb.querySelector(".text-field__error-message").textContent.trim()
         ).toBe("Error!");
@@ -111,7 +112,6 @@ describe("Stage App Component", () => {
       });
   });
 
-
   it("displays placeholder correctly (placeholder attribute)", (done) => {
     parentViewModel.value = "";
     parentViewModel.placeholder = "a2m_1test_!1";
@@ -120,7 +120,9 @@ describe("Stage App Component", () => {
       .then(() => {
         const cmb = document.querySelector("combobox");
         expect(
-          cmb.querySelector(".text-field__input-element").getAttribute("placeholder")
+          cmb
+            .querySelector(".text-field__input-element")
+            .getAttribute("placeholder")
         ).toBe("a2m_1test_!1");
         done();
       })
@@ -130,7 +132,7 @@ describe("Stage App Component", () => {
       });
   });
 
-  it("prints items correctly in drop down list container (item attribute)", (done) => {
+  it("prints items correctly in drop down list container (items attribute)", (done) => {
     parentViewModel.value = "";
     parentViewModel.items = ["aa", "bb"];
     component
@@ -148,11 +150,74 @@ describe("Stage App Component", () => {
       });
   });
 
+  it("controls clear button appearance correctly (showClearButton attribute)", (done) => {
+    parentViewModel.errorMessage = "Error!";
+    component
+      .create(bootstrap)
+      .then(async () => {
+        const cmb = document.querySelector("combobox");
+        cmb.querySelector(".text-field__input-element").value =
+          "activate hasBeenEdited controller";
+        expect(
+          cmb.querySelector(".text-field__error-message").textContent.trim()
+        ).toBe("Error!");
+        component.viewModel.errorMessage = "";
+        expect(
+          cmb.querySelectorAll(".text-field__error-message-container-inactive")
+            .length
+        ).toBe(1);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
+  it("filters drop down list items correctly with a custom data provider (dataProvider attribute)", (done) => {
+    parentViewModel.items = null;
+    parentViewModel.dataProvider = async (value) => {
+      const items = ["abc", "dfeg", "jhsh"];
+      if (!value) return items;
+      else {
+        return items.filter((e) => e.includes(value));
+      }
+    };
+    component
+      .create(bootstrap)
+      .then(async () => {
+        component.viewModel.value = "";
+        await component.viewModel._inputElementClicked();
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual([
+          "abc",
+          "dfeg",
+          "jhsh",
+        ]);
+        component.viewModel.dropDownListIconClicked();
+        component.viewModel.value = "c";
+        await component.viewModel._inputElementClicked();
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual(["abc"]);
+        component.viewModel.dropDownListIconClicked();
+        component.viewModel.value = "jh";
+        await component.viewModel._inputElementClicked();
+        await 1;
+        expect(component.viewModel._comboboxItems).toEqual(["jhsh"]);
+        done();
+      })
+      .catch((e) => {
+        fail(e);
+        done();
+      });
+  });
+
   /**
    * Elements
    */
 
   it("controls drop down list visibility (arrow down icon)", (done) => {
+    parentViewModel.dataProvider = null;
     parentViewModel.items = ["aa", "bb"];
     component
       .create(bootstrap)
@@ -259,44 +324,6 @@ describe("Stage App Component", () => {
         component.viewModel.value = "cc";
         await component.viewModel._inputElementClicked();
         expect(component.viewModel._comboboxItems).toEqual(["cc"]);
-        done();
-      })
-      .catch((e) => {
-        fail(e);
-        done();
-      });
-  });
-
-  it("filters drop down list items correctly with a custom data provider", (done) => {
-    parentViewModel.items = null;
-    parentViewModel.dataProvider = async (value) => {
-      const items = ["abc", "dfeg", "jhsh"];
-      if (!value) return items;
-      else {
-        return items.filter((e) => e.includes(value));
-      }
-    };
-    component
-      .create(bootstrap)
-      .then(async () => {
-        component.viewModel.value = "";
-        await component.viewModel._inputElementClicked();
-        await 1;
-        expect(component.viewModel._comboboxItems).toEqual([
-          "abc",
-          "dfeg",
-          "jhsh",
-        ]);
-        component.viewModel.dropDownListIconClicked();
-        component.viewModel.value = "c";
-        await component.viewModel._inputElementClicked();
-        await 1;
-        expect(component.viewModel._comboboxItems).toEqual(["abc"]);
-        component.viewModel.dropDownListIconClicked();
-        component.viewModel.value = "jh";
-        await component.viewModel._inputElementClicked();
-        await 1;
-        expect(component.viewModel._comboboxItems).toEqual(["jhsh"]);
         done();
       })
       .catch((e) => {
