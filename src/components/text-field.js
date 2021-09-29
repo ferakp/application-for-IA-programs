@@ -62,10 +62,15 @@ export class TextField {
    * Changes the hasBeenEdited property to true when user writes something into the input element
    * @param {string} newValue the new value of value attribute
    */
-  valueChanged(newValue) {
+  valueChanged(newValue, previousValue) {
     if (newValue && this.showClearButton) this.activateClearButton = true;
     else this.activateClearButton = false;
     if (!this.hasBeenEdited && newValue) this.hasBeenEdited = true;
+    if (this.allowOnlyNumbers) {
+      if (typeof newValue === "number") return;
+      else this.value = previousValue || "";
+      return;
+    }
     if (
       this.firstLetterUpperCase &&
       this.value &&
