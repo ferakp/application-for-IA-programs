@@ -50,6 +50,8 @@ export class TextField {
 
   activateClearButton = false;
 
+  tempValueChangedBlock = false;
+
   attached() {
     this.textFieldInputElement.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
@@ -66,22 +68,23 @@ export class TextField {
     if (newValue && this.showClearButton) this.activateClearButton = true;
     else this.activateClearButton = false;
     if (!this.hasBeenEdited && newValue) this.hasBeenEdited = true;
-    if (this.allowOnlyNumbers) {
-      if (typeof newValue === "number") return;
-      else this.value = previousValue || "";
-      return;
-    }
+    this.upperCaseCheck();
+  }
+
+  upperCaseCheck = () => {
     if (
       this.firstLetterUpperCase &&
       this.value &&
       this.value[0] !== this.value[0].toUpperCase()
     ) {
-      // Use timeout until solution is found
-      setTimeout(() => {
-        this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1);
-      }, 200);
+      setTimeout(
+        () =>
+          (this.value =
+            this.value.charAt(0).toUpperCase() + this.value.slice(1)),
+        200
+      );
     }
-  }
+  };
 
   // This function is called by icon container when ?-icon is clicked
   tooltipClicked() {}
