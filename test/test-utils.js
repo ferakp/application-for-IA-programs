@@ -17,6 +17,10 @@ export function expectElementNumber(selector) {
   return expect(document.querySelectorAll(selector).length);
 }
 
+export function expectViewModelProperty(component, propertyName) {
+  return expect(component.viewModel[propertyName]);
+}
+
 export function expectElementAttribute(selector, attributeName) {
   return expect(document.querySelector(selector).getAttribute(attributeName));
 }
