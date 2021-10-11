@@ -58,10 +58,14 @@ export class TextField {
         this.inputEnterPressed();
       }
     });
+
+    this.disableChanged(this.disable);
   }
 
   /**
-   * Changes the hasBeenEdited property to true when user writes something into the input element
+   * Changes the hasBeenEdited property to true when user writes something to input element
+   * Checks upper case flag
+   * Checks number type flag
    * @param {string} newValue the new value of value attribute
    */
   valueChanged(newValue) {
@@ -72,11 +76,16 @@ export class TextField {
   }
 
   showClearButtonChanged(newValue) {
-    if(newValue && this.showClearButton) this.activateClearButton = true; 
+    if(this.value && newValue) this.activateClearButton = true; 
   }
 
   allowOnlyNumbersChanged() {
     this.upperCaseAndNumberCheck();
+  }
+
+  disableChanged(newValue) {
+    if(newValue && this.textFieldInputElement) this.textFieldInputElement.disabled = true;
+    else if(this.textFieldInputElement) this.textFieldInputElement.disabled = false;
   }
 
   upperCaseAndNumberCheck = () => {
