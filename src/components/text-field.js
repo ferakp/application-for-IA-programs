@@ -68,10 +68,16 @@ export class TextField {
     if (newValue && this.showClearButton) this.activateClearButton = true;
     else this.activateClearButton = false;
     if (!this.hasBeenEdited && newValue) this.hasBeenEdited = true;
-    this.upperCaseCheck();
+    this.upperCaseAndNumberCheck();
   }
 
-  upperCaseCheck = () => {
+  allowOnlyNumbersChanged() {
+    this.upperCaseAndNumberCheck();
+  }
+
+  upperCaseAndNumberCheck = () => {
+    if (this.allowOnlyNumbers && typeof this.value !== "number")
+      setTimeout(() => (this.value = ""), 200);
     if (
       this.firstLetterUpperCase &&
       this.value &&
