@@ -2,7 +2,7 @@ import { bootstrap } from "aurelia-bootstrapper";
 import { StageComponent } from "aurelia-testing";
 
 export function update(time) {
-  time = time || 500;
+  time = time || 0;
   return new Promise((r) => setTimeout(r, time));
 }
 
