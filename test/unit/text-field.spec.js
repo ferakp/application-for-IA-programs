@@ -1,4 +1,4 @@
-import { update, executeTest, expectElement, expectElementAttribute, expectElementNumber } from "../test-utils";
+import { update, executeTest, expectElement, expectElementAttribute, expectElementNumber, expectViewModelProperty } from "../test-utils";
 
 describe("Test text-field component", () => {
   const resources = ["../../src/components/text-field"];
@@ -97,9 +97,12 @@ describe("Test text-field component", () => {
     });
   });
 
-
-
-
+  it("activates clear button (showClearButton attribute)", (done) => {
+    runTest({ value: "value-", showClearButton: true }, done, async (component) => {
+      await update(100);
+      expectViewModelProperty(component, "activateClearButton").toBe(true);
+    });
+  });
 
   /**
    * Functions
