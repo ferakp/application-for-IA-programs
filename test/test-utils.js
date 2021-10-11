@@ -1,8 +1,9 @@
 import { bootstrap } from "aurelia-bootstrapper";
 import { StageComponent } from "aurelia-testing";
 
-export function update() {
-  return new Promise((r) => setTimeout(r));
+export function update(time) {
+  time = time || 500;
+  return new Promise((r) => setTimeout(r, time));
 }
 
 export function expectElement(selector, propertyName) {
@@ -20,13 +21,13 @@ export function expectElementAttribute(selector, attributeName) {
   return expect(document.querySelector(selector).getAttribute(attributeName));
 }
 
-export function executeTest(resources, html, viewModel, done, test) {
+export function executeTest(resources, html, viewModel, done, testC) {
   const component = StageComponent.withResources(resources);
   component
     .inView(html)
     .boundTo(viewModel)
     .create(bootstrap)
-    .then(() => test(component))
+    .then(() => testC(component))
     .then(done)
     .then(() => component.dispose())
     .catch((e) => {
