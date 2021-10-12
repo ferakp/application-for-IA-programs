@@ -23,6 +23,7 @@ describe("Test text-field component", () => {
   allow-only-numbers.to-view="allowOnlyNumbers"
   show-clear-button.to-view="showClearButton"
   disable.to-view="disable"
+  input-enter-callback.to-view="inputEnterCallback"
   >
   </text-field>
 
@@ -125,6 +126,31 @@ describe("Test text-field component", () => {
     });
   });
 
+  it("calls inputEnterPressed function when enter is pressed (inputEnterPressed attribute)", (done) => {
+    let enterPressed = false;
+    runTest(
+      {
+        inputEnterCallback: () => {
+          enterPressed = true;
+        },
+      },
+      done,
+      () => {
+        const keyboardEvent = new KeyboardEvent("keyup", {
+          code: "Enter",
+          key: "Enter",
+          charCode: 13,
+          keyCode: 13,
+          view: window,
+          bubbles: true,
+        });
+        document
+          .querySelector(".text-field__input-element")
+          .dispatchEvent(keyboardEvent);
+        expect(enterPressed).toBe(true);
+      }
+    );
+  });
   /**
    * Functions
    */
@@ -137,6 +163,4 @@ describe("Test text-field component", () => {
       expectViewModelProperty(component, "value").toEqual("");
     });
   });
-
-  
 });
