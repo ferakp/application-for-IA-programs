@@ -37,8 +37,7 @@ describe("Test checkbox component", () => {
   });
 
   it("displays the value of checked attribute correctly (checked attribute)", (done) => {
-    runTest({ name: "LabelTest", checked: true }, done, async () => {
-      await update(100);
+    runTest({ name: "LabelTest", checked: true }, done, () => {
       expectElement(".checkbox__input", "checked").toBe(true);
     });
   });
