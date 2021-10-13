@@ -7,7 +7,7 @@ export function update(time) {
 }
 
 export function expectElement(selector, propertyName) {
-  if (selector) {
+  if (propertyName) {
     return expect(document.querySelector(selector)[propertyName]);
   }
   return expect(document.querySelector(selector));
