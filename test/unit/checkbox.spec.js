@@ -13,7 +13,7 @@ describe("Test checkbox component", () => {
   const html = `
   <checkbox
   name.to-view="name"
-  checked.two-way="value"
+  checked.two-way="checked"
   ></checkbox>`;
 
   const runTest = (viewModel, done, test) =>
@@ -32,11 +32,14 @@ describe("Test checkbox component", () => {
 
   it("displays name correctly (name attribute)", (done) => {
     runTest({ name: "LabelTest" }, done, () => {
-      expectElement(".checkbox__label", "innerHTML").toMatch(
-        "LabelTest"
-      );
+      expectElement(".checkbox__label", "innerHTML").toMatch("LabelTest");
     });
   });
 
-
+  it("displays the value of checked attribute correctly (checked attribute)", (done) => {
+    runTest({ name: "LabelTest", checked: true }, done, async () => {
+      await update(100);
+      expectElement(".checkbox__input", "checked").toBe(true);
+    });
+  });
 });
