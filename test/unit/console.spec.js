@@ -28,4 +28,16 @@ describe("Test console component", () => {
       expectElementNumber(".console__message-container").toBe(1);
     });
   });
+
+    /**
+   * Attributes
+   */
+     it("display terminal lines correctly (terminalLines attribute)", (done) => {
+      runTest({terminalLines: [{_id: 1, _text: "test", color: "rgba(255, 255, 255,0.5)"}]}, done, () => {
+        expectElement(".terminal-line__text", "innerText").toBe("test");
+        expectElementNumber(".terminal-line__text").toBe(1);
+        expectElementAttribute(".terminal-line__row-start-sign", "style").toBe("background-color: rgba(255, 255, 255,0.5)");
+      });
+    });
+
 });
