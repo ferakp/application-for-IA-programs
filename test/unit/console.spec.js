@@ -1,3 +1,4 @@
+import { waitFor } from "../../node_modules/aurelia-testing/dist/commonjs/wait";
 import {
   update,
   executeTest,
@@ -54,5 +55,30 @@ describe("Test console component", () => {
         );
       }
     );
+  });
+
+  /**
+   * Functions
+   */
+
+  it("creates a new terminal line correctly (_enterPressed function)", (done) => {
+    runTest({}, done, async (component) => {
+      component.viewModel.value = "test!";
+      await update(100);
+      const keyboardEvent = new KeyboardEvent("keyup", {
+        code: "Enter",
+        key: "Enter",
+        charCode: 13,
+        keyCode: 13,
+        view: window,
+        bubbles: true,
+      });
+      document
+        .querySelector(".text-field__input-element")
+        .dispatchEvent(keyboardEvent);
+      await update();
+      expectElement(".terminal-line__text", "innerHTML").toBe("test!");
+      expect(component.viewModel.value).toBe("");
+    });
   });
 });
