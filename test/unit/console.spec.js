@@ -1,4 +1,3 @@
-import { waitFor } from "../../node_modules/aurelia-testing/dist/commonjs/wait";
 import {
   update,
   executeTest,
