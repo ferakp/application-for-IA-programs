@@ -80,4 +80,16 @@ describe("Test console component", () => {
       expect(component.viewModel.value).toBe("");
     });
   });
+
+  it("deletes terminal line correctly (_deleteTerminalLine function)", (done) => {
+    runTest({}, done, async (component) => {
+      component.viewModel.value = "test!";
+      component.viewModel._enterPressed();
+      await update(100);
+      expectElement(".terminal-line__text", "innerHTML").toBe("test!");
+      expectViewModelProperty(component, "terminalLines").toHaveLength(1);
+      document.querySelectorAll(".terminal-line__icon-span")[1].click();
+      expectViewModelProperty(component, "terminalLines").toHaveLength(0);
+    });
+  });
 });
