@@ -1,0 +1,5 @@
+agent-view {
+  display: flex;
+  flex: 0 0 90%;
+  height: 100%;
+}
