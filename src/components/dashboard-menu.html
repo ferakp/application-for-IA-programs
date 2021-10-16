@@ -4,17 +4,17 @@
 
   <!-- Child components-->
   <div class="dashboard-menu__container d-flex flex-column">
-    <a class="dashboard-menu__item">
+    <a class="dashboard-menu__item" click.delegate="menuItemClicked('agent-view')">
       <i class="dashboard-menu__item-icon fas fa-cubes"></i>
-      <div class="dashboard-menu__item-tooltip-container" click.delegate="meniItemClicked('agent-view')"><p>Intelligent Agents</p></div>
+      <div class="dashboard-menu__item-tooltip-container"><p>Intelligent Agents</p></div>
     </a>
-    <a class="dashboard-menu__item mt-2">
+    <a class="dashboard-menu__item mt-2" click.delegate="menuItemClicked('file-view')">
       <i class="dashboard-menu__item-icon fas fa-folder"></i>
-      <div class="dashboard-menu__item-tooltip-container" click.delegate="meniItemClicked('file-view')"><p>Files</p></div>
+      <div class="dashboard-menu__item-tooltip-container" ><p>Files</p></div>
     </a>
-    <a class="dashboard-menu__item mt-2">
+    <a class="dashboard-menu__item mt-2" click.delegate="menuItemClicked('log-view')">
       <i class="dashboard-menu__item-icon fas fa-history"></i>
-      <div class="dashboard-menu__item-tooltip-container" click.delegate="meniItemClicked('log-view')"><p>Log</p></div>
+      <div class="dashboard-menu__item-tooltip-container" ><p>Log</p></div>
     </a>
   </div>
 </template>

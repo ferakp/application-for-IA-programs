@@ -7,8 +7,8 @@ export class DashboardMenu {
 
   @bindable
   activeView;
-  
-  menuItemClicked = (name) => {
+
+  menuItemClicked(name) {
     this.activeView = name;
   }
   

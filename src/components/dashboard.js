@@ -1,18 +1,16 @@
-import { bindable } from 'aurelia-framework';
+import { bindable } from "aurelia-framework";
 
 export class Dashboard {
-
   @bindable
   expansionMode;
 
   /**
    * List of active view options: agent, log, files
    */
+  @bindable
   activeView;
 
+  expansionModeChanged() {}
 
-  expansionModeChanged(newValue) {
-    
-  }
-
+  activeViewChanged() {}
 }
