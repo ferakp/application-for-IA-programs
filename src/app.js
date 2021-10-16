@@ -25,6 +25,7 @@ export class App {
     if (this.navBar) {
       try {
         this.navBar.addMainFAIcon("fas fa-square-root-alt");
+        this.navBar.addLink("Homepage", "/");
         this.navBar.addLink("Dashboard", "/dashboard");
       } catch (err) {
         // skip
