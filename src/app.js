@@ -41,7 +41,17 @@ export class App {
     };
     config.map([
       {
-        route: ["", "dashboard"],
+        route: ["", "landing"],
+        name: "Homepage",
+        moduleId: PLATFORM.moduleName("./components/landing"),
+        nav: true,
+        title: "Homepage",
+        settings: {
+          roles: [],
+        },
+      },
+      {
+        route: ["dashboard", "dashboard"],
         name: "Dashboard",
         moduleId: PLATFORM.moduleName("./components/dashboard"),
         nav: true,
