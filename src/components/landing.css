@@ -1,0 +1,9 @@
+.landing__text-p {
+  color: rgb(102, 101, 101);
+}
+
+.landing__text-container {
+  margin-left: 15px;
+  margin-top: 50px;
+  max-width: 60%;
+}
