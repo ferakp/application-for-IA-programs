@@ -1,7 +1,10 @@
 import "@babel/polyfill";
 import "./components/cs-navbar";
-import { PLATFORM } from "aurelia-pal";
+import { ViewModelProvider } from "./view-models/view-model-provider";
+import { PLATFORM} from "aurelia-pal";
+import {inject} from "aurelia-framework";
 
+@inject(ViewModelProvider)
 class AuthorizeStep {
   run(navigationInstruction, next) {
     if (
@@ -19,7 +22,12 @@ class AuthorizeStep {
 }
 
 export class App {
-  constructor() {}
+
+  viewModelProvider;
+
+  constructor(viewModelProvider) {
+    this.viewModelProvider = viewModelProvider;
+  }
 
   attached() {
     if (this.navBar) {
@@ -31,6 +39,8 @@ export class App {
         // skip
       }
     }
+
+
   }
 
   configureRouter(config, router) {
