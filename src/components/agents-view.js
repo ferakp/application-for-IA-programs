@@ -1,4 +1,7 @@
 
 export class AgentsView {
   
+  agents;
+
+  
 }
