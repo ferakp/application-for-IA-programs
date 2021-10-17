@@ -3,3 +3,9 @@ agent-view {
   flex: 0 0 90%;
   height: 100%;
 }
+
+.agent-view__container {
+  padding-top: 5px;
+  width: 99%;
+}
+
