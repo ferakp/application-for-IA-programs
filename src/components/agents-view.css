@@ -1,10 +1,10 @@
-agent-view {
+agents-view {
   display: flex;
   flex: 0 0 90%;
   height: 100%;
 }
 
-.agent-view__container {
+.agents-view__container {
   padding-top: 5px;
   width: 99%;
 }
