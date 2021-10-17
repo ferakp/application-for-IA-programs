@@ -1,5 +1,18 @@
 agent-box {
-  width: 220px;
-  height: 200px;
-  background-color: gray;
+  min-width: 280px;
+  min-height: 280px;
+  background-color: #f9f9f9;
+  border-radius: 2%;
+}
+
+.agent-box__logo {
+  color: #bdbdbd;
+  font-size: 55px;
+  margin-left: 10px;
+  height: 80px;
+}
+
+.agent-box__container {
+  flex: 1;
+  height: 100%;
 }
