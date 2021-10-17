@@ -1,8 +1,12 @@
-export class appVM {
+export class AppVM {
 
-  agents;
-  activeAgents;
-  terminatedAgents;
+  agents = [];
+  activeAgents = [];
+  terminatedAgents = [];
+
+  constructor() {
+    this.agents.add(new Agent(0));
+  }
 
   
 }
@@ -29,9 +33,12 @@ class Agent {
   utilityFunction;
 
 
-  constructor(type){
+  constructor(type, name){
     this.type = type;
     if (type === 0) this.ruleActionMap = new Map(); 
     if ( type === 1) this.observations = [];
+
+    this.name = name || ("Agent_"+Math.floor(Math.random()*1000000));
+    this.id = Math.floor(Math.random()*10000000000000);
   }
 }
