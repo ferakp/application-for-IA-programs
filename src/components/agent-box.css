@@ -56,6 +56,10 @@ agent-box:hover {
   color: yellow;
 }
 
+.agent-box__logo-color-paused {
+  color: orange;
+}
+
 .agent-box__logo-color-running {
   color: green;
 }

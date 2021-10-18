@@ -32,8 +32,10 @@ class Agent {
   // Only if agent's type is 3
   utilityFunction;
 
-  // Status
+  // Status - uninitialized, initialized, idle, running, terminated, paused
   status = "running";
+
+
 
 
   constructor(type, name){
