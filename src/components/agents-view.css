@@ -1,0 +1,15 @@
+agents-view {
+  display: flex;
+  flex: 0 0 90%;
+  height: 100%;
+}
+
+.agents-view__container {
+  padding-top: 5px;
+  width: 99%;
+}
+
+.agents-view__agent-container {
+  overflow-y: auto;
+}
+

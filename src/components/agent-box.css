@@ -1,0 +1,98 @@
+agent-box {
+  width: 380px;
+  background-color: #f9f9f9;
+  border-radius: 3%;
+  margin-right: 15px;
+  margin-bottom: 15px;
+  border: 1px grey solid;
+}
+
+agent-box:hover {
+  cursor: pointer;
+}
+
+.agent-box__logo {
+  color: #bdbdbd;
+  font-size: 55px;
+  margin-left: 10px;
+  margin-top: 10px;
+  height: 80px;
+  animation: fade-effect 2s linear infinite alternate;
+}
+
+.agent-box__container {
+  flex: 1;
+}
+
+.agent-box__content-row {
+  margin-bottom: 10px;
+}
+
+.agent-box__content-title {
+  font-weight: bold;
+  color: #525252;
+  font-size: 15px;
+  width: 105px;
+}
+
+.agent-box__buttons-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.agent-box__buttons-container button:nth-of-type(2) {
+  margin-left: auto;
+}
+
+.agent-box__button {
+  min-width: 92px;
+  margin-bottom: 10px;
+}
+
+.agent-box__button:hover {
+  color: #fbfbfbd6;
+}
+
+.agent-box__content-text {
+  font-size: 15px;
+  align-self: center;
+  color: #3c3b3b;
+  font-weight: 400;
+}
+
+.agent-box__content span {
+  padding-left: 10px;
+}
+
+.agent-box__logo-color-uninitialized {
+  color: black;
+}
+
+.agent-box__logo-color-initialized {
+  color: grey;
+}
+
+.agent-box__logo-color-idle {
+  color: yellow;
+}
+
+.agent-box__logo-color-paused {
+  color: orange;
+}
+
+.agent-box__logo-color-running {
+  color: green;
+}
+
+.agent-box__logo-color-terminated {
+  color: red;
+}
+
+@keyframes fade-effect {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.6;
+  }
+}

@@ -1,7 +1,10 @@
 import "@babel/polyfill";
 import "./components/cs-navbar";
-import { PLATFORM } from "aurelia-pal";
+import { ViewModelProvider } from "./view-models/view-model-provider";
+import { PLATFORM} from "aurelia-pal";
+import {inject} from "aurelia-framework";
 
+@inject(ViewModelProvider)
 class AuthorizeStep {
   run(navigationInstruction, next) {
     if (
@@ -19,17 +22,25 @@ class AuthorizeStep {
 }
 
 export class App {
-  constructor() {}
+
+  viewModelProvider;
+
+  constructor(viewModelProvider) {
+    this.viewModelProvider = viewModelProvider;
+  }
 
   attached() {
     if (this.navBar) {
       try {
         this.navBar.addMainFAIcon("fas fa-square-root-alt");
+        this.navBar.addLink("Homepage", "/");
         this.navBar.addLink("Dashboard", "/dashboard");
       } catch (err) {
         // skip
       }
     }
+
+
   }
 
   configureRouter(config, router) {

@@ -43,6 +43,7 @@ export class TextField {
   @bindable
   hideSuffixContainer = false;
 
+  // Hides label container if true
   @bindable
   minimalMode = false;
 

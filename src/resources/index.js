@@ -5,6 +5,8 @@ export function configure(config) {
     [
       PLATFORM.moduleName('../components/text-field'),
       PLATFORM.moduleName('../components/checkbox'),
+      PLATFORM.moduleName('../components/agents-view'),
+      PLATFORM.moduleName('../components/agent-box'),
       PLATFORM.moduleName('../components/landing'),
       PLATFORM.moduleName('../components/combobox'),
       PLATFORM.moduleName('../components/combobox-tag'),
