@@ -43,9 +43,7 @@
 }
 
 .text-field__container .text-field__input-container * {
-  animation-name: textFieldInputHighlight;
-  animation-duration: 0.5s;
-  animation-fill-mode: forwards;
+  background-color: rgba(255, 255, 255, 0.179);
 }
 
 .text-field__container:hover .text-field__input-container * {
@@ -158,11 +156,11 @@ input[type=number] {
 
 @keyframes textFieldInputHighlight {
   from {
-    background-color: white;
+    background-color: transparent;
   }
 
   to {
-    background-color: #7070705f;
+    background-color: #dad6d65f;
   }
 }
 

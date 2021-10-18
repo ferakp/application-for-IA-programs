@@ -23,6 +23,9 @@ export class Combobox {
   placeholder;
 
   @bindable
+  minimalMode;
+
+  @bindable
   for;
 
   @bindable

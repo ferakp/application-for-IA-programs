@@ -4,12 +4,41 @@
 
   <!-- Child components-->
   <div class="agent-box__container d-flex flex-column">
-    <div class="agent-box__logo d-flex ${'agent-box__logo-color-'+agent.status}"><i class="fas fa-box"></i></div>
+    <div
+      class="agent-box__logo d-flex ${'agent-box__logo-color-'+agent.status}"
+    >
+      <i class="fas fa-box"></i>
+    </div>
     <div class="agent-box__content d-flex flex-column">
-      <p class="agent-box__content-row d-flex"><span class="agent-box__content-title">Name</span>&nbsp;<span class="agent-box__content-text">${agent.name}</span></p>
-      <p class="agent-box__content-row d-flex"><span class="agent-box__content-title">ID</span>&nbsp;<span class="agent-box__content-text">${agent.id}</span></p>
-      <p class="agent-box__content-row d-flex"><span class="agent-box__content-title">Type</span>&nbsp;<span class="agent-box__content-text">${agentTypeFormatted}</span></p>
-      <p class="agent-box__content-row d-flex"><span class="agent-box__content-title">Status</span>&nbsp;<span class="agent-box__content-text"><combobox></combobox></span></p>
+      <p class="agent-box__content-row d-flex">
+        <span class="agent-box__content-title">Name</span>&nbsp;<span
+          class="agent-box__content-text"
+          >${agent.name}</span
+        >
+      </p>
+      <p class="agent-box__content-row d-flex">
+        <span class="agent-box__content-title">ID</span>&nbsp;<span
+          class="agent-box__content-text"
+          >${agent.id}</span
+        >
+      </p>
+      <p class="agent-box__content-row d-flex">
+        <span class="agent-box__content-title">Type</span>&nbsp;<span
+          class="agent-box__content-text"
+          >${agentTypeFormatted}</span
+        >
+      </p>
+      <p class="agent-box__content-row d-flex">
+        <span class="agent-box__content-title align-self-center">Status</span
+        >&nbsp;<span class="agent-box__content-text"
+          ><combobox
+            placeholder=""
+            minimal-mode.bind="true"
+            items.to-view="statusItems"
+            value.two-way="agent.status"
+          ></combobox
+        ></span>
+      </p>
     </div>
   </div>
 </template>
