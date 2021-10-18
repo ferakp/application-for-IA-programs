@@ -1,6 +1,5 @@
 agent-box {
   width: 380px;
-  height: 280px;
   background-color: #f9f9f9;
   border-radius: 5%;
 }
@@ -30,7 +29,15 @@ agent-box:hover {
   font-weight: bold;
   color: #525252;
   font-size: 15px;
-  width: 50px;
+  width: 105px;
+}
+
+.agent-box__buttons-container {
+  margin-left: 10px;
+}
+
+.agent-box__button:hover {
+  color: #fbfbfbd6;
 }
 
 .agent-box__content-text {

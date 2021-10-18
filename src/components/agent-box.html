@@ -29,6 +29,18 @@
         >
       </p>
       <p class="agent-box__content-row d-flex">
+        <span class="agent-box__content-title">Start time</span>&nbsp;<span
+          class="agent-box__content-text"
+          >${agent.startTime}</span
+        >
+      </p>
+      <p class="agent-box__content-row d-flex">
+        <span class="agent-box__content-title">Ending time</span>&nbsp;<span
+          class="agent-box__content-text"
+          >${agent.endingTime}</span
+        >
+      </p>
+      <p class="agent-box__content-row d-flex">
         <span class="agent-box__content-title align-self-center">Status</span
         >&nbsp;<span class="agent-box__content-text"
           ><combobox
@@ -40,6 +52,9 @@
           ></combobox
         ></span>
       </p>
+    </div>
+    <div class="agent-box__buttons-container d-flex flex-row">
+      <button class="agent-box__button btn btn-dark">Log history</button>
     </div>
   </div>
 </template>

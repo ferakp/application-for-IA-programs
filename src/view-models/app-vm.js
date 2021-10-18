@@ -35,6 +35,11 @@ class Agent {
   // Status - uninitialized, initialized, idle, running, terminated, paused
   status = "running";
 
+  startTime = "N/A";
+
+  pausedTime = "N/A";
+
+  endingTime = "N/A";
 
 
 
