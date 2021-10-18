@@ -5,5 +5,8 @@ export class AgentsView {
   @bindable
   agents;
 
+  attached() {
+  }
+
 
 }

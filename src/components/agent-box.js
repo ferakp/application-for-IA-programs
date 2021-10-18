@@ -17,4 +17,10 @@ export class AgentBox {
     if(this.agent.type === 2) this.agentTypeFormatted = "Goal-based agent";
     if(this.agent.type === 3) this.agentTypeFormatted = "Utility-based agent";
   }
+
+  deleteAgent() {
+    this.agent.delete();
+  }
+
+
 }
