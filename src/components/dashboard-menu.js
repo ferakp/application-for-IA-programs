@@ -1,7 +1,6 @@
-import {bindable} from "aurelia-framework";
+import { bindable } from "aurelia-framework";
 
 export class DashboardMenu {
-
   @bindable
   menuItemClickedCallback;
 
@@ -11,5 +10,4 @@ export class DashboardMenu {
   menuItemClicked(name) {
     this.activeView = name;
   }
-  
 }

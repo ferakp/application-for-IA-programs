@@ -1,15 +1,22 @@
-import { bindable } from "aurelia-framework";
+import { bindable, inject } from "aurelia-framework";
+import {EventAggregator} from "aurelia-event-aggregator";
 
+@inject(EventAggregator)
 export class AgentBox {
   @bindable
   agent;
-
-
   agentTypeFormatted;
 
   // Combobox properties
   statusItems = ["uninitialized", "initialized", "idle", "running", "stopped", "paused", "terminated"];
   customFilter = (v, i) => i;
+
+  // Injections
+  eventAggregator;
+
+  constructor(eventAggregator) {
+    this.eventAggregator = eventAggregator;
+  }
 
   attached() {
     if(this.agent.type === 0) this.agentTypeFormatted = "Reflex agent";
@@ -20,6 +27,10 @@ export class AgentBox {
 
   deleteAgent() {
     this.agent.delete();
+  }
+
+  openLogHistory() {
+    this.eventAggregator.publish("openLogsView", this.agent.id);
   }
 
 
