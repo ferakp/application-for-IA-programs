@@ -15,7 +15,7 @@
     </div>
     <div class="dashboard__right-window d-flex flex-row ${expansionMode === true ? 'dashboard__hide-window' : ''}">
       <dashboard-menu active-view.two-way="activeView"></dashboard-menu>
-      <agents-view show.bind="activeView === 'agents-view'"></agents-view>
+      <agents-view show.bind="activeView === 'agents-view'" agents.two-way="appVM.agents"></agents-view>
     </div>
   </div>
 </template>
