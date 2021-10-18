@@ -4,9 +4,12 @@ export class AgentBox {
   @bindable
   agent;
 
+
   agentTypeFormatted;
 
+  // Combobox properties
   statusItems = ["uninitialized", "initialized", "idle", "running", "stopped", "paused", "terminated"];
+  customFilter = (v, i) => i;
 
   attached() {
     if(this.agent.type === 0) this.agentTypeFormatted = "Reflex agent";

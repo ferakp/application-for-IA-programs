@@ -33,7 +33,7 @@ class Agent {
   utilityFunction;
 
   // Status
-  status = "uninitialized";
+  status = "running";
 
 
   constructor(type, name){
