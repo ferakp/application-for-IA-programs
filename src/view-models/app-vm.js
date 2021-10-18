@@ -5,7 +5,7 @@ export class AppVM {
   terminatedAgents = [];
 
   constructor() {
-    this.agents.add(new Agent(0));
+    this.agents.push(new Agent(0));
   }
 
   
@@ -31,6 +31,9 @@ class Agent {
 
   // Only if agent's type is 3
   utilityFunction;
+
+  // Status
+  status = "uninitialized";
 
 
   constructor(type, name){
