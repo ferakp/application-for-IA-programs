@@ -9,3 +9,7 @@ agents-view {
   width: 99%;
 }
 
+.agents-view__agent-container {
+  overflow-y: auto;
+}
+
