@@ -21,7 +21,7 @@ dashboard-menu {
 }
 
 .dashboard-menu__item-active .dashboard-menu__item-icon {
-  color: #0a0a0a;
+  color: #3888d8;
 }
 
 .dashboard-menu__item-tooltip-container {
@@ -33,7 +33,7 @@ dashboard-menu {
   display: block;
 }
 
-.dashboard-menu__item:hover .dashboard-menu__item-tooltip-container p{
+.dashboard-menu__item:hover .dashboard-menu__item-tooltip-container p {
   background-color: #3b3c3ddb;
   position: absolute;
   color: white;
@@ -48,12 +48,12 @@ dashboard-menu {
 }
 
 .dashboard-menu__item:hover .dashboard-menu__item-icon {
-  color: black;
+  color: #3888d8;
   transition: all 0.5s;
 }
 
 .dashboard-menu__item-icon {
   font-size: 1.8rem;
-  color: #3888d8;
+  color: black;
   transition: all 0.5s;
 }
