@@ -13,6 +13,9 @@ export class Console {
   @bindable
   terminalLines;
 
+  @bindable
+  disableTextField = false;
+
   attached() {
     if (!this.terminalLines) this.terminalLines = [];
   }

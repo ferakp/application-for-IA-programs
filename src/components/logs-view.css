@@ -1,6 +1,6 @@
 logs-view {
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
 }
 
 .logs-view__container {
