@@ -1,0 +1,13 @@
+logs-view {
+  height: 100%;
+  overflow: auto;
+}
+
+.logs-view__container {
+  width: 99%;
+  height: 100%;
+}
+
+.logs-view__console {
+  margin-right: 10px;
+}

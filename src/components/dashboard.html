@@ -19,6 +19,7 @@
         <p class="dashboard__right-window-view-title opacity-half h4">${activeView ? activeView.replace('-view', '') : ''}</p>
         <hr class="mt-0">
         <agents-view show.bind="activeView === 'Agents-view'" agents.two-way="appVM.agents"></agents-view>
+        <logs-view show.bind="activeView === 'Logs-view'" logs.two-way="appVM.logs"></logs-view>
       </div>
     </div>
   </div>
