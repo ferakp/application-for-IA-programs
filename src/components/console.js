@@ -20,6 +20,18 @@ export class Console {
     if (!this.terminalLines) this.terminalLines = [];
   }
 
+  createGenericTerminalLine = (payload) => {
+    if (typeof payload.text === "string") {
+      let terminalLine = {
+        text: payload.text,
+        time: (payload.time || new Date()),
+        id: payload.id || this._getNewId(),
+        color: this._getRandomColor(),
+      };
+      this.terminalLines.push(terminalLine);
+    }
+  }
+
   _enterPressed = () => {
     this.terminalLines.push(this._getNewTerminalLine());
     this.value = "";
