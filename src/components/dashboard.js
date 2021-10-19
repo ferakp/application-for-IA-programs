@@ -15,10 +15,10 @@ export class Dashboard {
   logsViewSubscriber;
 
   /**
-   * List of active view options: agents-view, logs-view, files-view
+   * List of active view options: Agents-view, Logs-view, Files-view
    */
   @bindable
-  activeView;
+  activeView = "Agents-view";
 
   constructor(viewModelProvider, eventAggregator) {
     this.eventAggregator = eventAggregator;
@@ -28,7 +28,7 @@ export class Dashboard {
     this.logsViewSubscriber = this.eventAggregator.subscribe(
       "openLogsView",
       (param) => {
-        this.activeView = "logs-view";
+        this.activeView = "Logs-view";
       }
     );
   }

@@ -44,3 +44,12 @@
   flex: 0 0 0%;
   transition: flex 1s;
 }
+
+.dashboard__right-window-view-container {
+  flex: 0 0 90%;
+  height: 100%;
+}
+
+.dashboard__right-window-view-title {
+  margin-top: 11px;
+}
