@@ -20,6 +20,10 @@ dashboard-menu {
   transition: all 0.5s;
 }
 
+.dashboard-menu__item-active .dashboard-menu__item-icon {
+  color: #0a0a0a;
+}
+
 .dashboard-menu__item-tooltip-container {
   display: none;
 }
@@ -50,6 +54,6 @@ dashboard-menu {
 
 .dashboard-menu__item-icon {
   font-size: 1.8rem;
-  color: #343a40;
+  color: #3888d8;
   transition: all 0.5s;
 }
