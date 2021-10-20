@@ -35,22 +35,22 @@ export class LogsView {
   }
 
   logsChanged(newValue) {
-    if (Array.isArray(newValue)) {
-      newValue.forEach(async (element) => {
+    if (Array.isArray(newValue) && this.consoleVM) {
+      newValue.forEach((element) => {
         if (Array.isArray(this.filters) && this.filters.length > 0) {
-          this.filters.forEach(async (e) => {
+          this.filters.forEach((e) => {
             if (
               e.includes("Agent ID") &&
               element.id.toString() === e.replace("Agent ID: ", "")
             )
-              await this.consoleVM.createGenericTerminalLine(element);
+              this.consoleVM.createGenericTerminalLine(element);
             else if (
               e.includes("Text: ") &&
-              (await element.text.includes(e.replace("Text: ", "")))
+              (element.text.includes(e.replace("Text: ", "")))
             )
-              await this.consoleVM.createGenericTerminalLine(element);
+              this.consoleVM.createGenericTerminalLine(element);
           });
-        } else await this.consoleVM.createGenericTerminalLine(element);
+        } else this.consoleVM.createGenericTerminalLine(element);
       });
     }
   }

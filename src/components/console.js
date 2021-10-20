@@ -16,9 +16,16 @@ export class Console {
   @bindable
   disableTextField = false;
 
-  createGenericTerminalLine = async (payload) => {
+  deletedTerminalLineIds = [];
+
+  createGenericTerminalLine(payload) {
     if (
-      this.terminalLines.some((e) => e.id.toString() === payload.id.toString())
+      this.terminalLines.some(
+        (e) => e.id.toString() === payload.id.toString()
+      ) ||
+      this.deletedTerminalLineIds.some(
+        (e) => e.toString() === payload.id.toString()
+      )
     )
       return;
     if (typeof payload.text === "string" && typeof payload.id === "number") {
@@ -30,7 +37,7 @@ export class Console {
       };
       this.terminalLines.push(terminalLine);
     }
-  };
+  }
 
   emptyConsole = () => {
     this.terminalLines = [];
@@ -47,6 +54,7 @@ export class Console {
 
   _deleteTerminalLine = (id) => {
     if (typeof id === "number") {
+      this.deletedTerminalLineIds.push(id);
       for (let i = 0; i < this.terminalLines.length; i++) {
         if (id === this.terminalLines[i].id) {
           this.terminalLines.splice(i, 1);
