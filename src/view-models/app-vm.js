@@ -1,13 +1,24 @@
+import { tsParenthesizedType } from "../../../../../../.cache/typescript/4.4/node_modules/@babel/types/lib/index";
+
 export class AppVM {
   agents = [];
   activeAgents = [];
   terminatedAgents = [];
   api;
-  logs;
+  logs = [];
 
   constructor() {
     this.api = { deleteAgent: this.deleteAgent };
+
+    // Tests
     this.agents.push(new Agent(this.api, 0));
+    setInterval(() => {
+      let testId = Math.floor(Math.random() * 50000000);
+      this.logs.push({
+        text: "Agent "+testId+" has been registered",
+        id: testId,
+      });
+    }, 10000);
   }
 
   deleteAgent = (agentId) => {

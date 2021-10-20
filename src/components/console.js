@@ -11,17 +11,14 @@ export class Console {
   inputElement;
 
   @bindable
-  terminalLines;
+  terminalLines = [];
 
   @bindable
   disableTextField = false;
-
-  attached() {
-    if (!this.terminalLines) this.terminalLines = [];
-  }
-
-  createGenericTerminalLine = (payload) => {
-    if (typeof payload.text === "string") {
+  
+  createGenericTerminalLine = async (payload) => {
+    if(this.terminalLines.some(e => e.id.toString() === payload.id.toString())) return;
+    if (typeof payload.text === "string" && typeof payload.id === 'number') {
       let terminalLine = {
         text: payload.text,
         time: (payload.time || new Date()),
@@ -30,6 +27,10 @@ export class Console {
       };
       this.terminalLines.push(terminalLine);
     }
+  }
+
+  emptyConsole = () => {
+    this.terminalLines = [];
   }
 
   _enterPressed = () => {

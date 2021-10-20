@@ -33,5 +33,4 @@ export class AgentBox {
     this.eventAggregator.publish("openLogsView", this.agent.id);
   }
 
-
 }

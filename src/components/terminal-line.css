@@ -34,6 +34,7 @@ terminal-line {
 .terminal-line__text {
   padding: 0px;
   margin: 0px;
+  color: #5c5b5b;
 }
 
 .terminal-line__icons-container {
@@ -43,4 +44,9 @@ terminal-line {
 
 .terminal-line__icon-span {
   margin-left: 10px;
+  color: #5c5b5b;
+}
+
+.terminal-line__icon-span:hover {
+  color: #2c2c2c;
 }
