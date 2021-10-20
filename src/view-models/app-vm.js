@@ -9,8 +9,6 @@ export class AppVM {
 
   constructor() {
     this.api = { deleteAgent: this.deleteAgent };
-    this.logs.push({text: "Hei", id: Math.floor(5000*Math.random())});
-    this.logs.push({text: "Hei", id: Math.floor(5000*Math.random())});
   }
 
   deleteAgent = (agentId) => {
