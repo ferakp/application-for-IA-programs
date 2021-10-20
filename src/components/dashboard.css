@@ -7,6 +7,7 @@
   display: flex;
   flex-flow: row nowrap;
   flex: 1;
+  height: 100%;
 }
 
 /**LEFT WINDOW**/
@@ -51,5 +52,5 @@
 }
 
 .dashboard__right-window-view-title {
-  margin-top: 11px;
+  margin-top: 12px;
 }

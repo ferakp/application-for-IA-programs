@@ -7,7 +7,7 @@
     <text-field
       ref="comboboxTextField"
       class="d-flex combobox-tag__text-field"
-      placeholder.to-view="placeholder"
+      placeholder.to-view="placeholder ? placeholder : ''"
       label.to-view="label"
       show-clear-button.to-view="showClearButton"
       first-letter-upper-case.to-view="firstLetterUpperCase"
@@ -16,10 +16,12 @@
       error-message.to-view="errorMessage"
       required.to-view="required"
       value.two-way="value"
+      minimal-mode.to-view="!minimalMode"
       hide-suffix-container.to-view="hideSuffixContainer"
       for.to-view="for"
       input-click-callback.to-view="_inputElementClicked"
       input-enter-callback.to-view="_inputElementEnterPressed"
+      input-element.from-view="inputElement"
     >
       <div
         class="combobox-tag__prefix-container"
@@ -27,45 +29,72 @@
         show.bind="selections.length > 0 ? true : false"
       >
         <div repeat.for="tag of selections" class="combobox-tag__tag">
-          <p class="combobox_tag-label">${tag}</p>
+          <p class="combobox-tag__tag-label">${tag}</p>
           <a
-            class="combobox_tag-close-icon-link"
+            class="combobox-tag__tag-close-icon-link"
             click.trigger="_deleteTag($index)"
             ><i class="fas fa-times combobox-tag__tag-close-icon"></i
           ></a>
         </div>
       </div>
       <div
+        if.bind="!hideSuffixContainer"
         class="combobox-tag__suffix-container"
         slot="suffix-container"
         ref="comboboxSuffixContainer"
       >
         <a
-          class="combobox-tag__suffix-container-link combobox-tag__transparent-bg-color d-flex align-items-center m-2 text-decoration-none"
+          class="
+            combobox-tag__suffix-container-link
+            d-flex
+            align-items-center
+            m-2
+            text-decoration-none
+          "
           click.trigger="dropDownListIconClicked()"
-          ><i
-            class="combobox-tag__drop-down-icon-list fas fa-angle-down combobox-tag__transparent-bg-color text-decoration-none combobox-tag__pointer-cursor"
-          ></i
-        ></a>
+        >
+          <i
+            class="
+              combobox-tag__drop-down-icon-list
+              fas
+              fa-angle-down
+              text-decoration-none
+              combobox-tag__pointer-cursor
+            "
+          ></i>
+        </a>
       </div>
       <div
         class="combobox-tag__drop-down-list-container"
         slot="drop-down-list-container"
         ref="dropDownListContainer"
       >
-        <div class="combobox-tag__drop-down-list-container-skipper d-flex">
+        <div
+          ref="dropDownList"
+          class="
+            combobox-tag__drop-down-list
+            flex-column
+            ${dropDownListDirectionTop
+            ===
+            true
+            ?
+            'combobox-tag__drop-down-list-direction-top'
+            :
+            ''}
+          "
+          show.bind="dropDownListOpened"
+        >
           <div
-            ref="dropDownList"
-            class="combobox-tag__drop-down-list flex-column"
-            show.bind="dropDownListOpened"
+            repeat.for="item of _comboboxItems"
+            class="
+              combobox-tag__drop-down-list-item
+              d-flex
+              align-items-center
+              ${$index===_focusedIndex?'combobox-tag__tag-focus':''}
+            "
+            click.trigger="itemSelected(item)"
           >
-            <div
-              class="combobox-tag__drop-down-list-item d-flex align-items-center"
-              repeat.for="item of _comboboxItems"
-              click.trigger="itemSelected(item)"
-            >
-              <p class="combobox-tag__drop-down-list-item-content">${item}</p>
-            </div>
+            <p class="combobox-tag__drop-down-list-item-content">${item}</p>
           </div>
         </div>
       </div>

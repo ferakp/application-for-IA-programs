@@ -20,6 +20,8 @@ export class Dashboard {
   @bindable
   activeView = "Agents-view";
 
+  logsViewFilters = [];
+
   constructor(viewModelProvider, eventAggregator) {
     this.eventAggregator = eventAggregator;
     this.viewModelProvider = viewModelProvider;
@@ -27,7 +29,8 @@ export class Dashboard {
     this.eventAggregator = eventAggregator;
     this.logsViewSubscriber = this.eventAggregator.subscribe(
       "openLogsView",
-      (param) => {
+      (agentId) => {
+        this.logsViewFilters.push("Agent ID: " + agentId);
         this.activeView = "Logs-view";
       }
     );
@@ -35,5 +38,7 @@ export class Dashboard {
 
   expansionModeChanged() {}
 
-  activeViewChanged() {}
+  activeViewChanged(newValue) {
+    if (newValue && newValue !== "Logs-view") this.logsViewFilters = [];
+  }
 }

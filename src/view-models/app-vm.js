@@ -3,10 +3,10 @@ export class AppVM {
   activeAgents = [];
   terminatedAgents = [];
   api;
+  logs = [];
 
   constructor() {
     this.api = { deleteAgent: this.deleteAgent };
-    this.agents.push(new Agent(this.api, 0));
   }
 
   deleteAgent = (agentId) => {

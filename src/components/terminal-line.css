@@ -3,6 +3,7 @@ terminal-line {
   flex-direction: column;
   margin-top: 8px;
   justify-content: left;
+  background-color: rgb(128 128 128 / 8%);
 }
 
 .terminal-line__content-container {
@@ -33,12 +34,19 @@ terminal-line {
 .terminal-line__text {
   padding: 0px;
   margin: 0px;
+  color: #5c5b5b;
 }
 
 .terminal-line__icons-container {
   margin-left: auto;
+  margin-right: 5px;
 }
 
 .terminal-line__icon-span {
   margin-left: 10px;
+  color: #5c5b5b;
+}
+
+.terminal-line__icon-span:hover {
+  color: #2c2c2c;
 }

@@ -12,7 +12,7 @@ console text-field {
 .console__message-container {
   flex-direction: column;
   justify-content: right;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
 }
 
 .console-message__text {

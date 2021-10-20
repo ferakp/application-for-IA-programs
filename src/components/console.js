@@ -11,11 +11,37 @@ export class Console {
   inputElement;
 
   @bindable
-  terminalLines;
+  terminalLines = [];
 
-  attached() {
-    if (!this.terminalLines) this.terminalLines = [];
+  @bindable
+  disableTextField = false;
+
+  deletedTerminalLineIds = [];
+
+  createGenericTerminalLine(payload) {
+    if (
+      this.terminalLines.some(
+        (e) => e.id.toString() === payload.id.toString()
+      ) ||
+      this.deletedTerminalLineIds.some(
+        (e) => e.toString() === payload.id.toString()
+      )
+    )
+      return;
+    if (typeof payload.text === "string" && typeof payload.id === "number") {
+      let terminalLine = {
+        text: payload.text,
+        time: payload.time || new Date(),
+        id: payload.id || this._getNewId(),
+        color: this._getRandomColor(),
+      };
+      this.terminalLines.push(terminalLine);
+    }
   }
+
+  emptyConsole = () => {
+    this.terminalLines = [];
+  };
 
   _enterPressed = () => {
     this.terminalLines.push(this._getNewTerminalLine());
@@ -24,15 +50,16 @@ export class Console {
 
   _openInfo = (id) => {
     // Open wiki window with given id
-  }
+  };
 
   _deleteTerminalLine = (id) => {
     if (typeof id === "number") {
+      this.deletedTerminalLineIds.push(id);
       for (let i = 0; i < this.terminalLines.length; i++) {
-        if(id === this.terminalLines[i].id){
+        if (id === this.terminalLines[i].id) {
           this.terminalLines.splice(i, 1);
           break;
-        } 
+        }
       }
     }
   };

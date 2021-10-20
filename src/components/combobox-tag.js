@@ -1,4 +1,4 @@
-import { bindable } from 'aurelia-framework';
+import { bindable } from "aurelia-framework";
 
 export class ComboboxTag {
   @bindable
@@ -32,7 +32,7 @@ export class ComboboxTag {
   items;
 
   @bindable
-  enableDuplicateSelections;
+  enableDuplicateSelections = true;
 
   @bindable
   enableCustomValues;
@@ -74,44 +74,47 @@ export class ComboboxTag {
 
   isAttached = false;
 
+  dropDownListDirectionTop = false;
+
   _comboboxItems = [];
+
+  _focusedIndex = -1;
+
+  @bindable
+  inputElement;
+
+  @bindable
+  minimalMode = false;
 
   attached() {
     this.isAttached = true;
-    this.initialize();
   }
-
-  initialize() {}
 
   /**
    * LISTENERS (CLICKED/SELECTED) FUNCTIONS
    */
 
   _inputElementEnterPressed = async () => {
-    if (this.value.trim().length > 0) {
-      if (this.enableCustomValues) this.itemSelected(this.value.trim());
-      else if (this._comboboxItems.indexOf(this.value.trim()) >= 0) {
-        this.itemSelected(this.value.trim());
-      }
+    const value =
+      this._focusedIndex >= 0
+        ? this._comboboxItems[this._focusedIndex]
+        : this.value;
+    if (this.enableCustomValues || this._comboboxItems.includes(value)) {
+      this.itemSelected(value);
     }
   };
 
   dropDownListIconClicked() {
     this.dropDownListOpened = !this.dropDownListOpened;
+    this.inputElement.select();
+    this.inputElement.focus();
   }
 
   itemSelected(newValue) {
-    // selections must be an array
-    if (!Array.isArray(this.selections)) this.selections = [];
-    if (!this.enableDuplicateSelections) {
-      if (!(this.selections.indexOf(newValue) >= 0)) {
-        this.selections.push(newValue);
-        this.value = '';
-      }
-    } else {
-      this.selections.push(newValue);
-      this.value = '';
-    }
+    if (!newValue) return;
+    this.addSelection(newValue);
+    this.value = "";
+    this._focusedIndex = -1;
     this.dropDownListOpened = false;
   }
 
@@ -135,7 +138,34 @@ export class ComboboxTag {
    * CHANGED FUNCTIONS
    */
 
-  async valueChanged(newValue, oldValue) {
+  inputElementChanged(newValue) {
+    if (newValue) {
+      this.inputElement.addEventListener("keydown", async (e) => {
+        if (
+          (e.keyCode === 40 || e.keyCode === 38) &&
+          this._comboboxItems.length > 0 &&
+          this._focusedIndex < this._comboboxItems.length &&
+          this.dropDownListOpened
+        ) {
+          if (
+            e.keyCode === 40 &&
+            this._focusedIndex < this._comboboxItems.length - 1
+          ) {
+            e.preventDefault();
+            this._focusedIndex += 1;
+          } else if (e.keyCode === 38) {
+            e.preventDefault();
+            if (this._focusedIndex > 0) this._focusedIndex -= 1;
+          }
+        }
+        this.dropDownList.scrollTop = 40 * this._focusedIndex;
+      });
+    }
+  }
+
+  async valueChanged(newValue) {
+    if (!newValue) return;
+    this._focusedIndex = -1;
     let isDataProviderCalled = false;
     // Open drop down list when value is not empty
     if (!this.dropDownListOpened && newValue.length === 1) {
@@ -153,20 +183,30 @@ export class ComboboxTag {
   }
 
   async dropDownListOpenedChanged(newValue) {
-    if (newValue) document.body.addEventListener('mouseup', this._outsideDropDownClicked);
+    if (newValue)
+      document.body.addEventListener("pointerup", this._outsideDropDownClicked);
     else {
       document.body.removeEventListener(
-        'mouseup',
-        this._outsideDropDownClicked,
+        "pointerup",
+        this._outsideDropDownClicked
       );
+      this._focusedIndex = -1;
     }
     if (newValue && this.dataProvider) {
       const tempItems = await this.dataProvider(this.value);
       this._comboboxItems = tempItems;
     }
+    this.adjustDropDownListDirection();
   }
 
-  async itemsChanged(newValue) {
+  adjustDropDownListDirection = () => {
+    const wH = window.innerHeight;
+    const eB = this.dropDownListContainer.getBoundingClientRect().bottom;
+    if (wH - eB < 280) this.dropDownListDirectionTop = true;
+    else this.dropDownListDirectionTop = false;
+  };
+
+  async itemsChanged() {
     // Return if data provider is provided
     if (this.dataProvider) return;
     this.applyFiltering();
@@ -179,17 +219,32 @@ export class ComboboxTag {
   applyFiltering() {
     const currentFilter = this.customFilter ?? this._defaultFilter;
     this._comboboxItems = currentFilter(this.value, this.items);
-    if (this._comboboxItems && this._comboboxItems.length === 0) this.dropDownListOpened = false;
+    if (this._comboboxItems && this._comboboxItems.length === 0)
+      this.dropDownListOpened = false;
   }
 
   _defaultFilter = (value, items) => {
-    if (value) {
+    if (value && items && items.length > 0) {
       const tempValidItems = [];
       items.forEach((e) => {
-        if (e.toLowerCase().includes(value.toLowerCase())) tempValidItems.push(e);
+        if (e.toLowerCase().includes(value.toLowerCase()))
+          tempValidItems.push(e);
       });
       return tempValidItems;
     }
-    return items;
+    return items ?? [];
   };
+
+  /**
+   * UTILITY FUNCTIONS
+   */
+
+  addSelection(item) {
+    if (!Array.isArray(this.selections)) this.selections = [];
+    if (!this.enableDuplicateSelections && !this.selections.includes(item)) {
+      this.selections.push(item);
+    } else if (this.enableDuplicateSelections) {
+      this.selections.push(item);
+    }
+  }
 }
