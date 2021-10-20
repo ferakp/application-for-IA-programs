@@ -1,4 +1,4 @@
-import { bindable } from 'aurelia-framework';
+import { bindable } from "aurelia-framework";
 
 export class ComboboxTag {
   @bindable
@@ -95,7 +95,10 @@ export class ComboboxTag {
    */
 
   _inputElementEnterPressed = async () => {
-    const value = this._focusedIndex >= 0 ? this._comboboxItems[this._focusedIndex] : this.value;
+    const value =
+      this._focusedIndex >= 0
+        ? this._comboboxItems[this._focusedIndex]
+        : this.value;
     if (this.enableCustomValues || this._comboboxItems.includes(value)) {
       this.itemSelected(value);
     }
@@ -110,7 +113,7 @@ export class ComboboxTag {
   itemSelected(newValue) {
     if (!newValue) return;
     this.addSelection(newValue);
-    this.value = '';
+    this.value = "";
     this._focusedIndex = -1;
     this.dropDownListOpened = false;
   }
@@ -135,20 +138,19 @@ export class ComboboxTag {
    * CHANGED FUNCTIONS
    */
 
-  selectionsChanged(newValue) {
-    console.log(newValue);
-  }
-
   inputElementChanged(newValue) {
     if (newValue) {
-      this.inputElement.addEventListener('keydown', async (e) => {
+      this.inputElement.addEventListener("keydown", async (e) => {
         if (
-          (e.keyCode === 40 || e.keyCode === 38)
-          && this._comboboxItems.length > 0
-          && this._focusedIndex < this._comboboxItems.length
-          && this.dropDownListOpened
+          (e.keyCode === 40 || e.keyCode === 38) &&
+          this._comboboxItems.length > 0 &&
+          this._focusedIndex < this._comboboxItems.length &&
+          this.dropDownListOpened
         ) {
-          if (e.keyCode === 40 && this._focusedIndex < this._comboboxItems.length - 1) {
+          if (
+            e.keyCode === 40 &&
+            this._focusedIndex < this._comboboxItems.length - 1
+          ) {
             e.preventDefault();
             this._focusedIndex += 1;
           } else if (e.keyCode === 38) {
@@ -181,9 +183,13 @@ export class ComboboxTag {
   }
 
   async dropDownListOpenedChanged(newValue) {
-    if (newValue) document.body.addEventListener('pointerup', this._outsideDropDownClicked);
+    if (newValue)
+      document.body.addEventListener("pointerup", this._outsideDropDownClicked);
     else {
-      document.body.removeEventListener('pointerup', this._outsideDropDownClicked);
+      document.body.removeEventListener(
+        "pointerup",
+        this._outsideDropDownClicked
+      );
       this._focusedIndex = -1;
     }
     if (newValue && this.dataProvider) {
@@ -213,14 +219,16 @@ export class ComboboxTag {
   applyFiltering() {
     const currentFilter = this.customFilter ?? this._defaultFilter;
     this._comboboxItems = currentFilter(this.value, this.items);
-    if (this._comboboxItems && this._comboboxItems.length === 0) this.dropDownListOpened = false;
+    if (this._comboboxItems && this._comboboxItems.length === 0)
+      this.dropDownListOpened = false;
   }
 
   _defaultFilter = (value, items) => {
     if (value && items && items.length > 0) {
       const tempValidItems = [];
       items.forEach((e) => {
-        if (e.toLowerCase().includes(value.toLowerCase())) tempValidItems.push(e);
+        if (e.toLowerCase().includes(value.toLowerCase()))
+          tempValidItems.push(e);
       });
       return tempValidItems;
     }

@@ -30,7 +30,7 @@ export class Dashboard {
     this.logsViewSubscriber = this.eventAggregator.subscribe(
       "openLogsView",
       (agentId) => {
-        this.logsViewFilters.push("Agent ID: "+agentId);
+        this.logsViewFilters.push("Agent ID: " + agentId);
         this.activeView = "Logs-view";
       }
     );
@@ -39,7 +39,6 @@ export class Dashboard {
   expansionModeChanged() {}
 
   activeViewChanged(newValue) {
-    if(newValue && newValue !== 'Logs-view')
-    this.logsViewFilters = [];
+    if (newValue && newValue !== "Logs-view") this.logsViewFilters = [];
   }
 }

@@ -20,7 +20,6 @@ export class LogsView {
   }
 
   update() {
-    console.log(this.filters);
     if (
       (Array.isArray(this.logs) &&
         this.logs.length !== this.previousFiltersLength) ||
