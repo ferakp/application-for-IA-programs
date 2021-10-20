@@ -7,6 +7,7 @@ export function configure(config) {
       PLATFORM.moduleName('../components/checkbox'),
       PLATFORM.moduleName('../components/agents-view'),
       PLATFORM.moduleName('../components/logs-view'),
+      PLATFORM.moduleName('../components/files-view'),
       PLATFORM.moduleName('../components/agent-box'),
       PLATFORM.moduleName('../components/landing'),
       PLATFORM.moduleName('../components/combobox'),
