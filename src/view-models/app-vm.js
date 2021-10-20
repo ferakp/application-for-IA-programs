@@ -9,16 +9,6 @@ export class AppVM {
 
   constructor() {
     this.api = { deleteAgent: this.deleteAgent };
-
-    // Tests
-    this.agents.push(new Agent(this.api, 0));
-    setInterval(() => {
-      let testId = Math.floor(Math.random() * 50000000);
-      this.logs.push({
-        text: "Agent "+testId+" has been registered",
-        id: testId,
-      });
-    }, 10000);
   }
 
   deleteAgent = (agentId) => {
