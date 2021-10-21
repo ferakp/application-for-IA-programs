@@ -17,15 +17,25 @@
         ><i class="fas fa-paperclip"></i
       ></span>
       <p class="file-upload__header-label">${label}</p>
-      <p class="file-upload__header-file-count">(${files.length})</p>
+      <p class="file-upload__header-file-count">
+        (<span style="font-weight: bold">${files.length}</span>)
+      </p>
     </div>
     <div
-    ref="fileUploadHeaderInputContainer"
-      class="file-upload__header-input-container d-flex flex-column"
+      ref="fileUploadHeaderInputContainer"
+      class="
+        file-upload__header-input-container
+        ${inputContainerStyle}
+        d-flex
+        flex-column
+      "
       click.delegate="openFolderView($event)"
     >
       <div class="file-upload__header-input-first-row d-flex">
-        <label ref="fileUploadHeaderInputLabel" class="file-upload__header-input-label" for="fileUploadInputId"
+        <label
+          ref="fileUploadHeaderInputLabel"
+          class="file-upload__header-input-label ${headerInputLabelStyle}"
+          for="fileUploadInputId"
           >${description}</label
         >
         <span class="file-upload__header-input-icon"

@@ -10,6 +10,8 @@ export class FileUpload {
   @bindable
   files;
 
+  inputStyle = "file-upload__input-container-default-style";
+
   attached() {
     if (this.fileUploadInput) {
       this.fileUploadInput.onchange = () => {
@@ -22,12 +24,14 @@ export class FileUpload {
       e.preventDefault();
       e.stopPropagation();
       this.dragOutside(true);
+      this.setInputContainerStatus("dragover");
     });
 
     document.querySelector("html").addEventListener("drop", (e) => {
       e.preventDefault();
       e.stopPropagation();
       this.dragOutside(false);
+      this.setInputContainerStatus("default");
     });
 
     // Drag enter
@@ -35,6 +39,8 @@ export class FileUpload {
       e.stopPropagation();
       e.preventDefault();
       this.dragInside(true);
+      this.setInputContainerStatus("dropArea");
+      console.log("started");
     });
 
     // Drag over
@@ -50,14 +56,19 @@ export class FileUpload {
       e.preventDefault();
       this.dragInside(false);
       let file = e.dataTransfer.files[0];
-      if (Array.isArray(this.files) && file) this.files.push(file);
+      if (Array.isArray(this.files) && file) {
+        this.files.push(file);
+        this.setInputContainerStatus("uploaded");
+        setTimeout(() => this.setInputContainerStatus("default"), 1000);
+      }
     });
   }
 
   dragOutside = (status) => {
     if (status) {
-      if (this.fileUploadHeaderInputLabel)
+      if (this.fileUploadHeaderInputLabel) {
         this.fileUploadHeaderInputLabel.innerHTML = "Drag it here..";
+      }
     } else {
       if (this.fileUploadHeaderInputLabel)
         this.fileUploadHeaderInputLabel.innerHTML = this.description;
@@ -90,5 +101,21 @@ export class FileUpload {
 
   openFolderView(event) {
     this.fileUploadInput.click();
+  }
+
+  /**
+   * UTILITY FUNCTIONS
+   */
+
+  setInputContainerStatus(status) {
+    if (status === "default") {
+      this.inputContainerStyle = "";
+    } else if (status === "dragover") {
+      this.inputContainerStyle = "file-upload__input-container-dragover-style";
+    } else if (status === "dropArea") {
+      this.inputContainerStyle = "file-upload__input-container-drop-area-style";
+    } else if (status === "success") {
+      this.inputContainerStyle = "file-upload__input-container-success-style";
+    }
   }
 }
