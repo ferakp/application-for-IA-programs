@@ -38,8 +38,8 @@ files-view {
 }
 
 .files-view__file {
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex: 1;
   max-height: 180px;
   max-width: 120px;
@@ -70,7 +70,11 @@ files-view {
   display: none;
 }
 
-.files-view__file:hover .files-view__file-name-tooltip-container {
+.files-view__file-text-area {
+  align-items: center;
+}
+
+.files-view__file-text-area:hover .files-view__file-name-tooltip-container {
   position: relative;
   display: block;
 }
