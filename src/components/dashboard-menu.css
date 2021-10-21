@@ -21,7 +21,7 @@ dashboard-menu {
 }
 
 .dashboard-menu__item-active .dashboard-menu__item-icon {
-  color: #3888d8;
+  color: black;
 }
 
 .dashboard-menu__item-tooltip-container {
@@ -54,6 +54,6 @@ dashboard-menu {
 
 .dashboard-menu__item-icon {
   font-size: 1.8rem;
-  color: black;
+  color: #3888d8;
   transition: all 0.5s;
 }
