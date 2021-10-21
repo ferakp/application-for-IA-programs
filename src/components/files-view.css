@@ -43,17 +43,17 @@ files-view {
   flex: 1;
   max-height: 180px;
   max-width: 120px;
-  overflow: hidden;
   background-color: rgb(78 152 215);
   border-radius: 3%;
+  margin-right: 10px;
 }
 
-.files-view__file p:nth-of-type(1) {
+.files-view__file-label {
   color: white;
   font-weight: bold;
 }
 
-.files-view__file p:nth-of-type(2) {
+.files-view__file-name {
   color: white;
   font-size: 0.8rem;
   overflow: hidden;
@@ -64,4 +64,27 @@ files-view {
   padding-right: 5px;
   max-width: 115px;
   white-space: nowrap;
+}
+
+.files-view__file-name-tooltip-container {
+  display: none;
+}
+
+.files-view__file:hover .files-view__file-name-tooltip-container {
+  position: relative;
+  display: block;
+}
+
+.files-view__file-name-tooltip-text {
+  background-color: #3b3c3ddb;
+  position: absolute;
+  color: white;
+  padding: 2px 5px 2px 5px;
+  z-index: 999999;
+  margin: 0px;
+  top: -29px;
+  left: 35px;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5%;
 }

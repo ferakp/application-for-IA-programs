@@ -9,9 +9,10 @@
       <hr>
     </div>
     <div class="files-view__uploaded-files-container d-flex flex-row flex-wrap mr-2">
-      <div class="files-view__file d-flex flex-column mr-2" repeat.for="file of files">
-        <p class="h4 m-0 p-0">File</p>
-        <p>${file.name}</p>
+      <div class="files-view__file d-flex flex-column" repeat.for="file of files">
+        <p class="files-view__file-label h4 m-0 p-0">File</p>
+        <p class="files-view__file-name">${file.name}</p>
+        <div class="files-view__file-name-tooltip-container"><p class="files-view__file-name-tooltip-text">${file.name}</p></div>
       </div>
     </div>
   </div>
