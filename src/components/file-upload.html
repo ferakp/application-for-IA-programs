@@ -1,0 +1,36 @@
+<template>
+  <!-- Requirements -->
+  <require from="./file-upload.css"></require>
+
+  <!-- Global compoennts-->
+  <input
+    id="fileUploadInputId"
+    ref="fileUploadInput"
+    type="file"
+    multiple
+    style="display: none"
+  />
+  <!-- Child components-->
+  <div class="file-upload__container d-flex flex-column">
+    <div class="file-upload__header d-flex flex-row">
+      <span class="file-upload__header-icon d-flex"
+        ><i class="fas fa-paperclip"></i
+      ></span>
+      <p class="file-upload__header-label">${label}</p>
+      <p class="file-upload__header-file-count">(${files.length})</p>
+    </div>
+    <div
+      class="file-upload__header-input-container d-flex flex-column"
+      click.delegate="openFolderView($event)"
+    >
+      <div class="file-upload__header-input-first-row d-flex">
+        <label ref="fileUploadHeaderInputLabel" class="file-upload__header-input-label" for="fileUploadInputId"
+          >${description}</label
+        >
+        <span class="file-upload__header-input-icon"
+          ><i class="fas fa-upload"></i
+        ></span>
+      </div>
+    </div>
+  </div>
+</template>
