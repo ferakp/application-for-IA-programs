@@ -1,10 +1,7 @@
 import {
-  update,
   executeTest,
   expectElement,
-  expectElementAttribute,
   expectElementNumber,
-  expectViewModelProperty,
 } from "../test-utils";
 
 describe("Test checkbox component", () => {
