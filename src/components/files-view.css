@@ -38,8 +38,6 @@ files-view {
 }
 
 .files-view__file {
-  align-items: center;
-  justify-content: center;
   flex: 1;
   max-height: 180px;
   max-width: 120px;
@@ -51,6 +49,7 @@ files-view {
 .files-view__file-label {
   color: white;
   font-weight: bold;
+  margin: 0px;
 }
 
 .files-view__file-name {
@@ -70,11 +69,17 @@ files-view {
   display: none;
 }
 
-.files-view__file-text-area {
+.files-view__file-text-area-box {
   align-items: center;
 }
 
-.files-view__file-text-area:hover .files-view__file-name-tooltip-container {
+.files-view__file-text-area {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.files-view__file-text-area-box:hover .files-view__file-name-tooltip-container {
   position: relative;
   display: block;
 }
@@ -87,8 +92,19 @@ files-view {
   z-index: 999999;
   margin: 0px;
   top: -29px;
-  left: 35px;
   font-size: 0.8rem;
   text-align: center;
   border-radius: 5%;
+  min-width: 200px;
+}
+
+.files-view__file-menu-container {
+  position: relative;
+  max-width: 0px;
+}
+
+.files-view__file-menu-box {
+  position: absolute;
+  z-index: 10;
+  background-color: rgb(181, 179, 179);
 }
