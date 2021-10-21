@@ -93,7 +93,7 @@ export class FileUpload {
     if (this.fileUploadInput) {
       if (!Array.isArray(this.files)) this.files = [];
       for (var i = 0; i < this.fileUploadInput.files.length; i++) {
-        this.files.push(files.item(i));
+        this.files.push(this.fileUploadInput.files.item(i));
       }
     }
   };
