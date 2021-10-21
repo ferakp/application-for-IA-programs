@@ -39,8 +39,8 @@ files-view {
 
 .files-view__file {
   flex: 1;
-  max-height: 180px;
-  max-width: 120px;
+  max-height: 190px;
+  max-width: 140px;
   background-color: rgb(78 152 215);
   border-radius: 3%;
   margin-right: 10px;
@@ -106,5 +106,10 @@ files-view {
 .files-view__file-menu-box {
   position: absolute;
   z-index: 10;
-  background-color: rgb(181, 179, 179);
+  min-width: 25px;
+}
+
+.files-view__file-menu-box p {
+  text-align: center;
+  border-right: 1px solid black;
 }
