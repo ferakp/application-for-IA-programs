@@ -92,10 +92,9 @@ export class FileUpload {
   receiveFiles = () => {
     if (this.fileUploadInput) {
       if (!Array.isArray(this.files)) this.files = [];
-      if (Array.isArray([...this.fileUploadInput.files]))
-        [...this.fileUploadInput.files].forEach((file) =>
-          this.files.push(file)
-        );
+      for (var i = 0; i < this.fileUploadInput.files.length; i++) {
+        this.files.push(files.item(i));
+      }
     }
   };
 

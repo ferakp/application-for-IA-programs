@@ -6,6 +6,13 @@
   <div class="files-view__container d-flex flex-column">
     <div class="files-view__upload-section d-flex flex-column">
       <file-upload class="files-view__file-upload" label="Upload files" files.two-way="files" description="Choose a file or drag it here"></file-upload>
+      <hr>
+    </div>
+    <div class="files-view__uploaded-files-container d-flex flex-row flex-wrap mr-2">
+      <div class="files-view__file d-flex" repeat.for="file of files">
+        <p class="h3 m-0 p-0">File</p>
+        <p class="d-flex m-0 p-0">${file.name}</p>
+      </div>
     </div>
   </div>
 </template>

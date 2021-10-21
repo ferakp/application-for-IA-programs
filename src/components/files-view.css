@@ -32,3 +32,22 @@ files-view {
   margin-bottom: 0px;
   padding: 0px;
 }
+
+.files-view__uploaded-files-container {
+  flex: 1;
+}
+
+.files-view__file {
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  max-height: 180px;
+  max-width: 120px;
+  background-color: rgb(78 152 215);
+  border-radius: 3%;
+}
+
+.files-view__file p:nth-of-type(1){
+  color: white;
+  font-weight: bold;
+}

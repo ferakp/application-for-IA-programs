@@ -7,4 +7,5 @@ export class FilesView {
 
   @bindable
   files;
+
 }

@@ -40,11 +40,13 @@ file-upload {
 .file-upload__header-input-icon {
   font-size: 1.5rem;
   line-height: 0;
+  opacity: 0.5;
 }
 
 .file-upload__header-input-label {
   margin-right: 15px;
   font-weight: bold;
+  opacity: 0.5;
 }
 
 .file-upload__header-input-label:hover {
