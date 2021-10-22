@@ -59,44 +59,38 @@ export class FileUpload {
       let file = e.dataTransfer.files[0];
       if (Array.isArray(this.files) && file) {
         if (!this.isFileUploaded(file)) {
-          this.setInputLabel("File has been uploaded!");
+          this.alertSuccessfulUpload();
           this.files.push(file);
         } else {
-          this.setInputLabel("File has been already uploaded!");
-          this.setInputContainerStatus("fail");
+          this.alertDuplicateInsertAttempt();
         }
-        setTimeout(() => this.setInputContainerStatus("default"), 2000);
-        setTimeout(() => this.setInputLabel(this.description), 2000);
       }
     });
   }
 
-  setInputLabel(label) {
-    if (
-      !this.fileUploadHeaderInputLabel ||
-      label === this.fileUploadHeaderInputLabel.innerHTML
-    )
-      return;
-    this.fileUploadHeaderInputLabel.innerHTML = label;
-  }
-
   receiveFiles = () => {
-    if (this.fileUploadInput) {
-      if (!Array.isArray(this.files)) this.files = [];
-      for (var i = 0; i < this.fileUploadInput.files.length; i++) {
-        let file = this.fileUploadInput.files.item(i);
-        if (Array.isArray(this.supportedFormats)) {
-          if (
-            this.supportedFormats.includes(
-              file.name.split(".")[file.name.split(".").length - 1]
-            )
-          )
-            this.files.push(this.fileUploadInput.files.item(i));
-          else continue;
-        }
-        this.files.push(this.fileUploadInput.files.item(i));
+    if (!this.fileUploadInput) return;
+    if (!Array.isArray(this.files)) this.files = [];
+    for (var i = 0; i < this.fileUploadInput.files.length; i++) {
+      let file = this.fileUploadInput.files.item(i);
+      if (this.isFileUploaded(file)) {
+        this.alertDuplicateInsertAttempt();
+        continue;
       }
+      if (Array.isArray(this.supportedFormats)) {
+        if (
+          this.supportedFormats.includes(
+            file.name.split(".")[file.name.split(".").length - 1]
+          )
+        )
+          this.files.push(file);
+        else {
+          this.alertDuplicateInsertAttempt();
+          continue;
+        }
+      } else this.files.push(this.fileUploadInput.files.item(i));
     }
+    this.fileUploadInput.value = null;
   };
 
   openFolderView(event) {
@@ -107,6 +101,15 @@ export class FileUpload {
    * UTILITY FUNCTIONS
    */
 
+  setInputLabel(label) {
+    if (
+      !this.fileUploadHeaderInputLabel ||
+      label === this.fileUploadHeaderInputLabel.innerHTML
+    )
+      return;
+    this.fileUploadHeaderInputLabel.innerHTML = label;
+  }
+
   setInputContainerStatus(status) {
     if (status === "default") {
       this.inputContainerStyle = "";
@@ -116,6 +119,7 @@ export class FileUpload {
       this.inputContainerStyle = "file-upload__input-container-drop-area-style";
     } else if (status === "fail") {
       this.inputContainerStyle = "file-upload__input-container-fail-style";
+      setTimeout(() => this.setInputContainerStatus("default"), 2000);
     }
   }
 
@@ -125,5 +129,17 @@ export class FileUpload {
         return true;
     }
     return false;
+  }
+
+  alertDuplicateInsertAttempt() {
+    this.setInputLabel("File has been already uploaded!");
+    this.setInputContainerStatus("fail");
+    setTimeout(() => this.setInputLabel(this.description), 2000);
+  }
+
+  alertSuccessfulUpload() {
+    this.setInputLabel("File has been uploaded!");
+    setTimeout(() => this.setInputContainerStatus("default"), 2000);
+    setTimeout(() => this.setInputLabel(this.description), 2000);
   }
 }
