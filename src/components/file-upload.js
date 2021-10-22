@@ -10,7 +10,7 @@ export class FileUpload {
   @bindable
   files;
 
-  inputStyle = "file-upload__input-container-default-style";
+  inputContainerStyle;
 
   attached() {
     if (this.fileUploadInput) {
@@ -23,71 +23,55 @@ export class FileUpload {
     document.querySelector("html").addEventListener("dragover", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      this.dragOutside(true);
+      this.setInputLabel("Drag it here!");
       this.setInputContainerStatus("dragover");
     });
 
     document.querySelector("html").addEventListener("drop", (e) => {
       e.preventDefault();
       e.stopPropagation();
-      this.dragOutside(false);
+      this.setInputLabel(this.description);
       this.setInputContainerStatus("default");
     });
 
     // Drag enter
-    this.fileUploadHeaderInputContainer.addEventListener("dragenter", (e) => {
+    this.fileUploadInputContainer.addEventListener("dragenter", (e) => {
       e.stopPropagation();
       e.preventDefault();
-      this.dragInside(true);
+      this.setInputLabel("Drop");
       this.setInputContainerStatus("dropArea");
-      console.log("started");
     });
 
     // Drag over
-    this.fileUploadHeaderInputContainer.addEventListener("dragover", (e) => {
+    this.fileUploadInputContainer.addEventListener("dragover", (e) => {
       e.stopPropagation();
       e.preventDefault();
-      this.dragInside(true);
+      this.setInputLabel("Drop");
     });
 
     // Drop
-    this.fileUploadHeaderInputContainer.addEventListener("drop", (e) => {
+    this.fileUploadInputContainer.addEventListener("drop", (e) => {
       e.stopPropagation();
       e.preventDefault();
-      this.dragInside(false);
       let file = e.dataTransfer.files[0];
       if (Array.isArray(this.files) && file) {
-        this.files.push(file);
-        this.setInputContainerStatus("uploaded");
-        setTimeout(() => this.setInputContainerStatus("default"), 1000);
+        if (!this.isFileUploaded(file)) {
+          this.setInputLabel("File has been uploaded!");
+          this.files.push(file);
+        } else {
+          this.setInputLabel("File has been already uploaded!");
+          this.setInputContainerStatus("fail");
+        } 
+        setTimeout(() => this.setInputContainerStatus("default"), 2000);
+        setTimeout(() => this.setInputLabel(this.description), 2000);
       }
     });
   }
 
-  dragOutside = (status) => {
-    if (status) {
-      if (this.fileUploadHeaderInputLabel) {
-        this.fileUploadHeaderInputLabel.innerHTML = "Drag it here..";
-      }
-    } else {
-      if (this.fileUploadHeaderInputLabel)
-        this.fileUploadHeaderInputLabel.innerHTML = this.description;
-    }
-  };
-
-  dragInside = (status) => {
-    if (status) {
-      if (this.fileUploadHeaderInputLabel)
-        this.fileUploadHeaderInputLabel.innerHTML = "Drop";
-    } else {
-      if (this.fileUploadHeaderInputLabel) {
-        this.fileUploadHeaderInputLabel.innerHTML = "Uploaded";
-        setTimeout(() => {
-          this.fileUploadHeaderInputLabel.innerHTML = this.description;
-        }, 1000);
-      }
-    }
-  };
+  setInputLabel(label) {
+    if (!this.fileUploadHeaderInputLabel || label === this.fileUploadHeaderInputLabel.innerHTML) return;
+    this.fileUploadHeaderInputLabel.innerHTML = label;
+  }
 
   receiveFiles = () => {
     if (this.fileUploadInput) {
@@ -113,8 +97,16 @@ export class FileUpload {
       this.inputContainerStyle = "file-upload__input-container-dragover-style";
     } else if (status === "dropArea") {
       this.inputContainerStyle = "file-upload__input-container-drop-area-style";
-    } else if (status === "success") {
-      this.inputContainerStyle = "file-upload__input-container-success-style";
+    } else if (status === "fail") {
+      this.inputContainerStyle = "file-upload__input-container-fail-style";
     }
+  }
+
+  isFileUploaded(file) {
+    for (let i = 0; i < this.files.length; i++) {
+      if (this.files[i].name === file.name && this.files[i].size === file.size)
+        return true;
+    }
+    return false;
   }
 }

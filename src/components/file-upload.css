@@ -28,7 +28,7 @@ file-upload {
   padding: 0px;
 }
 
-.file-upload__header-input-container {
+.file-upload__input-container {
   flex: 1;
   margin-top: 15px;
   border: 1px black dotted;
@@ -37,45 +37,39 @@ file-upload {
   background-color: rgb(221 239 245 / 48%);
 }
 
-.file-upload__header-input-icon {
+.file-upload__input-icon {
   font-size: 1.5rem;
   line-height: 0;
   opacity: 0.5;
 }
 
-.file-upload__header-input-label {
+.file-upload__input-label {
   margin-right: 15px;
   font-weight: bold;
   opacity: 0.5;
 }
 
-.file-upload__header-input-label:hover {
+.file-upload__input-label:hover {
   cursor: pointer !important;
 }
 
-.file-upload__header-input-first-row {
+.file-upload__input-first-row {
   flex: 1;
   justify-content: center;
   flex-wrap: nowrap;
 }
 
-.file-upload__header-input-container:hover {
+.file-upload__input-container:hover {
   cursor: pointer;
 }
 
-.file-upload__header-input-label-default-style {
-  color: #37a2d7;
-  font-weight: bold;
-}
-
-.file-upload__header-input-label-drag-here-style {
+.file-upload__input-label {
   color: black;
   opacity: 0.5;
   font-weight: bold;
 }
 
-.file-upload__header-input-label-drag-here-style
-  .file-upload__header-input-icon {
+.file-upload__input-icon {
   color: black;
   opacity: 0.5;
 }
@@ -88,6 +82,21 @@ file-upload {
 .file-upload__input-container-drop-area-style {
   animation: fileUploadInputGreenHighlight 1s infinite;
   animation-direction: alternate;
+}
+
+.file-upload__input-container-fail-style {
+  animation: fileUploadInputRedHighlight 1s infinite;
+  animation-direction: alternate;
+}
+
+@keyframes fileUploadInputRedHighlight {
+  from {
+    background-color: rgb(221 239 245 / 48%);
+  }
+
+  to {
+    background-color: #fd0505ab;
+  }
 }
 
 @keyframes fileUploadInputYellowHighlight {

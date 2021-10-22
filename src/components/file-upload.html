@@ -22,23 +22,23 @@
       </p>
     </div>
     <div
-      ref="fileUploadHeaderInputContainer"
+      ref="fileUploadInputContainer"
       class="
-        file-upload__header-input-container
+        file-upload__input-container
         ${inputContainerStyle}
         d-flex
         flex-column
       "
       click.delegate="openFolderView($event)"
     >
-      <div class="file-upload__header-input-first-row d-flex">
+      <div class="file-upload__input-first-row d-flex">
         <label
           ref="fileUploadHeaderInputLabel"
-          class="file-upload__header-input-label ${headerInputLabelStyle}"
+          class="file-upload__input-label"
           for="fileUploadInputId"
           >${description}</label
         >
-        <span class="file-upload__header-input-icon"
+        <span class="file-upload__input-icon"
           ><i class="fas fa-upload"></i
         ></span>
       </div>
