@@ -97,8 +97,8 @@ export class FileUpload {
    */
 
   setInputLabel(label) {
-    if (!this.fileUploadHeaderInputLabel || label === this.fileUploadHeaderInputLabel.innerHTML) return;
-    this.fileUploadHeaderInputLabel.innerHTML = label;
+    if (!this.fileUploadInputLabel || label === this.fileUploadInputLabel.innerHTML) return;
+    this.fileUploadInputLabel.innerHTML = label;
   }
 
   setInputContainerStatus(status) {
