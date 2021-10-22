@@ -10,18 +10,12 @@ export default class ElementGenerator {
   }
 
   async execute() {
-    const name = await this.ui.ensureAnswer(
-      this.options.args[0],
-      'What would you like to call the custom element?'
-    );
+    const name = await this.ui.ensureAnswer(this.options.args[0], 'What would you like to call the custom element?');
 
     let fileName = this.project.makeFileName(name);
     let className = this.project.makeClassName(name);
 
-    this.project.elements.add(
-      ProjectItem.text(`${fileName}.js`, this.generateJSSource(className)),
-      ProjectItem.text(`${fileName}.html`, this.generateHTMLSource(className))
-    );
+    this.project.elements.add(ProjectItem.text(`${fileName}.js`, this.generateJSSource(className)), ProjectItem.text(`${fileName}.html`, this.generateHTMLSource(className)));
 
     await this.project.commitChanges();
     await this.ui.log(`Created ${fileName}.`);

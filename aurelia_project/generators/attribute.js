@@ -10,10 +10,7 @@ export default class AttributeGenerator {
   }
 
   async execute() {
-    const name = await this.ui.ensureAnswer(
-      this.options.args[0],
-      'What would you like to call the custom attribute?'
-    );
+    const name = await this.ui.ensureAnswer(this.options.args[0], 'What would you like to call the custom attribute?');
 
     let fileName = this.project.makeFileName(name);
     let className = this.project.makeClassName(name);

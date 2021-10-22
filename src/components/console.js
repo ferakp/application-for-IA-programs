@@ -19,11 +19,7 @@ export class Console {
   deletedTerminalLineIds = [];
 
   createGenericTerminalLine(payload) {
-    if (
-      this.terminalLines.some(e => e.id.toString() === payload.id.toString()) ||
-      this.deletedTerminalLineIds.some(e => e.toString() === payload.id.toString())
-    )
-      return;
+    if (this.terminalLines.some(e => e.id.toString() === payload.id.toString()) || this.deletedTerminalLineIds.some(e => e.toString() === payload.id.toString())) return;
     if (typeof payload.text === 'string' && typeof payload.id === 'number') {
       let terminalLine = {
         text: payload.text,

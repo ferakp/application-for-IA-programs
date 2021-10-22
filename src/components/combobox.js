@@ -130,12 +130,7 @@ export class Combobox {
   inputElementChanged(newValue) {
     if (newValue) {
       this.inputElement.addEventListener('keydown', async e => {
-        if (
-          (e.keyCode === 40 || e.keyCode === 38) &&
-          this._comboboxItems.length > 0 &&
-          this._focusedIndex < this._comboboxItems.length &&
-          this.dropDownListOpened
-        ) {
+        if ((e.keyCode === 40 || e.keyCode === 38) && this._comboboxItems.length > 0 && this._focusedIndex < this._comboboxItems.length && this.dropDownListOpened) {
           if (e.keyCode === 40 && this._focusedIndex < this._comboboxItems.length - 1) {
             e.preventDefault();
             this._focusedIndex += 1;

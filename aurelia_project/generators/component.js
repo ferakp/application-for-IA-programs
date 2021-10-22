@@ -11,10 +11,7 @@ export default class ElementGenerator {
   }
 
   async execute() {
-    const name = await this.ui.ensureAnswer(
-      this.options.args[0],
-      'What would you like to call the component?'
-    );
+    const name = await this.ui.ensureAnswer(this.options.args[0], 'What would you like to call the component?');
 
     const subFolders = await this.ui.ensureAnswer(
       this.options.args[1],

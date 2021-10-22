@@ -78,8 +78,7 @@ export class FileUpload {
         continue;
       }
       if (Array.isArray(this.supportedFormats)) {
-        if (this.supportedFormats.includes(file.name.split('.')[file.name.split('.').length - 1]))
-          this.files.push(file);
+        if (this.supportedFormats.includes(file.name.split('.')[file.name.split('.').length - 1])) this.files.push(file);
         else {
           this.alertInvalidFileType();
           continue;

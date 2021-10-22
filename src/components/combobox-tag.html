@@ -23,67 +23,26 @@
       input-enter-callback.to-view="_inputElementEnterPressed"
       input-element.from-view="inputElement"
     >
-      <div
-        class="combobox-tag__prefix-container"
-        slot="prefix-container"
-        show.bind="selections.length > 0 ? true : false"
-      >
+      <div class="combobox-tag__prefix-container" slot="prefix-container" show.bind="selections.length > 0 ? true : false">
         <div repeat.for="tag of selections" class="combobox-tag__tag">
           <p class="combobox-tag__tag-label">${tag}</p>
-          <a class="combobox-tag__tag-close-icon-link" click.trigger="_deleteTag($index)"
-            ><i class="fas fa-times combobox-tag__tag-close-icon"></i
-          ></a>
+          <a class="combobox-tag__tag-close-icon-link" click.trigger="_deleteTag($index)"><i class="fas fa-times combobox-tag__tag-close-icon"></i></a>
         </div>
       </div>
-      <div
-        if.bind="!hideSuffixContainer"
-        class="combobox-tag__suffix-container"
-        slot="suffix-container"
-        ref="comboboxSuffixContainer"
-      >
-        <a
-          class="combobox-tag__suffix-container-link d-flex align-items-center m-2 text-decoration-none"
-          click.trigger="dropDownListIconClicked()"
-        >
-          <i
-            class="
-              combobox-tag__drop-down-icon-list
-              fas
-              fa-angle-down
-              text-decoration-none
-              combobox-tag__pointer-cursor
-            "
-          ></i>
+      <div if.bind="!hideSuffixContainer" class="combobox-tag__suffix-container" slot="suffix-container" ref="comboboxSuffixContainer">
+        <a class="combobox-tag__suffix-container-link d-flex align-items-center m-2 text-decoration-none" click.trigger="dropDownListIconClicked()">
+          <i class="combobox-tag__drop-down-icon-list fas fa-angle-down text-decoration-none combobox-tag__pointer-cursor"></i>
         </a>
       </div>
-      <div
-        class="combobox-tag__drop-down-list-container"
-        slot="drop-down-list-container"
-        ref="dropDownListContainer"
-      >
+      <div class="combobox-tag__drop-down-list-container" slot="drop-down-list-container" ref="dropDownListContainer">
         <div
           ref="dropDownList"
-          class="
-            combobox-tag__drop-down-list
-            flex-column
-            ${dropDownListDirectionTop
-            ===
-            true
-            ?
-            'combobox-tag__drop-down-list-direction-top'
-            :
-            ''}
-          "
+          class="combobox-tag__drop-down-list flex-column ${dropDownListDirectionTop === true ? 'combobox-tag__drop-down-list-direction-top' : ''}"
           show.bind="dropDownListOpened"
         >
           <div
             repeat.for="item of _comboboxItems"
-            class="
-              combobox-tag__drop-down-list-item
-              d-flex
-              align-items-center
-              ${$index===_focusedIndex?'combobox-tag__tag-focus':''}
-            "
+            class="combobox-tag__drop-down-list-item d-flex align-items-center ${$index===_focusedIndex?'combobox-tag__tag-focus':''}"
             click.trigger="itemSelected(item)"
           >
             <p class="combobox-tag__drop-down-list-item-content">${item}</p>

@@ -5,9 +5,7 @@ import { platform } from '../aurelia.json';
 const npm = new NPM();
 
 function run() {
-  console.log(
-    '`au run` is an alias of the `npm start`, you may use either of those; see README for more details.'
-  );
+  console.log('`au run` is an alias of the `npm start`, you may use either of those; see README for more details.');
   const args = process.argv.slice(3);
   return npm.run('start', ['--', ...cleanArgs(args)]);
 }

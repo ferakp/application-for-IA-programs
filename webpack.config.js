@@ -11,8 +11,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // config helpers:
 const ensureArray = config => (config && (Array.isArray(config) ? config : [config])) || [];
-const when = (condition, config, negativeConfig) =>
-  condition ? ensureArray(config) : ensureArray(negativeConfig);
+const when = (condition, config, negativeConfig) => (condition ? ensureArray(config) : ensureArray(negativeConfig));
 
 // primary config:
 const outDir = path.resolve(__dirname, project.platform.output);

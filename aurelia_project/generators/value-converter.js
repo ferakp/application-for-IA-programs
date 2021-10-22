@@ -10,10 +10,7 @@ export default class ValueConverterGenerator {
   }
 
   async execute() {
-    const name = await this.ui.ensureAnswer(
-      this.options.args[0],
-      'What would you like to call the value converter?'
-    );
+    const name = await this.ui.ensureAnswer(this.options.args[0], 'What would you like to call the value converter?');
 
     let fileName = this.project.makeFileName(name);
     let className = this.project.makeClassName(name);
