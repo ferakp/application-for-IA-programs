@@ -11,7 +11,7 @@ describe('Stage App Component', () => {
 
   afterEach(() => component.dispose());
 
-  it('should exist', (done) => {
+  it('should exist', done => {
     component
       .create(bootstrap)
       .then(() => {
@@ -19,7 +19,7 @@ describe('Stage App Component', () => {
         expect(app.children.length).toBe(1);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });

@@ -27,7 +27,7 @@ export class Dashboard {
     this.viewModelProvider = viewModelProvider;
     this.appVM = this.viewModelProvider.getAppVM();
     this.eventAggregator = eventAggregator;
-    this.logsViewSubscriber = this.eventAggregator.subscribe('openLogsView', (agentId) => {
+    this.logsViewSubscriber = this.eventAggregator.subscribe('openLogsView', agentId => {
       this.logsViewFilters.push('Agent ID: ' + agentId);
       this.activeView = 'Logs-view';
     });

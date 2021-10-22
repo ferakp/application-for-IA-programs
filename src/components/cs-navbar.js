@@ -91,7 +91,7 @@ class CustomNavbar extends HTMLElement {
    * @param{string} iconClassName the Font Awesome icon's name (prefix included)
    * return void
    */
-  addMainFAIcon = (iconClassName) => {
+  addMainFAIcon = iconClassName => {
     let navItem = document.createElement('li');
     navItem.className = 'custom-nav-item disable-hover';
 
@@ -159,7 +159,7 @@ class CustomNavbar extends HTMLElement {
    * Registers event handler for links
    * param{function} callback - the callback which will be called when link is clicked
    */
-  registerEventHandlerForLinks = (callback) => {
+  registerEventHandlerForLinks = callback => {
     this._linkEventHandlers.push(callback);
   };
 
@@ -167,7 +167,7 @@ class CustomNavbar extends HTMLElement {
    * Each time when nav link is clicked this function is called
    * @param{HTMLElement} element - the element clicked
    */
-  linkClicked = (element) => {
+  linkClicked = element => {
     for (let callback of this._linkEventHandlers) {
       try {
         callback(element);
@@ -180,7 +180,7 @@ class CustomNavbar extends HTMLElement {
   /*
    * Adds default styles
    */
-  initializeStyle = (style) => {
+  initializeStyle = style => {
     style.innerText = `
                           * {
                               box-sizing: border-box;

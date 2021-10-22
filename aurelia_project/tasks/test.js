@@ -4,7 +4,7 @@ import packageJson from '../../package.json';
 
 import { CLIOptions } from 'aurelia-cli';
 
-export default (cb) => {
+export default cb => {
   let options = packageJson.jest;
 
   if (CLIOptions.hasFlag('watch')) {

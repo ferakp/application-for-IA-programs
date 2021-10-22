@@ -3,7 +3,7 @@ import { StageComponent } from 'aurelia-testing';
 
 export function update(time) {
   time = time || 0;
-  return new Promise((r) => setTimeout(r, time));
+  return new Promise(r => setTimeout(r, time));
 }
 
 export function expectElement(selector, propertyName) {
@@ -34,7 +34,7 @@ export function executeTest(resources, html, viewModel, done, testC) {
     .then(() => testC(component))
     .then(done)
     .then(() => component.dispose())
-    .catch((e) => {
+    .catch(e => {
       fail(e);
       done();
       component.dispose();

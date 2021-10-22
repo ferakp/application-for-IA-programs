@@ -10,7 +10,7 @@ describe('Test console component', () => {
 
   const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
-  it('renders console component', (done) => {
+  it('renders console component', done => {
     runTest({}, done, () => {
       expectElement('.console__text-field').not.toEqual(null);
       expectElement('.console__message-container').not.toEqual(null);
@@ -21,7 +21,7 @@ describe('Test console component', () => {
   /**
    * Attributes
    */
-  it('display terminal lines correctly (terminalLines attribute)', (done) => {
+  it('display terminal lines correctly (terminalLines attribute)', done => {
     runTest(
       {
         terminalLines: [
@@ -46,8 +46,8 @@ describe('Test console component', () => {
    * Functions
    */
 
-  it('creates a new terminal line correctly (_enterPressed function)', (done) => {
-    runTest({}, done, async (component) => {
+  it('creates a new terminal line correctly (_enterPressed function)', done => {
+    runTest({}, done, async component => {
       component.viewModel.value = 'test!';
       await update(100);
       const keyboardEvent = new KeyboardEvent('keyup', {
@@ -65,8 +65,8 @@ describe('Test console component', () => {
     });
   });
 
-  it('deletes terminal line correctly (_deleteTerminalLine function)', (done) => {
-    runTest({}, done, async (component) => {
+  it('deletes terminal line correctly (_deleteTerminalLine function)', done => {
+    runTest({}, done, async component => {
       component.viewModel.value = 'test!';
       component.viewModel._enterPressed();
       await update(100);

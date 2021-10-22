@@ -23,14 +23,14 @@ export class FileUpload {
     }
 
     // Prevent redirection during drag and drop mechanism
-    document.querySelector('html').addEventListener('dragover', (e) => {
+    document.querySelector('html').addEventListener('dragover', e => {
       e.preventDefault();
       e.stopPropagation();
       this.setInputLabel('Drag it here!');
       this.setInputContainerStatus('dragover');
     });
 
-    document.querySelector('html').addEventListener('drop', (e) => {
+    document.querySelector('html').addEventListener('drop', e => {
       e.preventDefault();
       e.stopPropagation();
       this.setInputLabel(this.description);
@@ -38,7 +38,7 @@ export class FileUpload {
     });
 
     // Drag enter
-    this.fileUploadInputContainer.addEventListener('dragenter', (e) => {
+    this.fileUploadInputContainer.addEventListener('dragenter', e => {
       e.stopPropagation();
       e.preventDefault();
       this.setInputLabel('Drop');
@@ -46,14 +46,14 @@ export class FileUpload {
     });
 
     // Drag over
-    this.fileUploadInputContainer.addEventListener('dragover', (e) => {
+    this.fileUploadInputContainer.addEventListener('dragover', e => {
       e.stopPropagation();
       e.preventDefault();
       this.setInputLabel('Drop');
     });
 
     // Drop
-    this.fileUploadInputContainer.addEventListener('drop', (e) => {
+    this.fileUploadInputContainer.addEventListener('drop', e => {
       e.stopPropagation();
       e.preventDefault();
       let file = e.dataTransfer.files[0];

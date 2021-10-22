@@ -24,7 +24,7 @@ describe('Test text-field component', () => {
 
   const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
-  it('renders component', (done) => {
+  it('renders component', done => {
     runTest({}, done, () => {
       expectElement('.text-field__container').not.toEqual(null);
       expectElementNumber('.text-field__input-element').toEqual(1);
@@ -35,37 +35,37 @@ describe('Test text-field component', () => {
    * Attributes
    */
 
-  it('displays label correctly (label attribute)', (done) => {
+  it('displays label correctly (label attribute)', done => {
     runTest({ label: 'LabelTest' }, done, () => {
       expectElement('.text-field__label-element', 'innerHTML').toMatch('LabelTest');
     });
   });
 
-  it('displays error message correctly (errorMessage attribute)', (done) => {
+  it('displays error message correctly (errorMessage attribute)', done => {
     runTest({ errorMessage: 'Error!' }, done, () => {
       expectElement('.text-field__error-message', 'innerHTML').toMatch('Error!');
     });
   });
 
-  it('displays required sign correctly (required attribute)', (done) => {
+  it('displays required sign correctly (required attribute)', done => {
     runTest({ label: 'Label', required: true }, done, () => {
       expectElement('.text-field__required', 'innerHTML').toMatch('*');
     });
   });
 
-  it('displays placeholder correctly (placeholder attribute)', (done) => {
+  it('displays placeholder correctly (placeholder attribute)', done => {
     runTest({ value: '', placeholder: 'a2_!1' }, done, () => {
       expectElementAttribute('.text-field__input-element', 'placeholder').toBe('a2_!1');
     });
   });
 
-  it('displays value correctly (value attribute)', (done) => {
+  it('displays value correctly (value attribute)', done => {
     runTest({ value: 'value-' }, done, () => {
       expectElement('.text-field__input-element', 'value').toBe('value-');
     });
   });
 
-  it('calls inputClickCallback function when input is clicked (inputClickCallback attribute)', (done) => {
+  it('calls inputClickCallback function when input is clicked (inputClickCallback attribute)', done => {
     let clicked = false;
     runTest(
       {
@@ -81,34 +81,34 @@ describe('Test text-field component', () => {
     );
   });
 
-  it('displays first letter in upper case (firstLetterUpperCase attribute)', (done) => {
+  it('displays first letter in upper case (firstLetterUpperCase attribute)', done => {
     runTest({ value: 'value-', firstLetterUpperCase: true }, done, async () => {
       await update(500);
       expectElement('.text-field__input-element', 'value').toBe('Value-');
     });
   });
 
-  it('displays only numbers (allowOnlyNumbers attribute)', (done) => {
+  it('displays only numbers (allowOnlyNumbers attribute)', done => {
     runTest({ value: 'value-', allowOnlyNumbers: true }, done, async () => {
       await update(500);
       expectElement('.text-field__input-element', 'value').toBe('');
     });
   });
 
-  it('activates clear button (showClearButton attribute)', (done) => {
-    runTest({ value: 'value-', showClearButton: true }, done, async (component) => {
+  it('activates clear button (showClearButton attribute)', done => {
+    runTest({ value: 'value-', showClearButton: true }, done, async component => {
       await update(100);
       expectViewModelProperty(component, 'activateClearButton').toBe(true);
     });
   });
 
-  it('disables input correctly (disable attribute)', (done) => {
-    runTest({ disable: true }, done, async (component) => {
+  it('disables input correctly (disable attribute)', done => {
+    runTest({ disable: true }, done, async component => {
       expectElement('.text-field__input-element', 'disabled').toBe(true);
     });
   });
 
-  it('calls inputEnterPressed function when enter is pressed (inputEnterPressed attribute)', (done) => {
+  it('calls inputEnterPressed function when enter is pressed (inputEnterPressed attribute)', done => {
     let enterPressed = false;
     runTest(
       {
@@ -135,8 +135,8 @@ describe('Test text-field component', () => {
    * Functions
    */
 
-  it('clears input field when clearButtonClicked function is called (clearButtonClicked function)', (done) => {
-    runTest({ value: 'Test' }, done, async (component) => {
+  it('clears input field when clearButtonClicked function is called (clearButtonClicked function)', done => {
+    runTest({ value: 'Test' }, done, async component => {
       expectViewModelProperty(component, 'value').toEqual('Test');
       component.viewModel.clearButtonClicked();
       await update();

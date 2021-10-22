@@ -16,7 +16,7 @@ describe('Stage App Component', () => {
 
   afterEach(() => component.dispose());
 
-  it('renders component', (done) => {
+  it('renders component', done => {
     component
       .create(bootstrap)
       .then(() => {
@@ -25,7 +25,7 @@ describe('Stage App Component', () => {
         expect(cmb.querySelector('text-field').querySelectorAll('.text-field__input-element').length).toBe(1);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
@@ -35,7 +35,7 @@ describe('Stage App Component', () => {
    * Attributes
    */
 
-  it('displays label correctly (label attribute)', (done) => {
+  it('displays label correctly (label attribute)', done => {
     parentViewModel.label = 'Label';
     component
       .create(bootstrap)
@@ -44,13 +44,13 @@ describe('Stage App Component', () => {
         expect(cmb.querySelector('.text-field__label-element').textContent.trim()).toBe('Label');
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('displays required sign correctly (required attribute)', (done) => {
+  it('displays required sign correctly (required attribute)', done => {
     parentViewModel.label = 'Label';
     parentViewModel.required = true;
     component
@@ -60,13 +60,13 @@ describe('Stage App Component', () => {
         expect(cmb.querySelector('.text-field__required').textContent.trim()).toBe('*');
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('displays value correctly (value attribute)', (done) => {
+  it('displays value correctly (value attribute)', done => {
     parentViewModel.value = 'value-';
     component
       .create(bootstrap)
@@ -75,13 +75,13 @@ describe('Stage App Component', () => {
         expect(cmb.querySelector('.text-field__input-element').value).toBe('value-');
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('displays error message correctly (errorMessage attribute)', (done) => {
+  it('displays error message correctly (errorMessage attribute)', done => {
     parentViewModel.errorMessage = 'Error!';
     component
       .create(bootstrap)
@@ -91,13 +91,13 @@ describe('Stage App Component', () => {
         expect(cmb.querySelector('.text-field__error-message').textContent.trim()).toBe('Error!');
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('displays placeholder correctly (placeholder attribute)', (done) => {
+  it('displays placeholder correctly (placeholder attribute)', done => {
     parentViewModel.value = '';
     parentViewModel.placeholder = 'a2m_1test_!1';
     component
@@ -107,13 +107,13 @@ describe('Stage App Component', () => {
         expect(cmb.querySelector('.text-field__input-element').getAttribute('placeholder')).toBe('a2m_1test_!1');
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('prints items correctly in drop down list container (items attribute)', (done) => {
+  it('prints items correctly in drop down list container (items attribute)', done => {
     parentViewModel.value = '';
     parentViewModel.items = ['aa', 'bb'];
     component
@@ -123,13 +123,13 @@ describe('Stage App Component', () => {
         expect(cmb.querySelectorAll('.combobox__drop-down-list-item-content').length).toBe(2);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('controls clear button appearance correctly (showClearButton attribute)', (done) => {
+  it('controls clear button appearance correctly (showClearButton attribute)', done => {
     parentViewModel.errorMessage = 'Error!';
     component
       .create(bootstrap)
@@ -141,19 +141,19 @@ describe('Stage App Component', () => {
         expect(cmb.querySelectorAll('.text-field__error-message-container-inactive').length).toBe(1);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('filters drop down list items correctly with a custom data provider (dataProvider attribute)', (done) => {
+  it('filters drop down list items correctly with a custom data provider (dataProvider attribute)', done => {
     parentViewModel.items = null;
-    parentViewModel.dataProvider = async (value) => {
+    parentViewModel.dataProvider = async value => {
       const items = ['abc', 'dfeg', 'jhsh'];
       if (!value) return items;
       else {
-        return items.filter((e) => e.includes(value));
+        return items.filter(e => e.includes(value));
       }
     };
     component
@@ -175,7 +175,7 @@ describe('Stage App Component', () => {
         expect(component.viewModel._comboboxItems).toEqual(['jhsh']);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
@@ -185,7 +185,7 @@ describe('Stage App Component', () => {
    * Elements
    */
 
-  it('controls drop down list visibility (arrow down icon)', (done) => {
+  it('controls drop down list visibility (arrow down icon)', done => {
     parentViewModel.dataProvider = null;
     parentViewModel.items = ['aa', 'bb'];
     component
@@ -198,7 +198,7 @@ describe('Stage App Component', () => {
         expect(component.viewModel.dropDownListOpened).toEqual(false);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
@@ -208,7 +208,7 @@ describe('Stage App Component', () => {
    * Functions
    */
 
-  it('controls drop down list visibility (dropDownListOpened controller)', (done) => {
+  it('controls drop down list visibility (dropDownListOpened controller)', done => {
     parentViewModel.items = ['aa', 'bb'];
     component
       .create(bootstrap)
@@ -219,13 +219,13 @@ describe('Stage App Component', () => {
         expect(component.viewModel.dropDownListOpened).toEqual(false);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('filters drop down list items when new value is set', (done) => {
+  it('filters drop down list items when new value is set', done => {
     parentViewModel.items = ['aa', 'bb'];
     component
       .create(bootstrap)
@@ -241,13 +241,13 @@ describe('Stage App Component', () => {
         expect(component.viewModel._comboboxItems).toEqual(['aa', 'bb']);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('filters drop down list items correctly when input element is clicked', (done) => {
+  it('filters drop down list items correctly when input element is clicked', done => {
     parentViewModel.items = ['aa', 'bb', 'cc'];
     component
       .create(bootstrap)
@@ -264,19 +264,19 @@ describe('Stage App Component', () => {
         expect(component.viewModel._comboboxItems).toEqual(['cc']);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });
   });
 
-  it('filters drop down list items correctly with a custom filter', (done) => {
+  it('filters drop down list items correctly with a custom filter', done => {
     parentViewModel.items = ['aa', 'bb', 'cc'];
     parentViewModel.customFilter = (value, items) => {
       if (!Array.isArray(items)) return [];
       else if (!value) return items;
       else {
-        return items.filter((e) => e === value);
+        return items.filter(e => e === value);
       }
     };
     component
@@ -295,7 +295,7 @@ describe('Stage App Component', () => {
         expect(component.viewModel._comboboxItems).toEqual(['cc']);
         done();
       })
-      .catch((e) => {
+      .catch(e => {
         fail(e);
         done();
       });

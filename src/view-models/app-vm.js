@@ -10,8 +10,8 @@ export class AppVM {
     this.api = { deleteAgent: this.deleteAgent };
   }
 
-  deleteAgent = (agentId) => {
-    if (this.agents.length > 0) this.agents = this.agents.filter((e) => e.id !== agentId);
+  deleteAgent = agentId => {
+    if (this.agents.length > 0) this.agents = this.agents.filter(e => e.id !== agentId);
   };
 }
 

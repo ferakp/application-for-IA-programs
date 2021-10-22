@@ -120,14 +120,14 @@ export class ComboboxTag {
     this.applyFiltering();
   };
 
-  _outsideDropDownClicked = (event) => {
+  _outsideDropDownClicked = event => {
     const container = this.comboboxTagUpperContainer.parentElement;
     if (container !== event.target && !container.contains(event.target)) {
       this.dropDownListOpened = false;
     }
   };
 
-  _deleteTag = async (index) => {
+  _deleteTag = async index => {
     this.selections.splice(index, 1);
   };
 
@@ -137,13 +137,8 @@ export class ComboboxTag {
 
   inputElementChanged(newValue) {
     if (newValue) {
-      this.inputElement.addEventListener('keydown', async (e) => {
-        if (
-          (e.keyCode === 40 || e.keyCode === 38) &&
-          this._comboboxItems.length > 0 &&
-          this._focusedIndex < this._comboboxItems.length &&
-          this.dropDownListOpened
-        ) {
+      this.inputElement.addEventListener('keydown', async e => {
+        if ((e.keyCode === 40 || e.keyCode === 38) && this._comboboxItems.length > 0 && this._focusedIndex < this._comboboxItems.length && this.dropDownListOpened) {
           if (e.keyCode === 40 && this._focusedIndex < this._comboboxItems.length - 1) {
             e.preventDefault();
             this._focusedIndex += 1;
@@ -215,7 +210,7 @@ export class ComboboxTag {
   _defaultFilter = (value, items) => {
     if (value && items && items.length > 0) {
       const tempValidItems = [];
-      items.forEach((e) => {
+      items.forEach(e => {
         if (e.toLowerCase().includes(value.toLowerCase())) tempValidItems.push(e);
       });
       return tempValidItems;

@@ -19,11 +19,7 @@ export class Console {
   deletedTerminalLineIds = [];
 
   createGenericTerminalLine(payload) {
-    if (
-      this.terminalLines.some((e) => e.id.toString() === payload.id.toString()) ||
-      this.deletedTerminalLineIds.some((e) => e.toString() === payload.id.toString())
-    )
-      return;
+    if (this.terminalLines.some(e => e.id.toString() === payload.id.toString()) || this.deletedTerminalLineIds.some(e => e.toString() === payload.id.toString())) return;
     if (typeof payload.text === 'string' && typeof payload.id === 'number') {
       let terminalLine = {
         text: payload.text,
@@ -44,11 +40,11 @@ export class Console {
     this.value = '';
   };
 
-  _openInfo = (id) => {
+  _openInfo = id => {
     // Open wiki window with given id
   };
 
-  _deleteTerminalLine = (id) => {
+  _deleteTerminalLine = id => {
     if (typeof id === 'number') {
       this.deletedTerminalLineIds.push(id);
       for (let i = 0; i < this.terminalLines.length; i++) {

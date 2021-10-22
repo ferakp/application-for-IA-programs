@@ -54,7 +54,7 @@ export class TextField {
   tempValueChangedBlock = false;
 
   attached() {
-    this.textFieldInputElement.addEventListener('keyup', (e) => {
+    this.textFieldInputElement.addEventListener('keyup', e => {
       if (e.keyCode === 13) {
         this.inputEnterPressed();
       }
