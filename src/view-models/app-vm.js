@@ -2,6 +2,11 @@ export class AppVM {
   agents = [];
   activeAgents = [];
   terminatedAgents = [];
+
+  /**
+   * Array for storing logs
+   * A log is an object with following fields: id, text, time, color
+   */
   logs = [];
   files = [];
   api;
