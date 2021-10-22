@@ -1,17 +1,14 @@
-import { bindable } from 'aurelia-framework';
-
+import { bindable } from 'aurelia-framework'
 
 export class DashboardNav {
+  @bindable
+  disable
 
   @bindable
-  disable;
-
-  @bindable
-  expand = false;
+  expand = false
 
   _expandWindow = () => {
-    if(!this.expand) this.expand = false;
-    this.expand = !this.expand;
+    if (!this.expand) this.expand = false
+    this.expand = !this.expand
   }
-
 }

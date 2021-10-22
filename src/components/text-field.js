@@ -1,66 +1,66 @@
-import { bindable } from "aurelia-framework";
+import { bindable } from 'aurelia-framework'
 
 export class TextField {
   @bindable
-  label;
+  label
 
   @bindable
-  controller;
+  controller
 
   @bindable
-  required;
+  required
 
   @bindable
-  value;
+  value
 
   @bindable
-  errorMessage;
+  errorMessage
 
   @bindable
-  inputEnterCallback;
+  inputEnterCallback
 
   @bindable
-  placeholder;
+  placeholder
 
   @bindable
-  for;
+  for
 
   @bindable
-  inputClickCallback;
+  inputClickCallback
 
   @bindable
-  firstLetterUpperCase;
+  firstLetterUpperCase
 
   @bindable
-  allowOnlyNumbers;
+  allowOnlyNumbers
 
   @bindable
-  showClearButton;
+  showClearButton
 
   @bindable
-  disable;
+  disable
 
   @bindable
-  hideSuffixContainer = false;
+  hideSuffixContainer = false
 
   // Hides label container if true
   @bindable
-  minimalMode = false;
+  minimalMode = false
 
-  hasBeenEdited = false;
+  hasBeenEdited = false
 
-  activateClearButton = false;
+  activateClearButton = false
 
-  tempValueChangedBlock = false;
+  tempValueChangedBlock = false
 
   attached() {
-    this.textFieldInputElement.addEventListener("keyup", (e) => {
+    this.textFieldInputElement.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
-        this.inputEnterPressed();
+        this.inputEnterPressed()
       }
-    });
+    })
 
-    this.disableChanged(this.disable);
+    this.disableChanged(this.disable)
   }
 
   /**
@@ -70,54 +70,44 @@ export class TextField {
    * @param {string} newValue the new value of value attribute
    */
   valueChanged(newValue) {
-    if (newValue && this.showClearButton) this.activateClearButton = true;
-    else this.activateClearButton = false;
-    if (!this.hasBeenEdited && newValue) this.hasBeenEdited = true;
-    this.upperCaseAndNumberCheck();
+    if (newValue && this.showClearButton) this.activateClearButton = true
+    else this.activateClearButton = false
+    if (!this.hasBeenEdited && newValue) this.hasBeenEdited = true
+    this.upperCaseAndNumberCheck()
   }
 
   showClearButtonChanged(newValue) {
-    if(this.value && newValue) this.activateClearButton = true; 
+    if (this.value && newValue) this.activateClearButton = true
   }
 
   allowOnlyNumbersChanged() {
-    this.upperCaseAndNumberCheck();
+    this.upperCaseAndNumberCheck()
   }
 
   disableChanged(newValue) {
-    if(newValue && this.textFieldInputElement) this.textFieldInputElement.disabled = true;
-    else if(this.textFieldInputElement) this.textFieldInputElement.disabled = false;
+    if (newValue && this.textFieldInputElement) this.textFieldInputElement.disabled = true
+    else if (this.textFieldInputElement) this.textFieldInputElement.disabled = false
   }
 
   upperCaseAndNumberCheck = () => {
-    if (this.allowOnlyNumbers && typeof this.value !== "number")
-      setTimeout(() => (this.value = ""), 200);
-    if (
-      this.firstLetterUpperCase &&
-      this.value &&
-      this.value[0] !== this.value[0].toUpperCase()
-    ) {
-      setTimeout(
-        () =>
-          (this.value =
-            this.value.charAt(0).toUpperCase() + this.value.slice(1)),
-        200
-      );
+    if (this.allowOnlyNumbers && typeof this.value !== 'number') setTimeout(() => (this.value = ''), 200)
+    if (this.firstLetterUpperCase && this.value && this.value[0] !== this.value[0].toUpperCase()) {
+      setTimeout(() => (this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)), 200)
     }
-  };
+  }
 
   // This function is called by icon container when ?-icon is clicked
   tooltipClicked() {}
 
   inputEnterPressed() {
-    if (this.inputEnterCallback) this.inputEnterCallback();
+    if (this.inputEnterCallback) this.inputEnterCallback()
   }
 
   inputElementClicked() {
-    if (this.inputClickCallback) this.inputClickCallback();
+    if (this.inputClickCallback) this.inputClickCallback()
   }
 
   clearButtonClicked() {
-    this.value = "";
+    this.value = ''
   }
 }

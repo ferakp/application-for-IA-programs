@@ -1,10 +1,10 @@
-import { AppVM } from "./app-vm";
+import { AppVM } from './app-vm'
 
 export class ViewModelProvider {
-  appVM;
+  appVM
 
   getAppVM = () => {
-    if (!this.appVM) this.appVM = new AppVM();
-    return this.appVM;
-  };
+    if (!this.appVM) this.appVM = new AppVM()
+    return this.appVM
+  }
 }
