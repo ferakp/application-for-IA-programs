@@ -1,62 +1,62 @@
 export class AppVM {
-  agents = []
-  activeAgents = []
-  terminatedAgents = []
-  logs = []
-  files = []
-  api
+  agents = [];
+  activeAgents = [];
+  terminatedAgents = [];
+  logs = [];
+  files = [];
+  api;
 
   constructor() {
-    this.api = { deleteAgent: this.deleteAgent }
+    this.api = { deleteAgent: this.deleteAgent };
   }
 
   deleteAgent = (agentId) => {
-    if (this.agents.length > 0) this.agents = this.agents.filter((e) => e.id !== agentId)
-  }
+    if (this.agents.length > 0) this.agents = this.agents.filter((e) => e.id !== agentId);
+  };
 }
 
 class Agent {
-  id
-  name
+  id;
+  name;
   /**
    * 0 - reflex agent
    * 1 - model-based reflex agent
    * 2 - goal-based agent
    * 3 - utility agent
    */
-  type
+  type;
 
   // Only if agent's type is 0 and 1
-  ruleActionMap
+  ruleActionMap;
 
   // Only if agent's type is 1
-  observations
+  observations;
 
   // Only if agent's type is 3
-  utilityFunction
+  utilityFunction;
 
   // Status - uninitialized, initialized, idle, running, terminated, paused
-  status = 'running'
+  status = 'running';
 
-  startTime = 'N/A'
+  startTime = 'N/A';
 
-  pausedTime = 'N/A'
+  pausedTime = 'N/A';
 
-  endingTime = 'N/A'
+  endingTime = 'N/A';
 
-  appVMApi
+  appVMApi;
 
   constructor(appVMApi, type, name) {
-    this.appVMApi = appVMApi
-    this.type = type
-    if (type === 0) this.ruleActionMap = new Map()
-    if (type === 1) this.observations = []
+    this.appVMApi = appVMApi;
+    this.type = type;
+    if (type === 0) this.ruleActionMap = new Map();
+    if (type === 1) this.observations = [];
 
-    this.name = name || 'Agent_' + Math.floor(Math.random() * 1000000)
-    this.id = Math.floor(Math.random() * 10000000000000)
+    this.name = name || 'Agent_' + Math.floor(Math.random() * 1000000);
+    this.id = Math.floor(Math.random() * 10000000000000);
   }
 
   delete() {
-    this.appVMApi.deleteAgent(this.id)
+    this.appVMApi.deleteAgent(this.id);
   }
 }

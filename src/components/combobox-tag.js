@@ -1,50 +1,50 @@
-import { bindable } from 'aurelia-framework'
+import { bindable } from 'aurelia-framework';
 
 export class ComboboxTag {
   @bindable
-  label
+  label;
 
   @bindable
-  controller
+  controller;
 
   @bindable
-  required
+  required;
 
   @bindable
-  value
+  value;
 
   @bindable
-  selections
+  selections;
 
   @bindable
-  language
+  language;
 
   @bindable
-  errorMessage
+  errorMessage;
 
   @bindable
-  placeholder
+  placeholder;
 
   @bindable
-  for
+  for;
 
   @bindable
-  items
+  items;
 
   @bindable
-  enableDuplicateSelections = true
+  enableDuplicateSelections = true;
 
   @bindable
-  enableCustomValues
+  enableCustomValues;
 
   @bindable
-  showClearButton
+  showClearButton;
 
   @bindable
-  firstLetterUpperCase
+  firstLetterUpperCase;
 
   @bindable
-  allowOnlyNumbers
+  allowOnlyNumbers;
 
   /**
    * Function with following parameters
@@ -53,10 +53,10 @@ export class ComboboxTag {
    * @param {string} filter filter
    */
   @bindable
-  dataProvider
+  dataProvider;
 
   @bindable
-  disable
+  disable;
 
   /**
    * Function with following parameters
@@ -64,30 +64,30 @@ export class ComboboxTag {
    * @param {Array} items items to be filtered
    */
   @bindable
-  customFilter
+  customFilter;
 
   @bindable
-  hideSuffixContainer
+  hideSuffixContainer;
 
   @bindable
-  dropDownListOpened = false
+  dropDownListOpened = false;
 
-  isAttached = false
+  isAttached = false;
 
-  dropDownListDirectionTop = false
+  dropDownListDirectionTop = false;
 
-  _comboboxItems = []
+  _comboboxItems = [];
 
-  _focusedIndex = -1
-
-  @bindable
-  inputElement
+  _focusedIndex = -1;
 
   @bindable
-  minimalMode = false
+  inputElement;
+
+  @bindable
+  minimalMode = false;
 
   attached() {
-    this.isAttached = true
+    this.isAttached = true;
   }
 
   /**
@@ -95,41 +95,41 @@ export class ComboboxTag {
    */
 
   _inputElementEnterPressed = async () => {
-    const value = this._focusedIndex >= 0 ? this._comboboxItems[this._focusedIndex] : this.value
+    const value = this._focusedIndex >= 0 ? this._comboboxItems[this._focusedIndex] : this.value;
     if (this.enableCustomValues || this._comboboxItems.includes(value)) {
-      this.itemSelected(value)
+      this.itemSelected(value);
     }
-  }
+  };
 
   dropDownListIconClicked() {
-    this.dropDownListOpened = !this.dropDownListOpened
-    this.inputElement.select()
-    this.inputElement.focus()
+    this.dropDownListOpened = !this.dropDownListOpened;
+    this.inputElement.select();
+    this.inputElement.focus();
   }
 
   itemSelected(newValue) {
-    if (!newValue) return
-    this.addSelection(newValue)
-    this.value = ''
-    this._focusedIndex = -1
-    this.dropDownListOpened = false
+    if (!newValue) return;
+    this.addSelection(newValue);
+    this.value = '';
+    this._focusedIndex = -1;
+    this.dropDownListOpened = false;
   }
 
   _inputElementClicked = async () => {
-    this.dropDownListOpened = true
-    this.applyFiltering()
-  }
+    this.dropDownListOpened = true;
+    this.applyFiltering();
+  };
 
   _outsideDropDownClicked = (event) => {
-    const container = this.comboboxTagUpperContainer.parentElement
+    const container = this.comboboxTagUpperContainer.parentElement;
     if (container !== event.target && !container.contains(event.target)) {
-      this.dropDownListOpened = false
+      this.dropDownListOpened = false;
     }
-  }
+  };
 
   _deleteTag = async (index) => {
-    this.selections.splice(index, 1)
-  }
+    this.selections.splice(index, 1);
+  };
 
   /**
    * CHANGED FUNCTIONS
@@ -145,61 +145,61 @@ export class ComboboxTag {
           this.dropDownListOpened
         ) {
           if (e.keyCode === 40 && this._focusedIndex < this._comboboxItems.length - 1) {
-            e.preventDefault()
-            this._focusedIndex += 1
+            e.preventDefault();
+            this._focusedIndex += 1;
           } else if (e.keyCode === 38) {
-            e.preventDefault()
-            if (this._focusedIndex > 0) this._focusedIndex -= 1
+            e.preventDefault();
+            if (this._focusedIndex > 0) this._focusedIndex -= 1;
           }
         }
-        this.dropDownList.scrollTop = 40 * this._focusedIndex
-      })
+        this.dropDownList.scrollTop = 40 * this._focusedIndex;
+      });
     }
   }
 
   async valueChanged(newValue) {
-    if (!newValue) return
-    this._focusedIndex = -1
-    let isDataProviderCalled = false
+    if (!newValue) return;
+    this._focusedIndex = -1;
+    let isDataProviderCalled = false;
     // Open drop down list when value is not empty
     if (!this.dropDownListOpened && newValue.length === 1) {
-      this.dropDownListOpened = true
-      isDataProviderCalled = true
+      this.dropDownListOpened = true;
+      isDataProviderCalled = true;
     }
     if (!this.dataProvider) {
-      if (newValue.length > 0) this.dropDownListOpened = true
+      if (newValue.length > 0) this.dropDownListOpened = true;
       // Routing filtering
-      this.applyFiltering()
+      this.applyFiltering();
     } else if (!isDataProviderCalled) {
-      const tempItems = await this.dataProvider(this.value)
-      this._comboboxItems = tempItems
+      const tempItems = await this.dataProvider(this.value);
+      this._comboboxItems = tempItems;
     }
   }
 
   async dropDownListOpenedChanged(newValue) {
-    if (newValue) document.body.addEventListener('pointerup', this._outsideDropDownClicked)
+    if (newValue) document.body.addEventListener('pointerup', this._outsideDropDownClicked);
     else {
-      document.body.removeEventListener('pointerup', this._outsideDropDownClicked)
-      this._focusedIndex = -1
+      document.body.removeEventListener('pointerup', this._outsideDropDownClicked);
+      this._focusedIndex = -1;
     }
     if (newValue && this.dataProvider) {
-      const tempItems = await this.dataProvider(this.value)
-      this._comboboxItems = tempItems
+      const tempItems = await this.dataProvider(this.value);
+      this._comboboxItems = tempItems;
     }
-    this.adjustDropDownListDirection()
+    this.adjustDropDownListDirection();
   }
 
   adjustDropDownListDirection = () => {
-    const wH = window.innerHeight
-    const eB = this.dropDownListContainer.getBoundingClientRect().bottom
-    if (wH - eB < 280) this.dropDownListDirectionTop = true
-    else this.dropDownListDirectionTop = false
-  }
+    const wH = window.innerHeight;
+    const eB = this.dropDownListContainer.getBoundingClientRect().bottom;
+    if (wH - eB < 280) this.dropDownListDirectionTop = true;
+    else this.dropDownListDirectionTop = false;
+  };
 
   async itemsChanged() {
     // Return if data provider is provided
-    if (this.dataProvider) return
-    this.applyFiltering()
+    if (this.dataProvider) return;
+    this.applyFiltering();
   }
 
   /**
@@ -207,32 +207,32 @@ export class ComboboxTag {
    */
 
   applyFiltering() {
-    const currentFilter = this.customFilter ?? this._defaultFilter
-    this._comboboxItems = currentFilter(this.value, this.items)
-    if (this._comboboxItems && this._comboboxItems.length === 0) this.dropDownListOpened = false
+    const currentFilter = this.customFilter ?? this._defaultFilter;
+    this._comboboxItems = currentFilter(this.value, this.items);
+    if (this._comboboxItems && this._comboboxItems.length === 0) this.dropDownListOpened = false;
   }
 
   _defaultFilter = (value, items) => {
     if (value && items && items.length > 0) {
-      const tempValidItems = []
+      const tempValidItems = [];
       items.forEach((e) => {
-        if (e.toLowerCase().includes(value.toLowerCase())) tempValidItems.push(e)
-      })
-      return tempValidItems
+        if (e.toLowerCase().includes(value.toLowerCase())) tempValidItems.push(e);
+      });
+      return tempValidItems;
     }
-    return items ?? []
-  }
+    return items ?? [];
+  };
 
   /**
    * UTILITY FUNCTIONS
    */
 
   addSelection(item) {
-    if (!Array.isArray(this.selections)) this.selections = []
+    if (!Array.isArray(this.selections)) this.selections = [];
     if (!this.enableDuplicateSelections && !this.selections.includes(item)) {
-      this.selections.push(item)
+      this.selections.push(item);
     } else if (this.enableDuplicateSelections) {
-      this.selections.push(item)
+      this.selections.push(item);
     }
   }
 }

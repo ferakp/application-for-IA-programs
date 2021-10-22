@@ -30,7 +30,7 @@
   color: red;
 }
 
-.text-field__error-message-container-inactive  {
+.text-field__error-message-container-inactive {
   max-height: 0px;
   transition: max-height 1s ease;
   overflow: hidden;
@@ -53,13 +53,13 @@
 }
 
 .text-field__container:hover .text-field__label-element {
-  animation-name: textFieldBlueHighlight ;
+  animation-name: textFieldBlueHighlight;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
 }
 
 .text-field__container:hover .text-field__tooltip-icon {
-  animation-name: textFieldBlueHighlight ;
+  animation-name: textFieldBlueHighlight;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
 }
@@ -134,7 +134,7 @@
   outline: none;
 }
 
-.text-field__container div[slot="suffix-container"] {
+.text-field__container div[slot='suffix-container'] {
   max-height: 100%;
   display: flex;
   align-items: center;
@@ -146,7 +146,7 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 

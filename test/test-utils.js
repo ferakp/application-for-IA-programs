@@ -1,5 +1,5 @@
-import { bootstrap } from "aurelia-bootstrapper";
-import { StageComponent } from "aurelia-testing";
+import { bootstrap } from 'aurelia-bootstrapper';
+import { StageComponent } from 'aurelia-testing';
 
 export function update(time) {
   time = time || 0;

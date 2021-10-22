@@ -1,18 +1,18 @@
-import { inject, bindable } from 'aurelia-framework'
+import { inject, bindable } from 'aurelia-framework';
 
 export class Checkbox {
   @bindable
-  name
+  name;
 
   @bindable
-  checked
+  checked;
 
   @bindable
-  errorMessage
+  errorMessage;
 
-  isAttached = false
+  isAttached = false;
 
   attached() {
-    this.isAttached = true
+    this.isAttached = true;
   }
 }

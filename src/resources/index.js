@@ -1,4 +1,4 @@
-import { PLATFORM } from 'aurelia-pal'
+import { PLATFORM } from 'aurelia-pal';
 
 export function configure(config) {
   config.globalResources([
@@ -17,5 +17,5 @@ export function configure(config) {
     PLATFORM.moduleName('../components/dashboard-menu'),
     PLATFORM.moduleName('../components/console'),
     PLATFORM.moduleName('../components/terminal-line'),
-  ])
+  ]);
 }
