@@ -7,7 +7,9 @@ import { inject } from 'aurelia-framework';
 @inject(ViewModelProvider)
 class AuthorizeStep {
   run(navigationInstruction, next) {
-    if (navigationInstruction.getAllInstructions().some(i => i.config.settings.roles.indexOf('admin') !== -1)) {
+    if (
+      navigationInstruction.getAllInstructions().some(i => i.config.settings.roles.indexOf('admin') !== -1)
+    ) {
       const isAdmin = /* insert magic here */ false;
       if (!isAdmin) {
         return next.cancel(new Redirect('koti'));

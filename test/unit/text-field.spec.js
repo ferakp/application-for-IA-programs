@@ -1,4 +1,11 @@
-import { update, executeTest, expectElement, expectElementAttribute, expectElementNumber, expectViewModelProperty } from '../test-utils';
+import {
+  update,
+  executeTest,
+  expectElement,
+  expectElementAttribute,
+  expectElementNumber,
+  expectViewModelProperty,
+} from '../test-utils';
 
 describe('Test text-field component', () => {
   const resources = ['../../src/components/text-field'];

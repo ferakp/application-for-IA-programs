@@ -51,12 +51,17 @@ class CustomNavbar extends HTMLElement {
     if (this._id === undefined || this._id === null) {
       if (this.getAttribute('id')) this._id = this.getAttribute('id');
       else {
-        let id = 'juiaxasdiueia' + (Math.random() * Math.random() * Math.random() * Math.random()).toString(24).substring(3);
+        let id =
+          'juiaxasdiueia' +
+          (Math.random() * Math.random() * Math.random() * Math.random()).toString(24).substring(3);
         this.setAttribute('id', id);
         this._id = id;
       }
       for (let navItem of this._shadowRoot.querySelector('.custom-nav-links').children) {
-        navItem.children[0].setAttribute('onclick', "document.getElementById('" + this._id + "').linkClicked(this);");
+        navItem.children[0].setAttribute(
+          'onclick',
+          "document.getElementById('" + this._id + "').linkClicked(this);"
+        );
       }
     }
   }
@@ -137,7 +142,8 @@ class CustomNavbar extends HTMLElement {
     navItem.className = 'custom-nav-item minimize-right-margin minimize-top-margin';
 
     let slot = document.createElement('slot');
-    let slotName = 'custom-icon' + this._shadowRoot.querySelectorAll('.custom-nav-icons-list')[0].children.length;
+    let slotName =
+      'custom-icon' + this._shadowRoot.querySelectorAll('.custom-nav-icons-list')[0].children.length;
     slot.setAttribute('name', slotName);
     navItem.appendChild(slot);
     this._shadowRoot.querySelectorAll('.custom-nav-icons-list')[0].appendChild(navItem);

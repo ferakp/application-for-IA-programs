@@ -22,7 +22,16 @@ export class TerminalLine {
   }
 
   _formatWave(date) {
-    const tempDate = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
+    const tempDate =
+      date.getDate() +
+      '.' +
+      (date.getMonth() + 1) +
+      '.' +
+      date.getFullYear() +
+      ' ' +
+      date.getHours() +
+      ':' +
+      date.getMinutes();
     return tempDate;
   }
 

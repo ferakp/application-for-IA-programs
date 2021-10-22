@@ -5,9 +5,19 @@
   <!--Child components-->
   <div class="text-field__container">
     <div class="text-field__label-container mb-2" show.bind="!minimalMode">
-      <p class="text-field__label-element m-0 mr-auto">${label}<span class="text-field__required" if.bind="required">&nbsp; &#42;</span></p>
+      <p class="text-field__label-element m-0 mr-auto">
+        ${label}<span class="text-field__required" if.bind="required">&nbsp; &#42;</span>
+      </p>
       <div class="text-field__label-icon-container text-field__pointer-cursor">
-        <a class="text-field__tooltip-icon-link text-field__transparent-bg-color d-flex flex-row text-decoration-none" click.delegate="tooltipClicked()">
+        <a
+          class="
+            text-field__tooltip-icon-link text-field__transparent-bg-color
+            d-flex
+            flex-row
+            text-decoration-none
+          "
+          click.delegate="tooltipClicked()"
+        >
           <i class="text-field__tooltip-icon far fa-question-circle"></i>
         </a>
       </div>
@@ -24,17 +34,59 @@
       />
       <div class="text-field__input-icons-container d-flex flex-row-reserve ml-auto">
         <a
-          class="text-field__input-icons-container-link d-flex align-items-center text-field__transparent-bg-color align-items-center m-2 text-decoration-none"
+          class="
+            text-field__input-icons-container-link
+            d-flex
+            align-items-center
+            text-field__transparent-bg-color
+            align-items-center
+            m-2
+            text-decoration-none
+          "
           show.bind="activateClearButton"
           click.trigger="clearButtonClicked()"
-          ><i class="text-field__icon-clear fas fa-times text-field__transparent-bg-color text-field__pointer-cursor"></i
+          ><i
+            class="
+              text-field__icon-clear
+              fas
+              fa-times
+              text-field__transparent-bg-color text-field__pointer-cursor
+            "
+          ></i
         ></a>
         <slot name="suffix-container" if.bind="hideSuffixContainer"> </slot>
       </div>
     </div>
-    <hr class="m-0 p-0 ${errorMessage && hasBeenEdited ? 'text-field__red-border' : 'text-field__normal-border' }" />
+    <hr
+      class="
+        m-0
+        p-0
+        ${errorMessage
+        &&
+        hasBeenEdited
+        ?
+        'text-field__red-border'
+        :
+        'text-field__normal-border'
+        }
+      "
+    />
     <slot name="drop-down-list-container"></slot>
-    <div class="${errorMessage && hasBeenEdited ? 'text-field__error-message-container-active' : 'text-field__error-message-container-inactive' } m-0 p-0 mt-1">
+    <div
+      class="
+        ${errorMessage
+        &&
+        hasBeenEdited
+        ?
+        'text-field__error-message-container-active'
+        :
+        'text-field__error-message-container-inactive'
+        }
+        m-0
+        p-0
+        mt-1
+      "
+    >
       <p class="text-field__error-message m-0 p-0">${errorMessage}&nbsp;</p>
     </div>
   </div>

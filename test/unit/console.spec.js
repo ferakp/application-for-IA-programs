@@ -1,7 +1,18 @@
-import { update, executeTest, expectElement, expectElementAttribute, expectElementNumber, expectViewModelProperty } from '../test-utils';
+import {
+  update,
+  executeTest,
+  expectElement,
+  expectElementAttribute,
+  expectElementNumber,
+  expectViewModelProperty,
+} from '../test-utils';
 
 describe('Test console component', () => {
-  const resources = ['../../src/components/console', '../../src/components/terminal-line', '../../src/components/text-field'];
+  const resources = [
+    '../../src/components/console',
+    '../../src/components/terminal-line',
+    '../../src/components/text-field',
+  ];
 
   const html = `
   <console
@@ -37,7 +48,9 @@ describe('Test console component', () => {
       () => {
         expectElement('.terminal-line__text', 'innerHTML').toBe('test');
         expectElementNumber('.terminal-line__text').toBe(1);
-        expectElementAttribute('.terminal-line__row-start-sign', 'style').toBe('background-color: rgba(255, 255, 255, 0.5);');
+        expectElementAttribute('.terminal-line__row-start-sign', 'style').toBe(
+          'background-color: rgba(255, 255, 255, 0.5);'
+        );
       }
     );
   });

@@ -104,7 +104,9 @@ describe('Stage App Component', () => {
       .create(bootstrap)
       .then(() => {
         const cmb = document.querySelector('combobox');
-        expect(cmb.querySelector('.text-field__input-element').getAttribute('placeholder')).toBe('a2m_1test_!1');
+        expect(cmb.querySelector('.text-field__input-element').getAttribute('placeholder')).toBe(
+          'a2m_1test_!1'
+        );
         done();
       })
       .catch(e => {

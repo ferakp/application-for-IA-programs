@@ -23,13 +23,38 @@
       input-click-callback.to-view="_inputElementClicked"
     >
       <div class="combobox__suffix-container" slot="suffix-container" ref="comboboxSuffixContainer">
-        <a class="combobox__suffix-container-link combobox__transparent-bg-color d-flex align-items-center m-2 text-decoration-none" click.trigger="dropDownListIconClicked()"
-          ><i class="combobox__drop-down-icon-list fas fa-angle-down combobox__transparent-bg-color text-decoration-none combobox__pointer-cursor"></i
+        <a
+          class="
+            combobox__suffix-container-link combobox__transparent-bg-color
+            d-flex
+            align-items-center
+            m-2
+            text-decoration-none
+          "
+          click.trigger="dropDownListIconClicked()"
+          ><i
+            class="
+              combobox__drop-down-icon-list
+              fas
+              fa-angle-down
+              combobox__transparent-bg-color
+              text-decoration-none
+              combobox__pointer-cursor
+            "
+          ></i
         ></a>
       </div>
-      <div class="combobox__drop-down-list-container" slot="drop-down-list-container" ref="dropDownListContainer">
+      <div
+        class="combobox__drop-down-list-container"
+        slot="drop-down-list-container"
+        ref="dropDownListContainer"
+      >
         <div ref="dropDownList" class="combobox__drop-down-list flex-column" show.bind="dropDownListOpened">
-          <div class="combobox__drop-down-list-item d-flex align-items-center" repeat.for="item of _comboboxItems" click.trigger="itemSelected(item)">
+          <div
+            class="combobox__drop-down-list-item d-flex align-items-center"
+            repeat.for="item of _comboboxItems"
+            click.trigger="itemSelected(item)"
+          >
             <p class="combobox__drop-down-list-item-content">${item}</p>
           </div>
         </div>

@@ -10,7 +10,10 @@ export default class BindingBehaviorGenerator {
   }
 
   async execute() {
-    const name = await this.ui.ensureAnswer(this.options.args[0], 'What would you like to call the binding behavior?');
+    const name = await this.ui.ensureAnswer(
+      this.options.args[0],
+      'What would you like to call the binding behavior?'
+    );
 
     let fileName = this.project.makeFileName(name);
     let className = this.project.makeClassName(name);

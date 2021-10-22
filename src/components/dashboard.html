@@ -13,14 +13,37 @@
         <console class="dashboard__console d-flex"></console>
       </div>
     </div>
-    <div class="dashboard__right-window d-flex flex-row ${expansionMode === true ? 'dashboard__hide-window' : ''}">
+    <div
+      class="
+        dashboard__right-window
+        d-flex
+        flex-row
+        ${expansionMode
+        ===
+        true
+        ?
+        'dashboard__hide-window'
+        :
+        ''}
+      "
+    >
       <dashboard-menu active-view.two-way="activeView"></dashboard-menu>
       <div class="dashboard__right-window-view-container d-flex flex-column">
-        <p class="dashboard__right-window-view-title opacity-half h4">${activeView ? activeView.replace('-view', '') : ''}</p>
+        <p class="dashboard__right-window-view-title opacity-half h4">
+          ${activeView ? activeView.replace('-view', '') : ''}
+        </p>
         <hr class="mt-0" />
         <agents-view show.bind="activeView === 'Agents-view'" agents.two-way="appVM.agents"></agents-view>
-        <logs-view show.bind="activeView === 'Logs-view'" logs.to-view="appVM.logs" filters.two-way="logsViewFilters"></logs-view>
-        <files-view show.bind="activeView === 'Files-view'" label="Upload files" files.two-way="appVM.files"></files-view>
+        <logs-view
+          show.bind="activeView === 'Logs-view'"
+          logs.to-view="appVM.logs"
+          filters.two-way="logsViewFilters"
+        ></logs-view>
+        <files-view
+          show.bind="activeView === 'Files-view'"
+          label="Upload files"
+          files.two-way="appVM.files"
+        ></files-view>
       </div>
     </div>
   </div>

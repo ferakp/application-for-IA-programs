@@ -10,7 +10,10 @@ export default class GeneratorGenerator {
   }
 
   async execute() {
-    const name = await this.ui.ensureAnswer(this.options.args[0], 'What would you like to call the generator?');
+    const name = await this.ui.ensureAnswer(
+      this.options.args[0],
+      'What would you like to call the generator?'
+    );
 
     let fileName = this.project.makeFileName(name);
     let className = this.project.makeClassName(name);

@@ -11,7 +11,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 // config helpers:
 const ensureArray = config => (config && (Array.isArray(config) ? config : [config])) || [];
-const when = (condition, config, negativeConfig) => (condition ? ensureArray(config) : ensureArray(negativeConfig));
+const when = (condition, config, negativeConfig) =>
+  condition ? ensureArray(config) : ensureArray(negativeConfig);
 
 // primary config:
 const outDir = path.resolve(__dirname, project.platform.output);
@@ -233,11 +234,22 @@ module.exports = ({ production } = {}, { extractCss, analyze, tests, hmr, port, 
       },
       // embed small images and fonts as Data Urls and larger ones as files:
       { test: /\.(png|gif|jpg|cur)$/i, loader: 'url-loader', options: { limit: 8192 } },
-      { test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff2' } },
-      { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'url-loader', options: { limit: 10000, mimetype: 'application/font-woff' } },
+      {
+        test: /\.woff2(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
+        loader: 'url-loader',
+        options: { limit: 10000, mimetype: 'application/font-woff2' },
+      },
+      {
+        test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/i,
+        loader: 'url-loader',
+        options: { limit: 10000, mimetype: 'application/font-woff' },
+      },
       // load these fonts normally, as files:
       { test: /\.(ttf|eot|svg|otf)(\?v=[0-9]\.[0-9]\.[0-9])?$/i, loader: 'file-loader' },
-      { test: /environment\.json$/i, use: [{ loader: 'app-settings-loader', options: { env: production ? 'production' : 'development' } }] },
+      {
+        test: /environment\.json$/i,
+        use: [{ loader: 'app-settings-loader', options: { env: production ? 'production' : 'development' } }],
+      },
     ],
   },
   plugins: [
