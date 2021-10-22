@@ -10,6 +10,9 @@ export class FileUpload {
   @bindable
   files;
 
+  @bindable
+  supportedFormats;
+
   inputContainerStyle;
 
   attached() {
@@ -61,7 +64,7 @@ export class FileUpload {
         } else {
           this.setInputLabel("File has been already uploaded!");
           this.setInputContainerStatus("fail");
-        } 
+        }
         setTimeout(() => this.setInputContainerStatus("default"), 2000);
         setTimeout(() => this.setInputLabel(this.description), 2000);
       }
@@ -69,7 +72,11 @@ export class FileUpload {
   }
 
   setInputLabel(label) {
-    if (!this.fileUploadHeaderInputLabel || label === this.fileUploadHeaderInputLabel.innerHTML) return;
+    if (
+      !this.fileUploadHeaderInputLabel ||
+      label === this.fileUploadHeaderInputLabel.innerHTML
+    )
+      return;
     this.fileUploadHeaderInputLabel.innerHTML = label;
   }
 
@@ -77,6 +84,16 @@ export class FileUpload {
     if (this.fileUploadInput) {
       if (!Array.isArray(this.files)) this.files = [];
       for (var i = 0; i < this.fileUploadInput.files.length; i++) {
+        let file = this.fileUploadInput.files.item(i);
+        if (Array.isArray(this.supportedFormats)) {
+          if (
+            this.supportedFormats.includes(
+              file.name.split(".")[file.name.split(".").length - 1]
+            )
+          )
+            this.files.push(this.fileUploadInput.files.item(i));
+          else continue;
+        }
         this.files.push(this.fileUploadInput.files.item(i));
       }
     }
