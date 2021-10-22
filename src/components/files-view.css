@@ -39,8 +39,8 @@ files-view {
 
 .files-view__file {
   flex: 1;
-  max-height: 190px;
-  max-width: 140px;
+  height: 190px;
+  width: 140px;
   background-color: rgb(78 152 215);
   border-radius: 3%;
   margin-right: 35px;
