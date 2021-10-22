@@ -5,18 +5,11 @@
   <!--Content-->
   <div class="checkbox__container d-flex flex-row align-items-center">
     <label class="checkbox__label d-flex flex-row align-items-center m-0">
-      <input
-        class="checkbox__input"
-        type="checkbox"
-        ref="checkboxInput"
-        checked.bind="checked"
-      />
+      <input class="checkbox__input" type="checkbox" ref="checkboxInput" checked.bind="checked" />
       ${name}
     </label>
   </div>
-  <div
-    class="checkbox__error-message-container ${errorMessage ? 'error-message-active' : ''}"
-  >
+  <div class="checkbox__error-message-container ${errorMessage ? 'error-message-active' : ''}">
     <p class="checkbox__error-message">${errorMessage}</p>
   </div>
 </template>

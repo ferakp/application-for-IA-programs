@@ -1,6 +1,6 @@
-import { bindable, inject } from "aurelia-framework";
-import { ViewModelProvider } from "../view-models/view-model-provider";
-import { EventAggregator } from "aurelia-event-aggregator";
+import { bindable, inject } from 'aurelia-framework';
+import { ViewModelProvider } from '../view-models/view-model-provider';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(ViewModelProvider, EventAggregator)
 export class Dashboard {
@@ -18,7 +18,7 @@ export class Dashboard {
    * List of active view options: Agents-view, Logs-view, Files-view
    */
   @bindable
-  activeView = "Agents-view";
+  activeView = 'Agents-view';
 
   logsViewFilters = [];
 
@@ -27,18 +27,15 @@ export class Dashboard {
     this.viewModelProvider = viewModelProvider;
     this.appVM = this.viewModelProvider.getAppVM();
     this.eventAggregator = eventAggregator;
-    this.logsViewSubscriber = this.eventAggregator.subscribe(
-      "openLogsView",
-      (agentId) => {
-        this.logsViewFilters.push("Agent ID: " + agentId);
-        this.activeView = "Logs-view";
-      }
-    );
+    this.logsViewSubscriber = this.eventAggregator.subscribe('openLogsView', (agentId) => {
+      this.logsViewFilters.push('Agent ID: ' + agentId);
+      this.activeView = 'Logs-view';
+    });
   }
 
   expansionModeChanged() {}
 
   activeViewChanged(newValue) {
-    if (newValue && newValue !== "Logs-view") this.logsViewFilters = [];
+    if (newValue && newValue !== 'Logs-view') this.logsViewFilters = [];
   }
 }

@@ -35,3 +35,6 @@ node_modules
 /src/environment.js
 /dist
 /test/coverage-jest
+
+# Prettier file
+prettier.config.js

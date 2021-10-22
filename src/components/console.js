@@ -1,4 +1,4 @@
-import { bindable } from "aurelia-framework";
+import { bindable } from 'aurelia-framework';
 
 export class Console {
   @bindable
@@ -20,15 +20,11 @@ export class Console {
 
   createGenericTerminalLine(payload) {
     if (
-      this.terminalLines.some(
-        (e) => e.id.toString() === payload.id.toString()
-      ) ||
-      this.deletedTerminalLineIds.some(
-        (e) => e.toString() === payload.id.toString()
-      )
+      this.terminalLines.some((e) => e.id.toString() === payload.id.toString()) ||
+      this.deletedTerminalLineIds.some((e) => e.toString() === payload.id.toString())
     )
       return;
-    if (typeof payload.text === "string" && typeof payload.id === "number") {
+    if (typeof payload.text === 'string' && typeof payload.id === 'number') {
       let terminalLine = {
         text: payload.text,
         time: payload.time || new Date(),
@@ -45,7 +41,7 @@ export class Console {
 
   _enterPressed = () => {
     this.terminalLines.push(this._getNewTerminalLine());
-    this.value = "";
+    this.value = '';
   };
 
   _openInfo = (id) => {
@@ -53,7 +49,7 @@ export class Console {
   };
 
   _deleteTerminalLine = (id) => {
-    if (typeof id === "number") {
+    if (typeof id === 'number') {
       this.deletedTerminalLineIds.push(id);
       for (let i = 0; i < this.terminalLines.length; i++) {
         if (id === this.terminalLines[i].id) {
@@ -65,7 +61,7 @@ export class Console {
   };
 
   _getNewTerminalLine() {
-    if (typeof this.value === "string") {
+    if (typeof this.value === 'string') {
       let terminalLine = {
         text: this.value,
         time: new Date(),
@@ -77,8 +73,7 @@ export class Console {
   }
 
   _getNewId() {
-    if (this.terminalLines.length > 0)
-      return this.terminalLines[this.terminalLines.length - 1].id + 1;
+    if (this.terminalLines.length > 0) return this.terminalLines[this.terminalLines.length - 1].id + 1;
     else return Math.random() * 1000;
   }
 
@@ -87,6 +82,6 @@ export class Console {
     let green = 255 * Math.random();
     let blue = 255 * Math.random();
     let alpha = Math.random() + 0.2;
-    return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+    return 'rgba(' + red + ',' + green + ',' + blue + ',' + alpha + ')';
   }
 }

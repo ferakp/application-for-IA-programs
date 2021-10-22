@@ -1,0 +1,117 @@
+files-view {
+  display: flex;
+  flex: 1;
+  width: 100%;
+}
+
+.files-view__file-upload {
+  width: 500px;
+}
+
+.files-view__container {
+  flex: 1;
+}
+
+.files-view__upload-section-header {
+  max-width: 350px;
+}
+
+.files-view__upload-section-header-icon {
+  align-self: center;
+  font-size: 1.2rem;
+}
+
+.files-view__upload-section-header-label {
+  margin-left: 20px;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
+.files-view__upload-section-header-file-count {
+  margin-left: auto;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
+.files-view__uploaded-files-container {
+  flex: 1;
+}
+
+.files-view__file {
+  flex: 1;
+  min-height: 190px;
+  min-width: 140px;
+  max-width: 140px;
+  max-height: 190px;
+  background-color: rgb(78 152 215);
+  border-radius: 3%;
+  margin-right: 35px;
+}
+
+.files-view__file-label {
+  color: white;
+  font-weight: bold;
+  margin: 0px;
+}
+
+.files-view__file-name {
+  color: white;
+  font-size: 0.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0px;
+  padding: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  max-width: 115px;
+  white-space: nowrap;
+}
+
+.files-view__file-name-tooltip-container {
+  display: none;
+}
+
+.files-view__file-text-area-box {
+  align-items: center;
+}
+
+.files-view__file-text-area {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.files-view__file-text-area-box:hover .files-view__file-name-tooltip-container {
+  position: relative;
+  display: block;
+}
+
+.files-view__file-name-tooltip-text {
+  background-color: #3b3c3ddb;
+  position: absolute;
+  color: white;
+  padding: 2px 5px 2px 5px;
+  z-index: 999999;
+  margin: 0px;
+  top: -29px;
+  font-size: 0.8rem;
+  text-align: center;
+  border-radius: 5%;
+  min-width: 200px;
+}
+
+.files-view__file-menu-container {
+  position: relative;
+  max-width: 0px;
+}
+
+.files-view__file-menu-box {
+  position: absolute;
+  z-index: 10;
+  min-width: 25px;
+}
+
+.files-view__file-menu-box p {
+  text-align: center;
+  border-right: 1px solid #c7c1c1;
+}

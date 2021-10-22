@@ -1,0 +1,120 @@
+file-upload {
+  display: flex;
+  flex: 1;
+}
+
+.file-upload__container {
+  flex: 1;
+}
+
+.file-upload__header {
+  flex: 1;
+}
+
+.file-upload__header-icon {
+  align-self: center;
+  font-size: 1.2rem;
+}
+
+.file-upload__header-label {
+  margin-left: 20px;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
+.file-upload__header-file-count {
+  margin-left: auto;
+  margin-bottom: 0px;
+  padding: 0px;
+}
+
+.file-upload__input-container {
+  flex: 1;
+  margin-top: 15px;
+  border: 1px black dotted;
+  justify-content: center;
+  padding: 15px;
+  background-color: rgb(221 239 245 / 48%);
+}
+
+.file-upload__input-icon {
+  font-size: 1.5rem;
+  line-height: 0;
+  opacity: 0.5;
+}
+
+.file-upload__input-label {
+  margin-right: 15px;
+  font-weight: bold;
+  opacity: 0.5;
+}
+
+.file-upload__input-label:hover {
+  cursor: pointer !important;
+}
+
+.file-upload__input-first-row {
+  flex: 1;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.file-upload__input-container:hover {
+  cursor: pointer;
+}
+
+.file-upload__input-label {
+  color: black;
+  opacity: 0.5;
+  font-weight: bold;
+}
+
+.file-upload__input-icon {
+  color: black;
+  opacity: 0.5;
+}
+
+.file-upload__input-container-dragover-style {
+  animation: fileUploadInputYellowHighlight 1s infinite;
+  animation-direction: alternate;
+}
+
+.file-upload__input-container-drop-area-style {
+  animation: fileUploadInputGreenHighlight 1s infinite;
+  animation-direction: alternate;
+}
+
+.file-upload__input-container-fail-style {
+  animation: fileUploadInputRedHighlight 1s infinite;
+  animation-direction: alternate;
+}
+
+@keyframes fileUploadInputRedHighlight {
+  from {
+    background-color: rgb(221 239 245 / 48%);
+  }
+
+  to {
+    background-color: #fd0505ab;
+  }
+}
+
+@keyframes fileUploadInputYellowHighlight {
+  from {
+    background-color: rgb(221 239 245 / 48%);
+  }
+
+  to {
+    background-color: #ebf562;
+  }
+}
+
+@keyframes fileUploadInputGreenHighlight {
+  from {
+    background-color: rgb(221 239 245 / 48%);
+  }
+
+  to {
+    background-color: #71f046;
+  }
+}

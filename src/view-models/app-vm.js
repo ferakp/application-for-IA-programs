@@ -2,16 +2,16 @@ export class AppVM {
   agents = [];
   activeAgents = [];
   terminatedAgents = [];
-  api;
   logs = [];
+  files = [];
+  api;
 
   constructor() {
     this.api = { deleteAgent: this.deleteAgent };
   }
 
   deleteAgent = (agentId) => {
-    if (this.agents.length > 0)
-      this.agents = this.agents.filter((e) => e.id !== agentId);
+    if (this.agents.length > 0) this.agents = this.agents.filter((e) => e.id !== agentId);
   };
 }
 
@@ -36,13 +36,13 @@ class Agent {
   utilityFunction;
 
   // Status - uninitialized, initialized, idle, running, terminated, paused
-  status = "running";
+  status = 'running';
 
-  startTime = "N/A";
+  startTime = 'N/A';
 
-  pausedTime = "N/A";
+  pausedTime = 'N/A';
 
-  endingTime = "N/A";
+  endingTime = 'N/A';
 
   appVMApi;
 
@@ -52,7 +52,7 @@ class Agent {
     if (type === 0) this.ruleActionMap = new Map();
     if (type === 1) this.observations = [];
 
-    this.name = name || "Agent_" + Math.floor(Math.random() * 1000000);
+    this.name = name || 'Agent_' + Math.floor(Math.random() * 1000000);
     this.id = Math.floor(Math.random() * 10000000000000);
   }
 

@@ -1,4 +1,4 @@
-import { AppVM } from "./app-vm";
+import { AppVM } from './app-vm';
 
 export class ViewModelProvider {
   appVM;

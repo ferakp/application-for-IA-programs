@@ -1,4 +1,4 @@
-import { bindable } from "aurelia-framework";
+import { bindable } from 'aurelia-framework';
 
 export class TerminalLine {
   @bindable
@@ -22,22 +22,12 @@ export class TerminalLine {
   }
 
   _formatWave(date) {
-    const tempDate =
-      date.getDate() +
-      "." +
-      (date.getMonth() + 1) +
-      "." +
-      date.getFullYear() +
-      " " +
-      date.getHours() +
-      ":" +
-      date.getMinutes();
+    const tempDate = date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
     return tempDate;
   }
 
   _deleteLine() {
-    if (this.deleteTerminalLineCallback)
-      this.deleteTerminalLineCallback(this._id);
+    if (this.deleteTerminalLineCallback) this.deleteTerminalLineCallback(this._id);
   }
 
   _openInfo() {

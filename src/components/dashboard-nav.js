@@ -1,8 +1,6 @@
 import { bindable } from 'aurelia-framework';
 
-
 export class DashboardNav {
-
   @bindable
   disable;
 
@@ -10,8 +8,7 @@ export class DashboardNav {
   expand = false;
 
   _expandWindow = () => {
-    if(!this.expand) this.expand = false;
+    if (!this.expand) this.expand = false;
     this.expand = !this.expand;
-  }
-
+  };
 }

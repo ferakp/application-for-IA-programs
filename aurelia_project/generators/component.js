@@ -11,14 +11,12 @@ export default class ElementGenerator {
   }
 
   async execute() {
-    const name = await this.ui.ensureAnswer(
-      this.options.args[0],
-      'What would you like to call the component?'
-    );
+    const name = await this.ui.ensureAnswer(this.options.args[0], 'What would you like to call the component?');
 
     const subFolders = await this.ui.ensureAnswer(
       this.options.args[1],
-      'What sub-folder would you like to add it to?\nIf it doesn\'t exist it will be created for you.\n\nDefault folder is "." relative to the source folder src/', "."
+      'What sub-folder would you like to add it to?\nIf it doesn\'t exist it will be created for you.\n\nDefault folder is "." relative to the source folder src/',
+      '.'
     );
 
     let fileName = this.project.makeFileName(name);
@@ -39,13 +37,13 @@ export default class ElementGenerator {
     this.message = 'Hello world';
   }
 }
-`
+`;
   }
 
   generateHTMLSource(className) {
     return `<template>
   <h1>\${message}</h1>
 </template>
-`
+`;
   }
 }

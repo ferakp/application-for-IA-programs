@@ -1,0 +1,36 @@
+<template>
+  <!-- Requirements -->
+  <require from="./files-view.css"></require>
+
+  <!-- Child components-->
+  <div class="files-view__container d-flex flex-column">
+    <div class="files-view__upload-section d-flex flex-column">
+      <file-upload
+        class="files-view__file-upload"
+        label="Upload files"
+        files.two-way="files"
+        description="Choose a file or drag it here"
+        supported-formats.to-view="supportedFileFormats"
+      ></file-upload>
+      <hr />
+    </div>
+    <div class="files-view__uploaded-files-container d-flex flex-row flex-wrap mr-2">
+      <div class="files-view__file d-flex flex-row" repeat.for="file of files">
+        <div class="files-view__file-text-area d-flex flex-column">
+          <div class="files-view__file-text-area-box d-flex flex-column">
+            <p class="files-view__file-label h4">File</p>
+            <p class="files-view__file-name">${file.name}</p>
+            <div class="files-view__file-name-tooltip-container">
+              <p class="files-view__file-name-tooltip-text">${file.name}</p>
+            </div>
+          </div>
+        </div>
+        <div class="files-view__file-menu-container">
+          <div class="files-view__file-menu-box ctpoh d-flex flex-column" click.delegate="deleteFile(file)">
+            <p class="m-0 p-0"><i class="fas fa-trash-alt"></i></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

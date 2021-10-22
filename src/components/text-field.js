@@ -1,4 +1,4 @@
-import { bindable } from "aurelia-framework";
+import { bindable } from 'aurelia-framework';
 
 export class TextField {
   @bindable
@@ -54,7 +54,7 @@ export class TextField {
   tempValueChangedBlock = false;
 
   attached() {
-    this.textFieldInputElement.addEventListener("keyup", (e) => {
+    this.textFieldInputElement.addEventListener('keyup', (e) => {
       if (e.keyCode === 13) {
         this.inputEnterPressed();
       }
@@ -77,7 +77,7 @@ export class TextField {
   }
 
   showClearButtonChanged(newValue) {
-    if(this.value && newValue) this.activateClearButton = true; 
+    if (this.value && newValue) this.activateClearButton = true;
   }
 
   allowOnlyNumbersChanged() {
@@ -85,24 +85,14 @@ export class TextField {
   }
 
   disableChanged(newValue) {
-    if(newValue && this.textFieldInputElement) this.textFieldInputElement.disabled = true;
-    else if(this.textFieldInputElement) this.textFieldInputElement.disabled = false;
+    if (newValue && this.textFieldInputElement) this.textFieldInputElement.disabled = true;
+    else if (this.textFieldInputElement) this.textFieldInputElement.disabled = false;
   }
 
   upperCaseAndNumberCheck = () => {
-    if (this.allowOnlyNumbers && typeof this.value !== "number")
-      setTimeout(() => (this.value = ""), 200);
-    if (
-      this.firstLetterUpperCase &&
-      this.value &&
-      this.value[0] !== this.value[0].toUpperCase()
-    ) {
-      setTimeout(
-        () =>
-          (this.value =
-            this.value.charAt(0).toUpperCase() + this.value.slice(1)),
-        200
-      );
+    if (this.allowOnlyNumbers && typeof this.value !== 'number') setTimeout(() => (this.value = ''), 200);
+    if (this.firstLetterUpperCase && this.value && this.value[0] !== this.value[0].toUpperCase()) {
+      setTimeout(() => (this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)), 200);
     }
   };
 
@@ -118,6 +108,6 @@ export class TextField {
   }
 
   clearButtonClicked() {
-    this.value = "";
+    this.value = '';
   }
 }

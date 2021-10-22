@@ -1,14 +1,7 @@
-import {
-  update,
-  executeTest,
-  expectElement,
-  expectElementAttribute,
-  expectElementNumber,
-  expectViewModelProperty,
-} from "../test-utils";
+import { executeTest, expectElement, expectElementNumber } from '../test-utils';
 
-describe("Test checkbox component", () => {
-  const resources = ["../../src/components/checkbox"];
+describe('Test checkbox component', () => {
+  const resources = ['../../src/components/checkbox'];
 
   const html = `
   <checkbox
@@ -16,13 +9,12 @@ describe("Test checkbox component", () => {
   checked.two-way="checked"
   ></checkbox>`;
 
-  const runTest = (viewModel, done, test) =>
-    executeTest(resources, html, viewModel, done, test);
+  const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
-  it("renders component", (done) => {
+  it('renders component', (done) => {
     runTest({}, done, () => {
-      expectElement(".checkbox__container").not.toEqual(null);
-      expectElementNumber(".checkbox__input").toEqual(1);
+      expectElement('.checkbox__container').not.toEqual(null);
+      expectElementNumber('.checkbox__input').toEqual(1);
     });
   });
 
@@ -30,15 +22,15 @@ describe("Test checkbox component", () => {
    * Attributes
    */
 
-  it("displays name correctly (name attribute)", (done) => {
-    runTest({ name: "LabelTest" }, done, () => {
-      expectElement(".checkbox__label", "innerHTML").toMatch("LabelTest");
+  it('displays name correctly (name attribute)', (done) => {
+    runTest({ name: 'LabelTest' }, done, () => {
+      expectElement('.checkbox__label', 'innerHTML').toMatch('LabelTest');
     });
   });
 
-  it("displays the value of checked attribute correctly (checked attribute)", (done) => {
-    runTest({ name: "LabelTest", checked: true }, done, () => {
-      expectElement(".checkbox__input", "checked").toBe(true);
+  it('displays the value of checked attribute correctly (checked attribute)', (done) => {
+    runTest({ name: 'LabelTest', checked: true }, done, () => {
+      expectElement('.checkbox__input', 'checked').toBe(true);
     });
   });
 });

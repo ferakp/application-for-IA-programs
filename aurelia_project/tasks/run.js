@@ -2,12 +2,12 @@ import { NPM } from 'aurelia-cli';
 import kill from 'tree-kill';
 import { platform } from '../aurelia.json';
 
-const npm =  new NPM();
+const npm = new NPM();
 
 function run() {
   console.log('`au run` is an alias of the `npm start`, you may use either of those; see README for more details.');
   const args = process.argv.slice(3);
-  return npm.run('start', ['--', ... cleanArgs(args)]);
+  return npm.run('start', ['--', ...cleanArgs(args)]);
 }
 
 // Cleanup --env prod to --env.production
@@ -24,7 +24,7 @@ function cleanArgs(args) {
       } else if (env.startsWith('test')) {
         cleaned.push('--tests');
       }
-    } else if (args[i] === '--host' && i < ii -1) {
+    } else if (args[i] === '--host' && i < ii - 1) {
       host = args[++i];
     } else {
       cleaned.push(args[i]);
