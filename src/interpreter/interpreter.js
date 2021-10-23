@@ -46,9 +46,8 @@ export class Interpreter {
   isUploadCommandCorrect = command => {
     if (this.readCommand(command) === 'upload') {
       let args = this.readArguments(command);
-      console.log(args);
       if (args.length === 0) return true;
-      else if (args.length === 1 && this.supportedInstructions.args[this.supportedInstructions.commands.indexOf('upload')].includes(args[1])) return true;
+      else if (args.length === 1 && this.supportedInstructions.arguments[this.supportedInstructions.commands.indexOf('upload')].includes(args[0])) return true;
       else return false;
     }
   };

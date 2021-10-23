@@ -48,9 +48,13 @@ export class Dashboard {
   runInterpreter = () => {
     if (this.interpreter) {
       for (let i = 0; i < this.appVM.terminalLines.length; i++) {
-        if (i > this.lastTlCheckIndex) this.appVM.terminalLines[i].status = this.interpreter.interpret(this.appVM.terminalLines[i].text)[0];
+        try {
+          if (i > this.lastTlCheckIndex) this.appVM.terminalLines[i].status = this.interpreter.interpret(this.appVM.terminalLines[i].text);
+        } catch (err) {
+          console.log(err);
+        }
       }
-      this.lastTlCheckIndex = this.appVM.terminalLines.length-1;
+      this.lastTlCheckIndex = this.appVM.terminalLines.length - 1;
     }
   };
 }
