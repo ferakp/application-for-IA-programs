@@ -15,6 +15,7 @@ export class Dashboard {
   // Properties for event handling
   eventAggregator;
   logsViewSubscriber;
+  filesViewSubscribe;
 
   // List of active view options: Agents-view, Logs-view, Files-view
   @bindable
@@ -36,6 +37,9 @@ export class Dashboard {
       this.logsViewFilters.push('Agent ID: ' + agentId);
       this.activeView = 'Logs-view';
     });
+    this.filesViewSubscribe = this.eventAggregator.subscribe('openFilesView', () => {
+      this.activeView = 'Files-view';
+    })
     setInterval(() => this.runInterpreter(), 1000);
   }
 

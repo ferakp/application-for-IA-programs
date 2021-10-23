@@ -58,6 +58,7 @@ export class Interpreter {
 
   uploadFile = () => {
     this.eventAggregator.publish('activateUploadingComponent');
+    this.eventAggregator.publish('openFilesView');
   };
 
   /**
