@@ -86,6 +86,8 @@ export class ComboboxTag {
   @bindable
   minimalMode = false;
 
+  oldPlaceholder;
+
   attached() {
     this.isAttached = true;
   }
@@ -109,7 +111,7 @@ export class ComboboxTag {
 
   itemSelected(newValue) {
     if (!newValue) return;
-    this.addSelection(newValue);
+    this.addTag(newValue);
     this.value = '';
     this._focusedIndex = -1;
     this.dropDownListOpened = false;
@@ -129,6 +131,9 @@ export class ComboboxTag {
 
   _deleteTag = async index => {
     this.selections.splice(index, 1);
+    // Restore placeholder when input field is empty
+    this.placeholder = this.oldPlaceholder;
+    this.oldPlaceholder = '';
   };
 
   /**
@@ -222,12 +227,18 @@ export class ComboboxTag {
    * UTILITY FUNCTIONS
    */
 
-  addSelection(item) {
+  addTag(item) {
     if (!Array.isArray(this.selections)) this.selections = [];
     if (!this.enableDuplicateSelections && !this.selections.includes(item)) {
       this.selections.push(item);
     } else if (this.enableDuplicateSelections) {
       this.selections.push(item);
+    }
+
+    // Hide placeholder when tags are added
+    if (this.selections.length > 0) {
+      this.oldPlaceholder = this.placeholder;
+      this.placeholder = '';
     }
   }
 }
