@@ -33,7 +33,7 @@ export class LogsView {
       newValue.forEach(element => {
         if (Array.isArray(this.filters) && this.filters.length > 0) {
           this.filters.forEach(e => {
-            if (e.includes('Agent ID') && element.id.toString() === e.replace('Agent ID: ', '')) this.consoleVM.createGenericTerminalLine(element);
+            if (e.includes('Agent ID') && element.producer.id.toString() === e.replace('Agent ID: ', '')) this.consoleVM.createGenericTerminalLine(element);
             else if (e.includes('Text: ') && element.text.includes(e.replace('Text: ', ''))) this.consoleVM.createGenericTerminalLine(element);
           });
         } else this.consoleVM.createGenericTerminalLine(element);
