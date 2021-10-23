@@ -1,22 +1,39 @@
 export class AppVM {
+
+  /**
+   * Agents
+   */
   agents = [];
   activeAgents = [];
   terminatedAgents = [];
+
   /**
    * Array for storing logs
    * A log is an object with following fields: id, text, time, color and producer
    */
   logs = [];
+
+  /**
+   * Array for storing files of type File (HTML)
+   */
   files = [];
-  appVMApi;
+
+  // Functions for agents
+  _appVMApi;
+
+  /**
+   * Instructions 
+   * A list of objects with following fields: id, text, time, color and producer
+   */
+  terminalLines = [];
 
   constructor() {
-    this.appVMApi = { deleteAgent: this.deleteAgent };
+    this._appVMApi = { deleteAgent: this.deleteAgent };
 
     /**
      * Samples for tests
      */
-    // this.agents.push(new Agent(this.appVMApi, 0, null));
+    // this.agents.push(new Agent(this._appVMApi, 0, null));
     // this.logs.push(new Log('Test', null, null, null, { id: this.agents[0].id }));
     // this.logs.push(new Log('Another test with another agent ID', null, null, null, { id: 1121001 }));
     // this.logs.push(new Log('Another test with the same agent ID', null, null, null, { id: this.agents[0].id }));
