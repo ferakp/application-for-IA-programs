@@ -14,6 +14,9 @@ export class Console {
   terminalLines = [];
 
   @bindable
+  logMode;
+
+  @bindable
   disableTextField = false;
 
   deletedTerminalLineIds = [];

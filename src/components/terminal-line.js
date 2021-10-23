@@ -10,6 +10,9 @@ export class TerminalLine {
   @bindable
   openInfoCallback;
 
+  @bindable
+  logMode = false;
+
   _id;
   _text;
   _color;
@@ -19,6 +22,7 @@ export class TerminalLine {
     this._time = this._formatTime(this.terminalLine.time);
     this._color = this.terminalLine.color;
     this._id = this.terminalLine.id;
+    if (this.logMode) this._color = 'rgb(124 124 124 / 80%)';
   }
 
   _formatTime(date) {
