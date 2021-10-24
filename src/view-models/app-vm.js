@@ -1,5 +1,4 @@
 export class AppVM {
-
   /**
    * Agents
    */
@@ -9,7 +8,7 @@ export class AppVM {
 
   /**
    * Array for storing logs
-   * A log is an object with following fields: id, text, time, color and producer
+   * A log is an object with following fields: text, id, time, color and producer
    */
   logs = [];
 
@@ -22,7 +21,7 @@ export class AppVM {
   _appVMApi;
 
   /**
-   * Instructions 
+   * Instructions
    * A list of objects with following fields: id, text, time, color and producer
    */
   terminalLines = [];
@@ -41,6 +40,12 @@ export class AppVM {
 
   deleteAgent = agentId => {
     if (this.agents.length > 0) this.agents = this.agents.filter(e => e.id !== agentId);
+  };
+
+  createAgent = (type, file) => {
+    let agent = new Agent(this.appVMApi, type, file, null);
+    this.agents.push(agent);
+    this.logs.push(new Log('A new agent has been created \n Producer (Agent ID) ' + agent.id, null, null, null, { id: agent.id }));
   };
 }
 
@@ -73,9 +78,12 @@ class Agent {
 
   endingTime = 'N/A';
 
+  observationFile;
+
   appVMApi;
 
-  constructor(appVMApi, type, name) {
+  constructor(appVMApi, type, file, name) {
+    this.file = file;
     this.appVMApi = appVMApi;
     this.type = type;
     if (type === 0) this.ruleActionMap = new Map();

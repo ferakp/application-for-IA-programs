@@ -31,16 +31,22 @@ export class Dashboard {
     this.interpreter = interpreter;
     this.eventAggregator = eventAggregator;
     this.viewModelProvider = viewModelProvider;
-    this.appVM = this.viewModelProvider.getAppVM();
     this.eventAggregator = eventAggregator;
+
     this.logsViewSubscriber = this.eventAggregator.subscribe('openLogsView', agentId => {
       this.logsViewFilters.push('Agent ID: ' + agentId);
       this.activeView = 'Logs-view';
     });
     this.filesViewSubscribe = this.eventAggregator.subscribe('openFilesView', () => {
       this.activeView = 'Files-view';
-    })
+    });
     setInterval(() => this.runInterpreter(), 1000);
+    this.initialize();
+  }
+
+  initialize() {
+    this.appVM = this.viewModelProvider.getAppVM();
+    if (this.interpreter) this.interpreter.setAppVM(this.appVM);
   }
 
   expansionModeChanged() {}
@@ -53,7 +59,11 @@ export class Dashboard {
     if (this.interpreter) {
       for (let i = 0; i < this.appVM.terminalLines.length; i++) {
         try {
-          if (i > this.lastTlCheckIndex) this.appVM.terminalLines[i].status = this.interpreter.interpret(this.appVM.terminalLines[i].text);
+          if (i > this.lastTlCheckIndex) {
+            let response = this.interpreter.interpret(this.appVM.terminalLines[i].text);
+            this.appVM.terminalLines[i].status = response;
+            console.log(response);
+          }
         } catch (err) {
           console.log(err);
         }
