@@ -78,7 +78,7 @@ class Agent {
   utilityFunction;
 
   // Status - initializing, running, ready
-  status = 'initializing';
+  state = 'initializing';
 
   startTime = 'N/A';
 
@@ -99,11 +99,12 @@ class Agent {
 
     this.name = name || 'Agent_' + Math.floor(Math.random() * 1000000);
     this.id = Math.floor(Math.random() * 10000000000000);
+    this.changeState('initializing');
   }
 
-  changeStatus(status) {
-    if(status === 'initialized') {
-
+  changeState(state) {
+    if(state === 'initializing') {
+      
     }
   }
 

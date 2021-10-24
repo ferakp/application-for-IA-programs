@@ -8,7 +8,7 @@ export class AgentBox {
   agentTypeFormatted;
 
   // Combobox properties
-  statusItems = ['uninitialized', 'initialized', 'idle', 'running', 'stopped', 'paused', 'terminated'];
+  states = ['initializing', 'running', 'ready'];
   customFilter = (v, i) => i;
 
   // Injections
