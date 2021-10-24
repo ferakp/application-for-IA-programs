@@ -131,11 +131,6 @@ export class ComboboxTag {
 
   _deleteTag = async index => {
     this.selections.splice(index, 1);
-    // Restore placeholder when input field is empty
-    if (this.selections.length === 0) {
-      this.placeholder = this.oldPlaceholder;
-      this.oldPlaceholder = '';
-    }
   };
 
   /**
@@ -235,12 +230,6 @@ export class ComboboxTag {
       this.selections.push(item);
     } else if (this.enableDuplicateSelections) {
       this.selections.push(item);
-    }
-
-    // Hide placeholder when tags are added
-    if (this.selections.length > 0) {
-      this.oldPlaceholder = this.placeholder;
-      this.placeholder = '';
     }
   }
 }
