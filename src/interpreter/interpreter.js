@@ -1,4 +1,4 @@
-import { bindable, inject } from 'aurelia-framework';
+import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
 /**
@@ -14,7 +14,7 @@ export class Interpreter {
   supportedInstructions = {
     commands: ['upload', 'create', 'show'],
     arguments: [['', 'file', 'folder', 'text-file', 'perceptions'], ['agent'], ['files']],
-    options: [[], ['class', 'file']],
+    options: [[], ['class', 'file'], []],
   };
   commandFunctions;
   commandValidators;
