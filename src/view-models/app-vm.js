@@ -27,7 +27,7 @@ export class AppVM {
   terminalLines = [];
 
   constructor() {
-    this._appVMApi = { deleteAgent: this.deleteAgent };
+    this._appVMApi = { deleteAgent: this.deleteAgent, logs: this.logs };
 
     /**
      * Samples for tests
