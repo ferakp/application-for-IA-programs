@@ -2,9 +2,9 @@ import { bindable, inject } from 'aurelia-framework';
 import { ViewModelProvider } from '../view-models/view-model-provider';
 import { EventAggregator } from 'aurelia-event-aggregator';
 import { Interpreter } from '../interpreter/interpreter';
-import { FileReader } from '../file-reader/file-reader';
+import { CustomFileReader } from '../custom-file-reader/custom-file-reader';
 
-@inject(ViewModelProvider, EventAggregator, Interpreter, FileReader)
+@inject(ViewModelProvider, EventAggregator, Interpreter, CustomFileReader)
 export class Dashboard {
   // Controller for adjusting window size (console)
   @bindable
@@ -63,8 +63,13 @@ export class Dashboard {
       for (let i = 0; i < this.appVM.terminalLines.length; i++) {
         try {
           if (i > this.lastTlCheckIndex) {
+            // Skips if isResponse is true - then it's not an instruction
+            if (this.appVM.terminalLines[i].isResponse) continue;
+            // Reponse is an array with two indices (response, errorMessage)
             let response = this.interpreter.interpret(this.appVM.terminalLines[i].text);
+            console.log(response);
             this.appVM.terminalLines[i].status = response;
+            if(response[1]) this.dashboardConsole.createGenericTerminalLine({text: response[1], isResponse: true})
           }
         } catch (err) {
           console.log(err);

@@ -22,13 +22,15 @@ export class Console {
   deletedTerminalLineIds = [];
 
   createGenericTerminalLine(payload) {
-    if (this.terminalLines.some(e => e.id.toString() === payload.id.toString()) || this.deletedTerminalLineIds.some(e => e.toString() === payload.id.toString())) return;
-    if (typeof payload.text === 'string' && typeof payload.id === 'number') {
+    if (payload.id && (this.terminalLines.some(e => e.id.toString() === payload.id.toString()) || this.deletedTerminalLineIds.some(e => e.toString() === payload.id.toString()))) return;
+    if (typeof payload.text === 'string' && (!payload.id || typeof payload.id === 'number')) {
       let terminalLine = {
         text: payload.text,
         time: payload.time || new Date(),
         id: payload.id || this._getNewId(),
         color: this._getRandomColor(),
+        status: [],
+        isResponse: payload.isResponse || false
       };
       this.terminalLines.push(terminalLine);
     }
@@ -68,6 +70,8 @@ export class Console {
         time: new Date(),
         id: this._getNewId(),
         color: this._getRandomColor(),
+        status: [],
+        isResponse: false
       };
       return terminalLine;
     }

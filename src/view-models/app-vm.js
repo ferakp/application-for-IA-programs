@@ -28,7 +28,7 @@ export class AppVM {
   terminalLines = [];
 
   constructor() {
-    this._appVMApi = { deleteAgent: this.deleteAgent, logs: this.logs, fileReader: this.fileReader };
+    this._appVMApi = { deleteAgent: this.deleteAgent, logs: this.logs, fileReader: this.fileReader, log: this.log };
 
     /**
      * Samples for tests
@@ -53,8 +53,16 @@ export class AppVM {
   createAgent = (type, file) => {
     let agent = new Agent(this._appVMApi, type, file, null);
     this.agents.push(agent);
-    this.logs.push(new Log('A new agent has been created \n Producer (Agent ID) ' + agent.id, null, null, null, { id: agent.id }));
+    this.logs.push(new Log('A new agent has been created \n with producer ID (Agent ID) of ' + agent.id, null, null, null, { id: agent.id }));
   };
+
+  log = (message, producerId) => {
+    this.logs.push(new Log(message, null, null, null, { id: producerId }));
+  };
+
+  createTerminalLine = (text, isResponse) => {
+    this.terminalLines.push({text: text, isResponse: isResponse})
+  }
 }
 
 class Agent {
@@ -71,13 +79,13 @@ class Agent {
   // Only if agent's type is 0 and 1
   ruleActionMap;
 
-  // Only if agent's type is 1
-  observations;
+  // perceptions
+  perceptions;
 
   // Only if agent's type is 3
   utilityFunction;
 
-  // Status - initializing, running, ready
+  // Status - initializing, initialized, running, ready
   state = 'initializing';
 
   startTime = 'N/A';
@@ -86,7 +94,7 @@ class Agent {
 
   endingTime = 'N/A';
 
-  observationFile;
+  file;
 
   appVMApi;
 
@@ -95,16 +103,27 @@ class Agent {
     this.appVMApi = appVMApi;
     this.type = type;
     if (type === 0) this.ruleActionMap = new Map();
-    if (type === 1) this.observations = [];
+    if (type === 1) this.perceptions = [];
 
     this.name = name || 'Agent_' + Math.floor(Math.random() * 1000000);
     this.id = Math.floor(Math.random() * 10000000000000);
-    this.changeState('initializing');
+    this.changeState('initialize');
   }
 
-  changeState(state) {
-    if(state === 'initializing') {
-      
+  async changeState(state) {
+    if (state === 'initialize') {
+      this.appVMApi.log('Initializing ' + this.name, this.id);
+      let { response, errorMessage } = await this.appVMApi.fileReader.readFile(this.file);
+      if (Array.isArray(response)) {
+        this.perceptions = [];
+        response.forEach(e => this.perceptions.push(e));
+        this.appVMApi.log(this.name + ' has been initialized. ' + this.perceptions.length + ' perceptions have been extracted from the file ' + this.file.name, this.id);
+        this.state = 'initialized';
+      }
+    }
+    if (state === 'run') {
+      this.appVMApi.log('Running ' + this.name, this.id);
+
     }
   }
 

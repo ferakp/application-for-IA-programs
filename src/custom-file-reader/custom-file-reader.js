@@ -2,7 +2,7 @@ import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(EventAggregator)
-export class FileReader {
+export class CustomFileReader {
   eventAggregator;
 
   constructor(eventAggregator) {
@@ -14,9 +14,16 @@ export class FileReader {
    * @param {File} file file with observations
    * @returns {Object} {response, errorMessage}
    */
-  readFile = file => {
-    if(!this.isFileTypeValid(file)) return {response: [], errorMessage: "Invalid file type"};
-
+  readFile = async file => {
+    return await new Promise(resolve => {
+      let fileReader = new FileReader();
+      fileReader.onload = () => {
+        if (typeof fileReader.result === 'string') resolve({ response: fileReader.result.split('\n'), errorMessage: '' });
+        else resolve({ response: '', errorMessage: 'Invalid text content' });
+      };
+      if (!this.isFileTypeValid(file)) resolve({ response: [], errorMessage: 'Invalid file type' });
+      else fileReader.readAsText(file);
+    });
   };
 
   isFileTypeValid = file => {

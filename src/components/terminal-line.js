@@ -13,16 +13,29 @@ export class TerminalLine {
   @bindable
   logMode = false;
 
+  _successfulRun = false;
+  _errorMessage;
   _id;
   _text;
   _color;
+  _isResponse = false;
+
+  errorMessageInterval;
 
   attached() {
     this._text = this.terminalLine.text;
     this._time = this._formatTime(this.terminalLine.time);
     this._color = this.terminalLine.color;
     this._id = this.terminalLine.id;
+    this._isResponse = this.terminalLine.isResponse;
     if (this.logMode) this._color = 'rgb(124 124 124 / 80%)';
+    this.errorMessageInterval = setInterval(() => {
+      if (this.terminalLine.status.length > 1) {
+        if (this.terminalLine.status[1]) this._errorMessage = this.terminalLine.status[1];
+        else this._successfulRun = true;
+        clearInterval(this.errorMessageInterval);
+      }
+    }, 1000);
   }
 
   _formatTime(date) {

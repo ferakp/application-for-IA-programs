@@ -204,7 +204,7 @@ export class Interpreter {
     try {
       fn(params);
     } catch (err) {
-      console.log(err);
+      return err;
     }
   }
 }
