@@ -62,7 +62,6 @@ export class Dashboard {
           if (i > this.lastTlCheckIndex) {
             let response = this.interpreter.interpret(this.appVM.terminalLines[i].text);
             this.appVM.terminalLines[i].status = response;
-            console.log(response);
           }
         } catch (err) {
           console.log(err);

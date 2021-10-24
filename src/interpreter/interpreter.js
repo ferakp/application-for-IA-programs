@@ -12,8 +12,8 @@ export class Interpreter {
   agentTypes = ['reflex', 'model-reflex', 'goal', 'utility'];
 
   supportedInstructions = {
-    commands: ['upload', 'create'],
-    arguments: [['', 'file', 'folder', 'text-file', 'perceptions'], ['agent']],
+    commands: ['upload', 'create', 'show'],
+    arguments: [['', 'file', 'folder', 'text-file', 'perceptions'], ['agent'], ['files']],
     options: [[], ['class', 'file']],
   };
   commandFunctions;
@@ -35,6 +35,12 @@ export class Interpreter {
     // Create instruction
     this.commandFunctions.set('create', this.create);
     this.commandValidators.set('create', this.isCreateInstructionValid);
+
+    // Show instruction
+    this.commandFunctions.set('show', () => this.eventAggregator.publish('openFilesView'));
+    this.commandValidators.set('show', (text, isArgumentsOptional, isOptionsOptional) => {
+      return { response: text === 'show files', errorMessage: text === 'show files' ? '' : 'Invalid instruction' };
+    });
   }
 
   setAppVM(appVM) {
@@ -96,7 +102,6 @@ export class Interpreter {
         if (e[0] === 'class') classValue = e[1];
         else if (e[0] === 'file') fileValue = e[1];
       });
-      console.log(fileValue, this.appVM.files.length);
       if (typeof parseInt(fileValue) === NaN || !(this.appVM && this.appVM.files.length > parseInt(fileValue))) return { response: false, errorMessage: 'Invalid file index' };
       if (this.agentTypes.includes(classValue)) {
         return { response: true, errorMessage: null, parameters: ['agent', this.agentTypes.indexOf(classValue), this.appVM.files[parseInt(fileValue)]] };
@@ -197,7 +202,6 @@ export class Interpreter {
 
   runFunction(fn, params) {
     try {
-      console.log(fn, params);
       fn(params);
     } catch (err) {
       console.log(err);
