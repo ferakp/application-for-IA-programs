@@ -19,7 +19,13 @@
     </div>
   </text-field>
   <div class="console__message-container d-flex">
-    <terminal-line repeat.for="terminalLine of terminalLines" log-mode.to-view="logMode" terminal-line.to-view="terminalLine" delete-terminal-line-callback.to-view="_deleteTerminalLine" open-info-callback.to-view="_openInfo">
+    <terminal-line
+      repeat.for="terminalLine of terminalLines"
+      log-mode.to-view="logMode"
+      terminal-line.to-view="terminalLine"
+      delete-terminal-line-callback.to-view="_deleteTerminalLine"
+      open-info-callback.to-view="_openInfo"
+    >
     </terminal-line>
   </div>
 </template>

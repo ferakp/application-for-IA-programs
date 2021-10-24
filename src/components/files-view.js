@@ -1,5 +1,7 @@
-import { bindable } from 'aurelia-framework';
+import { bindable, inject } from 'aurelia-framework';
+import { EventAggregator } from 'aurelia-event-aggregator';
 
+@inject(EventAggregator)
 export class FilesView {
   @bindable
   label;
@@ -8,6 +10,16 @@ export class FilesView {
   files;
 
   supportedFileFormats;
+
+  eventAggregator;
+  activateUploadingSubscriber;
+
+  constructor(eventAggregator) {
+    this.eventAggregator = eventAggregator;
+    this.activateUploadingSubscriber = this.eventAggregator.subscribe('activateUploadingComponent', agentId => {
+      this.fileUpload.openFolderView();
+    });
+  }
 
   attached() {
     this.supportedFileFormats = ['txt'];

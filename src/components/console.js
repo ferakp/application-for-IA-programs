@@ -39,6 +39,8 @@ export class Console {
   };
 
   _enterPressed = () => {
+    if (!this.value) return;
+    if (!Array.isArray(this.terminalLines)) this.terminalLines = [];
     this.terminalLines.push(this._getNewTerminalLine());
     this.value = '';
   };

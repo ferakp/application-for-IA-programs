@@ -7,7 +7,7 @@
     <text-field
       ref="comboboxTextField"
       class="d-flex combobox-tag__text-field"
-      placeholder.to-view="placeholder ? placeholder : ''"
+      placeholder.bind="selections.length < 1 ? placeholder : ''"
       label.to-view="label"
       show-clear-button.to-view="showClearButton"
       first-letter-upper-case.to-view="firstLetterUpperCase"
