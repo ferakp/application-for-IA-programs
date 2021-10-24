@@ -132,8 +132,10 @@ export class ComboboxTag {
   _deleteTag = async index => {
     this.selections.splice(index, 1);
     // Restore placeholder when input field is empty
-    this.placeholder = this.oldPlaceholder;
-    this.oldPlaceholder = '';
+    if (this.selections.length === 0) {
+      this.placeholder = this.oldPlaceholder;
+      this.oldPlaceholder = '';
+    }
   };
 
   /**
