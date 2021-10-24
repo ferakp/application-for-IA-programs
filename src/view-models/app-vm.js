@@ -16,6 +16,7 @@ export class AppVM {
    * Array for storing files of type File (HTML)
    */
   files = [];
+  fileReader;
 
   // Functions for agents
   _appVMApi;
@@ -27,7 +28,7 @@ export class AppVM {
   terminalLines = [];
 
   constructor() {
-    this._appVMApi = { deleteAgent: this.deleteAgent, logs: this.logs };
+    this._appVMApi = { deleteAgent: this.deleteAgent, logs: this.logs, fileReader: this.fileReader };
 
     /**
      * Samples for tests
@@ -38,12 +39,19 @@ export class AppVM {
     // this.logs.push(new Log('Another test with the same agent ID', null, null, null, { id: this.agents[0].id }));
   }
 
+  registerFileReader = fileReader => {
+    if (fileReader) {
+      this.fileReader = fileReader;
+      this._appVMApi.fileReader = this.fileReader;
+    }
+  };
+
   deleteAgent = agentId => {
     if (this.agents.length > 0) this.agents = this.agents.filter(e => e.id !== agentId);
   };
 
   createAgent = (type, file) => {
-    let agent = new Agent(this.appVMApi, type, file, null);
+    let agent = new Agent(this._appVMApi, type, file, null);
     this.agents.push(agent);
     this.logs.push(new Log('A new agent has been created \n Producer (Agent ID) ' + agent.id, null, null, null, { id: agent.id }));
   };
@@ -69,8 +77,8 @@ class Agent {
   // Only if agent's type is 3
   utilityFunction;
 
-  // Status - uninitialized, initialized, idle, running, terminated, paused
-  status = 'running';
+  // Status - initializing, running, ready
+  status = 'initializing';
 
   startTime = 'N/A';
 
@@ -91,6 +99,12 @@ class Agent {
 
     this.name = name || 'Agent_' + Math.floor(Math.random() * 1000000);
     this.id = Math.floor(Math.random() * 10000000000000);
+  }
+
+  changeStatus(status) {
+    if(status === 'initialized') {
+
+    }
   }
 
   delete() {

@@ -9,9 +9,14 @@ export class FileReader {
     this.eventAggregator = eventAggregator;
   }
 
+  /**
+   * Function for parsing files and extracting observations
+   * @param {File} file file with observations
+   * @returns {Object} {response, errorMessage}
+   */
   readFile = file => {
     if(!this.isFileTypeValid(file)) return {response: [], errorMessage: "Invalid file type"};
-    
+
   };
 
   isFileTypeValid = file => {
