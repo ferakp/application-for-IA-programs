@@ -193,7 +193,7 @@ export class Interpreter {
     let options = [];
     let splittedCommand = text.split(' ');
     for (let i = 1; i < splittedCommand.length; i++) {
-      if (splittedCommand[i].chartAt(0).includes('-')) {
+      if (splittedCommand[i].charAt(0).includes('-')) {
         options.push([splittedCommand[i].replace('-', '')]);
       } else if (options.length > 0 && options[options.length - 1].length === 1) options[options.length - 1].push(splittedCommand[i]);
     }
