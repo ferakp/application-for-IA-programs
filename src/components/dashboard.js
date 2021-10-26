@@ -78,4 +78,5 @@ export class Dashboard {
       this.lastTlCheckIndex = this.appVM.terminalLines.length - 1;
     }
   };
+
 }
