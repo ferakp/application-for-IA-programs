@@ -118,7 +118,10 @@ class Agent {
       let { response, errorMessage } = await this.appVMApi.fileReader.readFile(this.file);
       if (Array.isArray(response)) {
         let answer = this.parseRules(response.filter(e => e).map(e => e.trim()));
-        if (answer) this.state = 'initialized';
+        if (answer) {
+          this.state = 'initialized';
+          this.appVMApi.log('Rules have been extracted.', null);
+        } 
         else this.state = 'error';
       }
     } else if (state === 'run') {
