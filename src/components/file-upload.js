@@ -73,10 +73,7 @@ export class FileUpload {
     if (!Array.isArray(this.files)) this.files = [];
     for (var i = 0; i < this.fileUploadInput.files.length; i++) {
       let file = this.fileUploadInput.files.item(i);
-      if (this.isFileUploaded(file)) {
-        this.alertDuplicateInsertAttempt();
-        continue;
-      }
+      this.duplicateDeletion(file);
       if (Array.isArray(this.supportedFormats)) {
         if (this.supportedFormats.includes(file.name.split('.')[file.name.split('.').length - 1])) this.files.push(file);
         else {
@@ -114,11 +111,10 @@ export class FileUpload {
     }
   }
 
-  isFileUploaded(file) {
+  duplicateDeletion(file) {
     for (let i = 0; i < this.files.length; i++) {
-      if (this.files[i].name === file.name && this.files[i].size === file.size) return true;
+      if (this.files[i].name === file.name && this.files[i].size === file.size) this.files.splice(i, 1);
     }
-    return false;
   }
 
   alertInvalidFileType() {

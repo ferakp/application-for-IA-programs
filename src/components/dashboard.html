@@ -10,7 +10,7 @@
         <hr class="mt-0" />
       </div>
       <div class="dashboard__console-container">
-        <console class="dashboard__console d-flex" terminal-lines.two-way="appVM.terminalLines"></console>
+        <console class="dashboard__console d-flex" terminal-lines.two-way="appVM.terminalLines" view-model.ref="dashboardConsole"></console>
       </div>
     </div>
     <div class="dashboard__right-window d-flex flex-row ${expansionMode === true ? 'dashboard__hide-window' : ''}">

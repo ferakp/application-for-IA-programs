@@ -49,3 +49,15 @@ terminal-line {
 .terminal-line__icon-span:hover {
   color: #2c2c2c;
 }
+
+.terminal-line__icon-red {
+  color: red !important;
+}
+
+.terminal-line__content-container-response {
+  margin-left: 20px;
+}
+
+.terminal-line__icon-green {
+  color: green !important;
+}
