@@ -3,8 +3,6 @@ export class AppVM {
    * Agents
    */
   agents = [];
-  activeAgents = [];
-  terminatedAgents = [];
 
   /**
    * Array for storing logs
