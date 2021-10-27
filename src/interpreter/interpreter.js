@@ -12,8 +12,8 @@ export class Interpreter {
   agentTypes = ['reflex', 'model-reflex', 'goal', 'utility'];
 
   supportedInstructions = {
-    commands: ['upload', 'create', 'show'],
-    arguments: [['', 'file', 'folder', 'text-file', 'perceptions'], ['agent'], ['files']],
+    commands: ['upload', 'create', 'show', 'generate'],
+    arguments: [['', 'file', 'folder', 'text-file'], ['agent'], ['files'], ['perception']],
     options: [[], ['class', 'file'], []],
   };
   commandFunctions;
@@ -41,6 +41,10 @@ export class Interpreter {
     this.commandValidators.set('show', (text, isArgumentsOptional, isOptionsOptional) => {
       return { response: text === 'show files', errorMessage: text === 'show files' ? '' : 'Invalid instruction' };
     });
+
+    // Create instruction
+    this.commandFunctions.set('generate', this.generate);
+    this.commandValidators.set('generate', this.isGenerateValid);
   }
 
   setAppVM(appVM) {
@@ -67,7 +71,25 @@ export class Interpreter {
 
   /**
    * Command validity validators
+   *
+   * Validators returns an object with two properties: response and errorMessage
    */
+
+  isGenerateValid = text => {
+    let fText = text.split(' ');
+    if (
+      fText[0] === 'generate' &&
+      fText[1] === 'perception' &&
+      fText[2] === 'id' &&
+      fText[3].length > 0 &&
+      fText[4] === 'target' &&
+      fText[5].length > 0 &&
+      fText[6] === 'value' &&
+      fText[7].length > 0
+    ) {
+      if (!isNaN(parseFloat(fText[7]))) return { response: true, errorMessage: '', parameters: fText };
+    } else return { response: false, errorMessage: 'Invalid instruction structure' };
+  };
 
   isUploadInstructionValid = text => {
     if (this.isInstructionStructureValid(text, true, true) && this.readCommand(text) === 'upload') {
@@ -153,6 +175,10 @@ export class Interpreter {
   /**
    * Command functions
    */
+
+  generate = (params) => {
+    console.log(params);
+  }
 
   /**
    *

@@ -73,15 +73,15 @@ export class TextField {
     if (newValue && this.showClearButton) this.activateClearButton = true;
     else this.activateClearButton = false;
     if (!this.hasBeenEdited && newValue) this.hasBeenEdited = true;
-    this.upperCaseAndNumberCheck();
+    this.upperCaseCheck();
   }
 
   showClearButtonChanged(newValue) {
     if (this.value && newValue) this.activateClearButton = true;
   }
 
-  allowOnlyNumbersChanged() {
-    this.upperCaseAndNumberCheck();
+  allowOnlyNumbersChanged(nv) {
+    console.log(nv);
   }
 
   disableChanged(newValue) {
@@ -89,8 +89,7 @@ export class TextField {
     else if (this.textFieldInputElement) this.textFieldInputElement.disabled = false;
   }
 
-  upperCaseAndNumberCheck = () => {
-    if (this.allowOnlyNumbers && typeof this.value !== 'number') setTimeout(() => (this.value = ''), 200);
+  upperCaseCheck = () => {
     if (this.firstLetterUpperCase && this.value && this.value[0] !== this.value[0].toUpperCase()) {
       setTimeout(() => (this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)), 200);
     }
