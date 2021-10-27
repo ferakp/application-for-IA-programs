@@ -78,6 +78,7 @@ export class Interpreter {
   isGenerateValid = text => {
     let fText = text.split(' ');
     if (
+      fText.length === 8 &&
       fText[0] === 'generate' &&
       fText[1] === 'perception' &&
       fText[2] === 'id' &&
@@ -176,9 +177,9 @@ export class Interpreter {
    * Command functions
    */
 
-  generate = (params) => {
+  generate = params => {
     console.log(params);
-  }
+  };
 
   /**
    *
