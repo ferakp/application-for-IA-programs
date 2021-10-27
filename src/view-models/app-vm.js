@@ -24,10 +24,26 @@ export class AppVM {
    * A list of objects with following fields: id, text, time, color and producer
    */
   terminalLines = [];
+  
+
+  /**
+   * Global perceptions
+   * Perception structure is id value, target value, value value
+   */
+  perceptions = [];
+  processedPerceptions = [];
 
   constructor() {
     this._appVMApi = { deleteAgent: this.deleteAgent, logs: this.logs, fileReader: this.fileReader, log: this.log };
+    setInterval(() => {
+      if(this.lastPerceptionIndex !== this.perceptions.length -1) {
+        this.agents.forEach(a => a.addPerceptions(this.perceptions));
+        this.processedPerceptions.concat(this.perceptions);
+        this.perceptions = [];
+      }
+    }, 1000);
 
+    
     /**
      * Samples for tests
      */
@@ -74,11 +90,15 @@ class Agent {
    */
   type;
 
-  // Only if agent's type is 0 and 1
+  /**
+   * Type 0 agent has structure of [id, target, rule, action]
+   */
   ruleActionList = [];
 
   // perceptions
-  perceptions;
+  perceptions = [];
+
+  processedPerceptions = [];
 
   goalFunction;
 
@@ -125,6 +145,18 @@ class Agent {
     } else if (state === 'run') {
       this.appVMApi.log('Running ' + this.name, this.id);
     }
+  }
+
+  addPerceptions(perceptions) {
+    if(this.type === 0) this.parsePerceptions(perceptions);
+    else {
+      this.perceptions = this.perceptions.concat(perceptions);
+      this.parsePerceptions(this.perceptions);
+    }
+  }
+
+  parsePerceptions(perceptions) {
+
   }
 
   parseRules = rules => {

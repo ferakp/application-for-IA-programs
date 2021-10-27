@@ -178,7 +178,9 @@ export class Interpreter {
    */
 
   generate = params => {
-    console.log(params);
+    if (Array.isArray(params)) this.appVM.log('A perception has been registered ----> ' + params.join(' '), null, { response: true, errorMessage: '' });
+    else return;
+    this.appVM.perceptions.push(params.filter(e => !['id', 'generate', 'perception', 'target', 'value'].includes(e)));
   };
 
   /**
