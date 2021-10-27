@@ -43,7 +43,7 @@ export class AppVM {
       }
     }, 1000);
 
-    
+
     /**
      * Samples for tests
      */
@@ -180,7 +180,7 @@ class Agent {
 
       if ([id, target, rule, action].includes(false)) {
         this.reportInvalidAttributeValue(e);
-        this.response = false;
+        response = false;
       } else {
         formattedRule.push(...[id, target, rule, action]);
       }
