@@ -161,17 +161,17 @@ class Agent {
     clearInterval(this.executionCycleInterval);
   }
 
+  /**
+   * Function for receiving recently perceived (added) perceptions
+   * @param {Array} perceptions 
+   * @returns 
+   */
   addPerceptions(perceptions) {
-    // Convert perceptions type to Array
-    if (!Array.isArray(perceptions)) {
-      perceptions = [perceptions];
-    }
-
+    if (this.state !== 'running' || perceptions.length === 0) return;
     // Add perception time
     perceptions.forEach(e => e.push(new Date()));
-
-    // Add recently perceived perceptions to perceptions array
-    if (this.state === 'running') this.perceptions = this.perceptions.concat(perceptions);
+    // Store recently perceived perceptions
+   this.perceptions = this.perceptions.concat(perceptions);
   }
 
   runAgentProgram() {
