@@ -72,7 +72,7 @@ export class AppVM {
   };
 
   log = (message, producerId, status) => {
-    this.logs.push(new Log(message, null, null, null, { id: producerId }, status));
+    this.logs.push(new Log(message, null, null, null, { id: (producerId || 'N/Á')}, status));
   };
 
   createTerminalLine = (text, isResponse) => {
@@ -555,7 +555,7 @@ class Log {
     else this.color = this.generateRandomColor();
     if (time) this.time = time;
     else this.time = new Date();
-    if (producer) this.producer = producer;
+    if (producer && (typeof producer.id === 'string' || typeof producer.id === 'number')) this.producer = producer;
     else this.producer = { id: 'N/A' };
     if (status) this.status = status;
     else this.status = {};
