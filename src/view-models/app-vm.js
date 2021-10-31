@@ -1,10 +1,11 @@
 /**
- *  AppVM is a view model for entire application
- *  AppVPM has
+ *  AppVM is a view model class for entire application
+ *  Once application is initialized Aurelia creates a single AppVM instance
  *
- *
- *
- *
+ *  AppVM is also used to controlling user interface components 
+ *  Agents is binded to agent-view and logs is binded to logs-view
+ *  
+ *  See the documentation for further details
  */
 export class AppVM {
   // An array of agents
@@ -338,7 +339,7 @@ class Agent {
   /**
    * An agent program for utility-based agent
    * Utility-based agent program is filtering perceptions before moving to next phases
-   * Utility-based agent program compares values of perception and rule and then picks appropariate action 
+   * Utility-based agent program compares values of perception and rule and then picks appropariate action
    * only if it's optimal to do so
    * @param {Array} perceptions Perception array with following elements: id, target, value and time
    */
@@ -405,7 +406,7 @@ class Agent {
     else return false;
   };
 
-    /**
+  /**
    * Executes rule's operator on perception's value with model-based reflex agent specific functionality
    * @param {Array} perceptions perceptions [id, target, value, time]
    * @param {string} rule [operator, value]
@@ -444,7 +445,7 @@ class Agent {
    * Phase 1 - Validates general structure of rule is valid
    * Phase 2 - Validates agent specific rule structure
    * Phase 3 - Validates values occuring in rule
-   * @param {Array} rules 
+   * @param {Array} rules
    */
   parseRules = rules => {
     if (!this.isRulesValid(rules)) {
@@ -507,7 +508,7 @@ class Agent {
   };
 
   /**
-   * Converts two string texts to numbers and checks if the first value is smaller than the second value
+   * Converts two string texts to numbers and checks if first value is smaller than the second value
    * @param {string} value
    * @param {string} compValue
    * @returns {boolean} true if first value is smaller than second value
@@ -518,7 +519,7 @@ class Agent {
   }
 
   /**
-   * Converts two string texts to numbers and checks if the first value is larger than the second value
+   * Converts two string texts to numbers and checks if first value is larger than the second value
    * @param {string} value
    * @param {string} compValue
    * @returns {boolean} true if first value is larger than second value
@@ -529,7 +530,7 @@ class Agent {
   }
 
   /**
-   * Converts two string texts to numbers and checks if the first value is equal with the second value
+   * Converts two string texts to numbers and checks if first value is equal with the second value
    * @param {string} value
    * @param {string} compValue
    * @returns {boolean} true if first value is equal with second value
@@ -540,9 +541,13 @@ class Agent {
   }
 
   /**
-   *
-   * @param {string} value
-   * @returns {Array} action or [əction, action]
+   * Parses action value for four different agent programs
+   * Reflex agents and model-based reflex agents have basic action structure
+   * Goal-based and utility-based agents use : to separate direction-dependent actions with first action being
+   * activated when perception's value is smaller than rule's value and the second action vice versa
+   * Returns false if structure is invalid
+   * @param {string} value action
+   * @returns {string or Array} action or [first action, second action]
    */
   parseActionValue = value => {
     if ((this.type === 0 || this.type === 1) && value.length > 0) {
@@ -555,8 +560,12 @@ class Agent {
   };
 
   /**
-   *
-   * @param {string} value
+   * Parses rule
+   * Reflex agent has a rule with following structure [<, >, =]number (ie. <22 or =14)
+   * Model-based reflex agent has a rule with following structure [<, >, =]number:number (ie. <22:0 or =14:0)
+   * Goal-based agents and utility-based agent have only number as value of RULE
+   * Returns false if structure is invalid
+   * @param {string} value rule
    * @returns {Array} [operator, value, (secondValue)] or false
    */
   parseRuleValue = value => {
@@ -589,31 +598,35 @@ class Agent {
   };
 
   /**
-   *
-   * @param {string} value
-   * @returns {Object} value or false
+   * Parses target value
+   * Returns false if it's empty
+   * @param {string} value target
+   * @returns {string} value or false
    */
   parseTargetValue = value => {
-    if (value === '*') {
-      return '*';
-    } else if (value.length > 0) {
+    if (value.length > 0) {
       return value;
     } else return false;
   };
 
   /**
-   *
-   * @param {string} idValue
-   * @returns {Object} value or false
+   * Parses id value
+   * Returns false if id is not type of number
+   * @param {string} idValue id
+   * @returns {number} value or false
    */
   parseIdValue = idValue => {
-    if (idValue === '*') {
-      return '*';
-    } else if (typeof parseFloat(idValue) === 'number') {
+    if (typeof parseFloat(idValue) === 'number') {
       return parseFloat(idValue);
     } else return false;
   };
 
+  /**
+   * Validates general structure of rules
+   * If rule has invalid structure it returns false
+   * @param {Array} rules rules [id, idValue, target, targetValue, rule, ruleValue, action, actionValue]
+   * @returns {boolean} answer true if rules are valid otherwise false
+   */
   isRulesValid = rules => {
     let answer = null;
     let ruleType = this.type;
@@ -652,6 +665,12 @@ class Agent {
     if (answer === null) return true;
   };
 
+  /**
+   * Checks if value contains one of the elements of array
+   * @param {string} value
+   * @param {Array} arr array containing elements
+   * @returns {boolean} true or false
+   */
   containsElement = (value, arr) => {
     let answer = false;
     for (let i = 0; i < arr.length; i++) {
@@ -660,16 +679,28 @@ class Agent {
     return answer;
   };
 
+  /**
+   * Creates a log
+   * @param {string} message actual message to be printed
+   * @param {string} errorMessage error message
+   * @param {boolean} isAction flag for marking log as action
+   */
   log = (message, errorMessage, isAction) => {
     if (errorMessage) this.appVMApi.log(message, this.id, { response: false, errorMessage: errorMessage, isAction: isAction });
     else this.appVMApi.log(message, this.id, { response: true, errorMessage: '', isAction: isAction });
   };
 
+  /**
+   * Creates a log for informing user that agent has not been initialized yet
+   */
   agentIsNotInitialized = () => {
     this.log("Interrupting agent program execution as it hasn't been initialized yet", 'Interruption, agent is not initialized');
   };
 }
 
+/**
+ * A class for log message
+ */
 class Log {
   text = 'N/A';
   id;
