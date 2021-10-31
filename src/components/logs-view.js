@@ -1,22 +1,39 @@
 import { bindable } from 'aurelia-framework';
 
+/**
+ * A view model for logs-view component
+ * 
+ * The logs array is used for storing logs to be printed
+ * The filters array is used for storing filters
+ */
 export class LogsView {
   @bindable
   logs = [];
 
+  /**
+   * There are two types of filters
+   * Filter 1 - Agent ID: sample 
+   * The first filter starts with 'Agent ID:' and then comes actual text to be used for filtering
+   * For example Agent ID: 22 will show only logs that are related to the agent with the ID of 22
+   * Filter 2 - Text: sample
+   * Looks for logs that have such content
+   * For example Text: aaa will look for logs in which text aaa appears
+   */
   @bindable
   filters = [];
 
-  updateInterval = 2000;
+  // Looks for new logs every 2000 seconds
+  updateCycleTime = 2000;
 
-  // Old states
+  // Variables for comparing old logs and filters with new ones
+  
   previousFiltersLength = 0;
   previousLogsLength = 0;
 
   attached() {
     setInterval(() => {
       this.update();
-    }, this.updateInterval);
+    }, this.updateCycleTime);
   }
 
   update() {
