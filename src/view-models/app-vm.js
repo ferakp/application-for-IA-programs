@@ -68,7 +68,7 @@ export class AppVM {
   createAgent = (type, file) => {
     let agent = new Agent(this._appVMApi, type, file, null);
     this.agents.push(agent);
-    this.logs.push(new Log('A new agent has been created \n with producer ID (Agent ID) of ' + agent.id, null, null, null, { id: agent.id }));
+    this.logs.push(new Log('A new agent has been created \n with a producer ID (Agent ID) of ' + agent.id, null, null, null, { id: agent.id }));
   };
 
   log = (message, producerId, status) => {
@@ -94,18 +94,16 @@ class Agent {
   /**
    * Type 0 agent has structure of [id, target, [rule](2), action]
    * Type 1 agent has structure of [id, target, [rule](3), action]
+   * Type 2 agent has structure of [id, target, [rule](2), action]
+   * Type 3 agent has structure of [id, target, [rule](2), action]
    */
   ruleActionList = [];
 
-  // perceptions
+  // An array of perceptions with the structure of [id, target, value, time]
   perceptions = [];
 
+  // An array of processed perceptions for agent type 2, 3 and 4
   processedPerceptions = [];
-
-  goalFunction;
-
-  // Only if agent's type is 3
-  utilityFunction;
 
   // Status - initializing, initialized, running, ready, error
   state = 'initializing';
@@ -284,7 +282,8 @@ class Agent {
       } else if (parseFloat(lastPerception[2]) > ruleAction[2][1]) {
         action = ruleAction[3][1];
       } else {
-        action = 'ready';
+        this.log(this.name + ' HAS REACHED ITS GOAL', null, true);
+        this.state = 'ready';
       }
 
       // If a new sensor value exceeds the rule's value it should wait for another perception
@@ -295,12 +294,7 @@ class Agent {
         return;
       }
 
-      if (action === 'ready') {
-        this.log(this.name + ' HAS REACHED ITS GOAL', null, true);
-        this.state = 'ready';
-      } else {
-        this.log('ACTION ' + action + ' HAS BEEN ACTIVATED', null, true);
-      }
+      this.log('ACTION ' + action + ' HAS BEEN ACTIVATED', null, true);
     });
   };
 
