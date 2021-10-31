@@ -12,7 +12,7 @@ describe('Test checkbox component', () => {
   const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
   it('renders component', done => {
-    runTest({}, done, () => {
+    runTest({}, done, async () => {
       expectElement('.checkbox__container').not.toEqual(null);
       expectElementNumber('.checkbox__input').toEqual(1);
     });
@@ -23,13 +23,13 @@ describe('Test checkbox component', () => {
    */
 
   it('displays name correctly (name attribute)', done => {
-    runTest({ name: 'LabelTest' }, done, () => {
+    runTest({ name: 'LabelTest' }, done, async () => {
       expectElement('.checkbox__label', 'innerHTML').toMatch('LabelTest');
     });
   });
 
   it('displays the value of checked attribute correctly (checked attribute)', done => {
-    runTest({ name: 'LabelTest', checked: true }, done, () => {
+    runTest({ name: 'LabelTest', checked: true }, done, async () => {
       expectElement('.checkbox__input', 'checked').toBe(true);
     });
   });

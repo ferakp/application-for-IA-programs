@@ -83,13 +83,14 @@ describe('Test text-field component', () => {
 
   it('displays first letter in upper case (firstLetterUpperCase attribute)', done => {
     runTest({ value: 'value-', firstLetterUpperCase: true }, done, async () => {
-      await update(500);
+      await update(1000);
       expectElement('.text-field__input-element', 'value').toBe('Value-');
     });
   });
 
   it('displays only numbers (allowOnlyNumbers attribute)', done => {
-    runTest({ value: 'value-', allowOnlyNumbers: true }, done, async () => {
+    runTest({ allowOnlyNumbers: true }, done, async (component) => {
+      component.viewModel.valye = 'value-';
       await update(500);
       expectElement('.text-field__input-element', 'value').toBe('');
     });
