@@ -55,4 +55,8 @@ export class TerminalLine {
   _openInfo() {
     if (this.openInfoCallback) this.openInfoCallback(this._id);
   }
+
+  isResponse = () => {
+    return this._isResponse;
+  }
 }
