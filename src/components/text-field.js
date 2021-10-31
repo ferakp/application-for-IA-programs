@@ -73,7 +73,6 @@ export class TextField {
     if (newValue && this.showClearButton) this.activateClearButton = true;
     else this.activateClearButton = false;
     if (!this.hasBeenEdited && newValue) this.hasBeenEdited = true;
-    this.upperCaseCheck();
   }
 
   showClearButtonChanged(newValue) {
@@ -84,12 +83,6 @@ export class TextField {
     if (newValue && this.textFieldInputElement) this.textFieldInputElement.disabled = true;
     else if (this.textFieldInputElement) this.textFieldInputElement.disabled = false;
   }
-
-  upperCaseCheck = () => {
-    if (this.firstLetterUpperCase && this.value && this.value[0] !== this.value[0].toUpperCase()) {
-      setTimeout(() => (this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1)), 200);
-    }
-  };
 
   // This function is called by icon container when ?-icon is clicked
   tooltipClicked() {}

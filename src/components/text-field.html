@@ -1,6 +1,7 @@
 <template>
   <!--Requirements-->
   <require from="./text-field.css"></require>
+  <require from="./text-field-format"></require>
 
   <!--Child components-->
   <div class="text-field__container">
@@ -18,7 +19,7 @@
         ref="textFieldInputElement"
         class="text-field__input-element"
         placeholder.to-view="placeholder"
-        value.two-way="value"
+        value.two-way="value | textFieldFormat:{firstLetterUpperCase}"
         type="${allowOnlyNumbers === true ? 'number' : 'text'}"
         click.delegate="inputElementClicked()"
       />
