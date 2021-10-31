@@ -80,10 +80,6 @@ export class TextField {
     if (this.value && newValue) this.activateClearButton = true;
   }
 
-  allowOnlyNumbersChanged(nv) {
-    console.log(nv);
-  }
-
   disableChanged(newValue) {
     if (newValue && this.textFieldInputElement) this.textFieldInputElement.disabled = true;
     else if (this.textFieldInputElement) this.textFieldInputElement.disabled = false;

@@ -6,6 +6,10 @@ terminal-line {
   background-color: rgb(128 128 128 / 8%);
 }
 
+.terminal-line__text-highlight {
+  font-weight: bold !important;
+}
+
 .terminal-line__content-container {
   flex-direction: row;
   align-items: center;

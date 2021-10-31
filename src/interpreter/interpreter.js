@@ -12,9 +12,9 @@ export class Interpreter {
   agentTypes = ['reflex', 'model-reflex', 'goal', 'utility'];
 
   supportedInstructions = {
-    commands: ['upload', 'create', 'show', 'generate'],
-    arguments: [['', 'file', 'folder', 'text-file'], ['agent'], ['files'], ['perception']],
-    options: [[], ['class', 'file'], []],
+    commands: ['upload', 'create', 'show', 'generate', 'run', 'delete'],
+    arguments: [['', 'file', 'folder', 'text-file'], ['agent'], ['files'], ['perception'], ['agent'], ['agent']],
+    options: [[], ['class', 'file'], [], [], [], []],
   };
   commandFunctions;
   commandValidators;
@@ -38,13 +38,20 @@ export class Interpreter {
 
     // Show instruction
     this.commandFunctions.set('show', () => this.eventAggregator.publish('openFilesView'));
-    this.commandValidators.set('show', (text, isArgumentsOptional, isOptionsOptional) => {
+    this.commandValidators.set('show', text => {
       return { response: text === 'show files', errorMessage: text === 'show files' ? '' : 'Invalid instruction' };
     });
 
     // Create instruction
     this.commandFunctions.set('generate', this.generate);
-    this.commandValidators.set('generate', this.isGenerateValid);
+    this.commandValidators.set('generate', this.isGenerateInstructionValid);
+
+    // Run instruction
+    this.commandFunctions.set('run', params => {
+      let agents = this.appVM.agents.filter(e => e.id.toString().startsWith(params[2]));
+      if(agents.length === 1) agents[0].changeState("run");
+    });
+    this.commandValidators.set('run', this.isRunInstructionValid);
   }
 
   setAppVM(appVM) {
@@ -72,10 +79,18 @@ export class Interpreter {
   /**
    * Command validity validators
    *
-   * Validators returns an object with two properties: response and errorMessage
+   * Validators returns an object with three properties: response, errorMessage and parameters
    */
 
-  isGenerateValid = text => {
+  isRunInstructionValid = text => {
+    let fText = text.split(' ');
+    if (fText.length === 3 && fText[0] === 'run' && fText[1] === 'agent' && fText[2].length > 0) {
+      if (!isNaN(parseFloat(fText[2])) && this.appVM.agents.filter(e => e.id.toString().startsWith(fText[2])).length > 0) return { response: true, errorMessage: '', parameters: fText };
+      else return { response: false, errorMessage: 'Invalid agent ID' };
+    } else return { response: false, errorMessage: 'Invalid instruction structure' };
+  };
+
+  isGenerateInstructionValid = text => {
     let fText = text.split(' ');
     if (
       fText.length === 8 &&
@@ -178,7 +193,7 @@ export class Interpreter {
    */
 
   generate = params => {
-    if (Array.isArray(params)) this.appVM.log('A perception has been registered ----> ' + params.join(' '), null, { response: true, errorMessage: '' });
+    if (Array.isArray(params)) this.appVM.log('Following perception has been received ----> ' + params.join(' '), null, { response: true, errorMessage: '' });
     else return;
     this.appVM.perceptions.push(params.filter(e => !['id', 'generate', 'perception', 'target', 'value'].includes(e)));
   };

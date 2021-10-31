@@ -29,7 +29,7 @@ export class Console {
         time: payload.time || new Date(),
         id: payload.id || this._getNewId(),
         color: this._getRandomColor(),
-        status: payload.status || [],
+        status: payload.status || {},
         isResponse: payload.isResponse || false
       };
       this.terminalLines.push(terminalLine);

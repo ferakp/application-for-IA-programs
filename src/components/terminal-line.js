@@ -19,6 +19,7 @@ export class TerminalLine {
   _text;
   _color;
   _isResponse = false;
+  _isAction = false;
 
   errorMessageInterval;
 
@@ -30,11 +31,10 @@ export class TerminalLine {
     this._isResponse = this.terminalLine.isResponse;
     if (this.logMode) this._color = 'rgb(124 124 124 / 80%)';
     this.errorMessageInterval = setInterval(() => {
-      if (this.terminalLine.status.length > 1) {
-        if (this.terminalLine.status[1]) this._errorMessage = this.terminalLine.status[1];
-        else this._successfulRun = true;
-        clearInterval(this.errorMessageInterval);
-      }
+      if (this.terminalLine.status.errorMessage) this._errorMessage = this.terminalLine.status.errorMessage;
+      else this._successfulRun = true;
+      if (this.terminalLine.status.isAction) this._isAction = true;
+      clearInterval(this.errorMessageInterval);
     }, 1000);
   }
 

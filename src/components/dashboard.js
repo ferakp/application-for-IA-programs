@@ -42,7 +42,7 @@ export class Dashboard {
     this.filesViewSubscribe = this.eventAggregator.subscribe('openFilesView', () => {
       this.activeView = 'Files-view';
     });
-    setInterval(() => this.runInterpreter(), 1000);
+    setInterval(() => this.runInterpreter(), 500);
     this.initialize();
   }
 
@@ -68,7 +68,7 @@ export class Dashboard {
             // Reponse is an array with two indices (response, errorMessage)
             let response = this.interpreter.interpret(this.appVM.terminalLines[i].text);
             console.log(response);
-            this.appVM.terminalLines[i].status = response;
+            this.appVM.terminalLines[i].status = {response: response[0], errorMessage: response[1]};
             if(response[1]) this.dashboardConsole.createGenericTerminalLine({text: response[1], isResponse: true})
           }
         } catch (err) {
