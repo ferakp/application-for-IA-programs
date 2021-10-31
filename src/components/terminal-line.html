@@ -10,8 +10,8 @@
       <span class="terminal-line__icon-span" click.delegate="_deleteLine()"><i class="terminal-line__default-icon fas fa-trash-alt ctpoh"></i></span>
     </div>
   </div>
-  <div class="terminal-line__content-container ${_isResponse ? 'terminal-line__content-container-response' : ''} d-flex">
+  <div class="terminal-line__content-container ${_isResponse ? 'terminal-line__content-container-response' : ''}  d-flex">
     <div class="terminal-line__row-start-sign" css="background-color: ${_color};">&nbsp;</div>
-    <p class="terminal-line__text">${_text}</p>
+    <p class="terminal-line__text ${_isAction === true ? 'terminal-line__text-highlight' : ''}">${_text}</p>
   </div>
 </template>
