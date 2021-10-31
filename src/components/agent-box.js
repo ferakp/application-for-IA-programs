@@ -3,7 +3,7 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(EventAggregator)
 export class AgentBox {
-  // A reference to agent view model
+  // A reference to the view model of agent
   @bindable
   agent;
   // Readable agent type
