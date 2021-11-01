@@ -13,6 +13,7 @@ console text-field {
   flex-direction: column;
   justify-content: right;
   margin-bottom: 18px;
+  overflow-y: auto;
 }
 
 .console-message__text {

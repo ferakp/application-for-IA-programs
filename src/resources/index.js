@@ -3,7 +3,6 @@ import { PLATFORM } from 'aurelia-pal';
 export function configure(config) {
   config.globalResources([
     PLATFORM.moduleName('../components/text-field'),
-    PLATFORM.moduleName('../components/checkbox'),
     PLATFORM.moduleName('../components/file-upload'),
     PLATFORM.moduleName('../components/agents-view'),
     PLATFORM.moduleName('../components/logs-view'),
