@@ -13,12 +13,12 @@ export class Dashboard {
   viewModelProvider;
   appVM;
 
-  // Properties for event handling
+  // Properties for handling events
   eventAggregator;
   logsViewSubscriber;
   filesViewSubscribe;
 
-  // List of active view options: Agents-view, Logs-view, Files-view
+  // Active view - Options [Agents-view, Logs-view, Files-view]
   @bindable
   activeView = 'Agents-view';
 
@@ -51,8 +51,6 @@ export class Dashboard {
     if (this.interpreter) this.interpreter.setAppVM(this.appVM);
     if (this.appVM) this.appVM.registerFileReader(this.fileReader);
   }
-
-  expansionModeChanged() {}
 
   activeViewChanged(newValue) {
     if (newValue && newValue !== 'Logs-view') this.logsViewFilters = [];

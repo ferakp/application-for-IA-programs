@@ -39,8 +39,13 @@ export class TerminalLine {
   }
 
   _formatTime(date) {
-    if (date && Object.getPrototypeOf(date).constructor.name === 'Date')
-      return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + date.getHours() + ':' + date.getMinutes();
+    if (date && Object.getPrototypeOf(date).constructor.name === 'Date') {
+      let prefixMinutes = '0';
+      let prefixHours = '0';
+      if (date.getHours() > 9) prefixHours = '';
+      if (date.getMinutes() > 9) prefixMinutes = '';
+      return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + +prefixHours + date.getHours() + ':' + prefixMinutes + date.getMinutes();
+    }
   }
 
   _deleteLine() {
@@ -49,5 +54,9 @@ export class TerminalLine {
 
   _openInfo() {
     if (this.openInfoCallback) this.openInfoCallback(this._id);
+  }
+
+  isResponse = () => {
+    return this._isResponse;
   }
 }

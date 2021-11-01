@@ -3,16 +3,15 @@ import { EventAggregator } from 'aurelia-event-aggregator';
 
 @inject(EventAggregator)
 export class AgentBox {
+  // A reference to the view model of agent
   @bindable
   agent;
+  // Readable agent type
   agentTypeFormatted;
-
-  // Combobox properties
+  // An array of possible agent states
   states = ['initializing', 'initialized', 'running', 'ready', 'error'];
+  // Custom fitler for combobox component
   customFilter = (v, i) => i;
-
-  // Injections
-  eventAggregator;
 
   constructor(eventAggregator) {
     this.eventAggregator = eventAggregator;
@@ -29,6 +28,7 @@ export class AgentBox {
     this.agent.delete();
   }
 
+  // Emits event for opening the Logs View
   openLogHistory() {
     this.eventAggregator.publish('openLogsView', this.agent.id);
   }

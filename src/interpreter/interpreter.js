@@ -2,25 +2,39 @@ import { inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
 
 /**
- * This class represents an interpeter for console instructions.
- * A command is used to refer program, the first word of the instruction.
+ * A class for console interpreter
+ *
+ * Instruction is entire paragraph with structure of command argument option optionValue
+ *
+ * SUPPORTED INSTRUCTIONS
+ *
+ * Upload [file|folder|text-file]
+ * Create agent -file [index] -class [reflex|model-reflex|goal|utility]
+ * Show files
+ * Generate perception id [idValue] target [targetValue] value [value]
+ * Run agent [agentID]
+ *
+ * See documentation for more details
  */
 
 @inject(EventAggregator)
 export class Interpreter {
-  // Agent types
+  // Agent program types
   agentTypes = ['reflex', 'model-reflex', 'goal', 'utility'];
 
   supportedInstructions = {
-    commands: ['upload', 'create', 'show', 'generate', 'run', 'delete'],
-    arguments: [['', 'file', 'folder', 'text-file'], ['agent'], ['files'], ['perception'], ['agent'], ['agent']],
-    options: [[], ['class', 'file'], [], [], [], []],
+    commands: ['upload', 'create', 'show', 'generate', 'run'],
+    arguments: [['', 'file', 'folder', 'text-file'], ['agent'], ['files'], ['perception'], ['agent']],
+    options: [[], ['class', 'file'], [], [], []],
   };
+
+  // Map pointing commands to their functions
   commandFunctions;
+
+  // Map pointing commands to their validators
   commandValidators;
 
   eventAggregator;
-
   appVM;
 
   constructor(eventAggregator) {
@@ -49,7 +63,7 @@ export class Interpreter {
     // Run instruction
     this.commandFunctions.set('run', params => {
       let agents = this.appVM.agents.filter(e => e.id.toString().startsWith(params[2]));
-      if(agents.length === 1) agents[0].changeState("run");
+      if (agents.length === 1) agents[0].changeState('run');
     });
     this.commandValidators.set('run', this.isRunInstructionValid);
   }
@@ -60,8 +74,9 @@ export class Interpreter {
 
   /**
    * Interprets instruction
-   * @param {string} text executable instruction
-   * @returns {Array} [isCommandValid, errorMessage]
+   * Looks for validator, use it to validate input and then calls the command's function if input is valid instruction
+   * @param {string} text instruction
+   * @returns {Array} [isCommandValid, errorMessage, parameters]
    */
   interpret = text => {
     if (typeof text !== 'string') return [false, 'Invalid command'];
@@ -77,9 +92,8 @@ export class Interpreter {
   };
 
   /**
-   * Command validity validators
-   *
-   * Validators returns an object with three properties: response, errorMessage and parameters
+   * Utility functions for validating instructions
+   * Validators return an object with two or three properties: response, errorMessage and parameters (optional)
    */
 
   isRunInstructionValid = text => {
@@ -119,11 +133,6 @@ export class Interpreter {
     }
   };
 
-  /**
-   *
-   * @param {string} instruction
-   * @returns {object} {response, errorMessage}
-   */
   isCreateInstructionValid = text => {
     if (!this.isInstructionStructureValid(text, false, false) || this.readCommand(text) !== 'create') return { response: false, errorMessage: 'Invalid instruction structure' };
     let receivedArguments = this.readArguments(text);
@@ -149,6 +158,13 @@ export class Interpreter {
     return { response: false, errorMessage: 'Invalid argument "' + receivedArguments[0] + '"' };
   };
 
+  /**
+   * High level instruction structure validator
+   * @param {string} text
+   * @param {boolean} isArgumentsOptional
+   * @param {boolean} isOptionsOptional
+   * @returns {boolean}
+   */
   isInstructionStructureValid = (text, isArgumentsOptional, isOptionsOptional) => {
     if (this.hasValidCommand(text) && this.hasValidArguments(text, isArgumentsOptional) && this.hasValidOptions(text, isOptionsOptional)) {
       let options = this.readOptions(text);
@@ -189,7 +205,7 @@ export class Interpreter {
   };
 
   /**
-   * Command functions
+   * FUNCTIONS FOR EXECUTING COMMANDS
    */
 
   generate = params => {
@@ -198,14 +214,10 @@ export class Interpreter {
     this.appVM.perceptions.push(params.filter(e => !['id', 'generate', 'perception', 'target', 'value'].includes(e)));
   };
 
-  /**
-   *
-   * @param {Array} parameters [argument, agentType, file]}
-   */
-  create = arr => {
-    if (!Array.isArray(arr)) return;
-    if (arr[0] === 'agent') {
-      this.appVM.createAgent(arr[1], arr[2]);
+  create = params => {
+    if (!Array.isArray(params)) return;
+    if (params[0] === 'agent') {
+      this.appVM.createAgent(params[1], params[2]);
     }
   };
 
@@ -215,13 +227,23 @@ export class Interpreter {
   };
 
   /**
-   * Utility functions
+   * UTILITY FUNCTIONS
    */
 
+  /**
+   * Returns command from the instruction
+   * @param {string} text instruction
+   * @returns {string}
+   */
   readCommand(text) {
     return text.split(' ')[0];
   }
 
+  /**
+   * Returns arguments from the instruction
+   * @param {string} text instruction
+   * @returns {Array} arguments
+   */
   readArguments(text) {
     let args = [];
     let splittedCommand = text.split(' ');
@@ -233,6 +255,11 @@ export class Interpreter {
     return args;
   }
 
+  /**
+   * Returns options from the instruction
+   * @param {string} text instruction
+   * @returns {Array} options
+   */
   readOptions(text) {
     let options = [];
     let splittedCommand = text.split(' ');
@@ -244,6 +271,12 @@ export class Interpreter {
     return options;
   }
 
+  /**
+   * Runs function with given parameters
+   * @param {Function} fn
+   * @param {Array} params
+   * @returns
+   */
   runFunction(fn, params) {
     try {
       fn(params);

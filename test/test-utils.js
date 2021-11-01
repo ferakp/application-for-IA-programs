@@ -34,9 +34,13 @@ export function executeTest(resources, html, viewModel, done, testC) {
     .then(() => testC(component))
     .then(done)
     .then(() => component.dispose())
-    .catch(e => {
-      fail(e);
-      done();
-      component.dispose();
+    .catch(err => {
+      endTest(done, err, component);
     });
+}
+
+function endTest(done, err, component) {
+  if (err) fail(err);
+  done();
+  if (component) component.dispose();
 }

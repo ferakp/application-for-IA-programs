@@ -4,7 +4,6 @@ describe('Test text-field component', () => {
   const resources = ['../../src/components/text-field'];
 
   const html = `
-  
   <text-field 
   label.to-view="label"
   error-message.to-view="errorMessage"
@@ -17,10 +16,7 @@ describe('Test text-field component', () => {
   show-clear-button.to-view="showClearButton"
   disable.to-view="disable"
   input-enter-callback.to-view="inputEnterCallback"
-  >
-  </text-field>
-
-  `;
+  ></text-field>`;
 
   const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
@@ -32,7 +28,7 @@ describe('Test text-field component', () => {
   });
 
   /**
-   * Attributes
+   * ATTRIBUTES
    */
 
   it('displays label correctly (label attribute)', done => {
@@ -83,13 +79,14 @@ describe('Test text-field component', () => {
 
   it('displays first letter in upper case (firstLetterUpperCase attribute)', done => {
     runTest({ value: 'value-', firstLetterUpperCase: true }, done, async () => {
-      await update(500);
+      await update(1000);
       expectElement('.text-field__input-element', 'value').toBe('Value-');
     });
   });
 
   it('displays only numbers (allowOnlyNumbers attribute)', done => {
-    runTest({ value: 'value-', allowOnlyNumbers: true }, done, async () => {
+    runTest({ allowOnlyNumbers: true }, done, async component => {
+      component.viewModel.valye = 'value-';
       await update(500);
       expectElement('.text-field__input-element', 'value').toBe('');
     });
@@ -131,15 +128,16 @@ describe('Test text-field component', () => {
       }
     );
   });
+
   /**
-   * Functions
+   * FUNCTIONS
    */
 
   it('clears input field when clearButtonClicked function is called (clearButtonClicked function)', done => {
     runTest({ value: 'Test' }, done, async component => {
       expectViewModelProperty(component, 'value').toEqual('Test');
       component.viewModel.clearButtonClicked();
-      await update();
+      await update(0);
       expectViewModelProperty(component, 'value').toEqual('');
     });
   });

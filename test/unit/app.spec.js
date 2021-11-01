@@ -1,27 +1,16 @@
-import { bootstrap } from 'aurelia-bootstrapper';
-import { StageComponent } from 'aurelia-testing';
-import { PLATFORM } from 'aurelia-pal';
+import { executeTest, expectElement, expectElementNumber} from '../test-utils';
 
 describe('Stage App Component', () => {
-  let component;
+  const resources = ['../../src/app'];
 
-  beforeEach(() => {
-    component = StageComponent.withResources(PLATFORM.moduleName('../../src/app')).inView('<app></app>');
-  });
+  const html = `<app></app>`;
 
-  afterEach(() => component.dispose());
+  const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
-  it('should exist', done => {
-    component
-      .create(bootstrap)
-      .then(() => {
-        const app = document.querySelector('app');
-        expect(app.children.length).toBe(1);
-        done();
-      })
-      .catch(e => {
-        fail(e);
-        done();
-      });
+  it('renders component', done => {
+    runTest({}, done, async () => {
+      expectElement('.app__container').not.toEqual(null);
+      expectElementNumber('.app__container').toEqual(1);
+    });
   });
 });

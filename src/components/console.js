@@ -1,5 +1,9 @@
 import { bindable } from 'aurelia-framework';
-
+/**
+ * A view model for console component
+ * 
+ * The component could be also used for log mode (logMode attribute)
+ */
 export class Console {
   @bindable
   disable;
@@ -30,7 +34,7 @@ export class Console {
         id: payload.id || this._getNewId(),
         color: this._getRandomColor(),
         status: payload.status || {},
-        isResponse: payload.isResponse || false
+        isResponse: payload.isResponse || false,
       };
       this.terminalLines.push(terminalLine);
     }
@@ -47,15 +51,15 @@ export class Console {
     this.value = '';
   };
 
-  _openInfo = id => {
-    // Open wiki window with given id
-  };
+  // Disabled
+  _openInfo = id => {};
 
   _deleteTerminalLine = id => {
     if (typeof id === 'number') {
       this.deletedTerminalLineIds.push(id);
       for (let i = 0; i < this.terminalLines.length; i++) {
         if (id === this.terminalLines[i].id) {
+          if (i + 1 < this.terminalLines.length && this.terminalLines[i + 1].isResponse) this.terminalLines.splice(i, 1);
           this.terminalLines.splice(i, 1);
           break;
         }
@@ -71,7 +75,7 @@ export class Console {
         id: this._getNewId(),
         color: this._getRandomColor(),
         status: [],
-        isResponse: false
+        isResponse: false,
       };
       return terminalLine;
     }
