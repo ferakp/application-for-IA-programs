@@ -2,9 +2,6 @@ import { Interpreter } from '../../src/interpreter/interpreter';
 import { AppVM } from '../../src/view-models/app-vm';
 import { CustomFileReader } from '../../src/custom-file-reader/custom-file-reader';
 
-// Use fake timer for skipping async calls
-//jest.useFakeTimers();
-
 describe('Test interpreter class', () => {
   /**
    * STANDARDS
