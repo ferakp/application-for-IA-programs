@@ -118,6 +118,7 @@ export class Interpreter {
       fText[7].length > 0
     ) {
       if (!isNaN(parseFloat(fText[7]))) return { response: true, errorMessage: '', parameters: fText };
+      else return { response: false, errorMessage: 'Invalid instruction structure (invalid value)' };
     } else return { response: false, errorMessage: 'Invalid instruction structure' };
   };
 

@@ -2,9 +2,9 @@
  *  AppVM is a view model class for entire application
  *  Once application is initialized Aurelia creates a single AppVM instance
  *
- *  AppVM is also used to controlling user interface components 
+ *  AppVM is also used to controlling user interface components
  *  Agents is binded to agent-view and logs is binded to logs-view
- *  
+ *
  *  See the documentation for further details
  */
 export class AppVM {
@@ -184,7 +184,12 @@ class Agent {
       // Creates initializing message log
       this.appVMApi.log('Initializing ' + this.name, this.id);
       // Reads rules file
-      let { response, errorMessage } = await this.appVMApi.fileReader.readFile(this.file);
+      if (this.file) {
+        let { response, errorMessage } = await this.appVMApi.fileReader.readFile(this.file);
+      } else {
+        this.state = 'error';
+        return;
+      }
       // Parse rules
       if (this.parseRules(response.filter(e => e).map(e => e.trim()))) {
         this.state = 'initialized';
