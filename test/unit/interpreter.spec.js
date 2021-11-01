@@ -66,5 +66,22 @@ describe('Test interpreter class', () => {
     expect(interpreter.isGenerateInstructionValid('generate perception id 1 target tem value a3').response).toBe(false);
   });
 
-  
+  it('validates the upload instruction correctly', () => {
+    expect(interpreter.isUploadInstructionValid('upload').response).toBe(true);
+    expect(interpreter.isUploadInstructionValid('upload fi').response).toBe(false);
+    expect(interpreter.isUploadInstructionValid('upload file').response).toBe(true);
+  });
+
+  it('validates the create instruction correctly', () => {
+    expect(interpreter.isCreateInstructionValid('create agent').response).toBe(false);
+    appVM.files.push(null, "test.txt");
+    expect(interpreter.isCreateInstructionValid('create agent -file 0 -class reflex').response).toBe(true);
+    expect(interpreter.isCreateInstructionValid('create agent -file 0 -class reflex').parameters[0]).toBe('agent');
+    expect(typeof interpreter.isCreateInstructionValid('create agent -file 0 -class reflex').parameters[1]).toBe('number');
+    expect(interpreter.isCreateInstructionValid('create agent -file 0 -class reflex').parameters[2]).not.toEqual(undefined);
+    expect(interpreter.isCreateInstructionValid('create agent -file 0 -class model-reflex').response).toBe(true);
+    expect(interpreter.isCreateInstructionValid('create agent -file 0 -class goal').response).toBe(true);
+    expect(interpreter.isCreateInstructionValid('create agent -file 0 -class utility').response).toBe(true);
+  });
+
 });
