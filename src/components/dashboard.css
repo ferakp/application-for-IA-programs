@@ -14,16 +14,16 @@
 
 .dashboard__left-window {
   display: flex;
-  flex-flow: column wrap;
+  flex-flow: column nowrap;
   flex: 0 0 40%;
   margin-left: 5px;
   transition: flex 1s;
 }
 
 .dashboard__console-container {
-  flex: 1;
-  align-items: stretch;
-  flex-direction: column;
+  margin-top: auto;
+  height: 100%;
+  overflow: hidden;
 }
 
 .dashboard__expanded-window {
