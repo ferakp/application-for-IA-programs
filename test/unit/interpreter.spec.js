@@ -53,4 +53,18 @@ describe('Test interpreter class', () => {
   it('has a valid command', () => {
     expect(interpreter.hasValidCommand('create agent -file 0 -class reflex')).toBe(true);
   });
+
+  it('validates the run instruction correctly', () => {
+    appVM.createAgent(0, null);
+    expect(interpreter.isRunInstructionValid('run agent '+appVM.agents[0].id).response).toBe(true);
+    expect(interpreter.isRunInstructionValid('run agent').response).toBe(false);
+  });
+
+  it('validates the generate instruction correctly', () => {
+    expect(interpreter.isGenerateInstructionValid('generate perception id').response).toBe(false);
+    expect(interpreter.isGenerateInstructionValid('generate perception id 1 target tem value 3').response).toBe(true);
+    expect(interpreter.isGenerateInstructionValid('generate perception id 1 target tem value a3').response).toBe(false);
+  });
+
+  
 });
