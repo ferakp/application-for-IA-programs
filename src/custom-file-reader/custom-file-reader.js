@@ -1,14 +1,4 @@
-import { inject } from 'aurelia-framework';
-import { EventAggregator } from 'aurelia-event-aggregator';
-
-@inject(EventAggregator)
 export class CustomFileReader {
-  eventAggregator;
-
-  constructor(eventAggregator) {
-    this.eventAggregator = eventAggregator;
-  }
-
   /**
    * Function for parsing files and extracting observations
    * @param {File} file file with observations

@@ -24,7 +24,7 @@ export class Interpreter {
 
   supportedInstructions = {
     commands: ['upload', 'create', 'show', 'generate', 'run'],
-    arguments: [['', 'file', 'folder', 'text-file'], ['agent'], ['files'], ['perception'], ['agent']],
+    arguments: [['', 'file', 'files', 'folder', 'text-file'], ['agent'], ['files'], ['perception'], ['agent']],
     options: [[], ['class', 'file'], [], [], []],
   };
 
@@ -118,6 +118,7 @@ export class Interpreter {
       fText[7].length > 0
     ) {
       if (!isNaN(parseFloat(fText[7]))) return { response: true, errorMessage: '', parameters: fText };
+      else return { response: false, errorMessage: 'Invalid instruction structure (invalid value)' };
     } else return { response: false, errorMessage: 'Invalid instruction structure' };
   };
 
@@ -125,9 +126,9 @@ export class Interpreter {
     if (this.isInstructionStructureValid(text, true, true) && this.readCommand(text) === 'upload') {
       let args = this.readArguments(text);
       if (args.length === 0) return { response: true };
-      else if (args.length > 1) return { response: false };
+      else if (args.length > 1) return { response: false, errorMessage: "Invalid amount of arguments" };
       else if (args.length === 1 && this.supportedInstructions.arguments[this.supportedInstructions.commands.indexOf('upload')].includes(args[0])) return { response: true };
-      else return { response: false };
+      else return { response: false, errorMessage: "Invalid argument" };
     } else {
       return { response: false, errorMessage: 'Invalid instruction structure' };
     }
@@ -136,11 +137,8 @@ export class Interpreter {
   isCreateInstructionValid = text => {
     if (!this.isInstructionStructureValid(text, false, false) || this.readCommand(text) !== 'create') return { response: false, errorMessage: 'Invalid instruction structure' };
     let receivedArguments = this.readArguments(text);
-    let supportedArguments = this.supportedInstructions.arguments[this.supportedInstructions.commands.indexOf('create')];
     if (receivedArguments.length > 1) return { response: false, errorMessage: 'Create command supports only one argument' };
-
     let receivedOptions = this.readOptions(text);
-    let supportedOptions = this.supportedInstructions.options[this.supportedInstructions.commands.indexOf('create')];
 
     if (receivedArguments[0] === 'agent') {
       let classValue;
@@ -280,6 +278,7 @@ export class Interpreter {
   runFunction(fn, params) {
     try {
       fn(params);
+      return '';
     } catch (err) {
       return err;
     }
