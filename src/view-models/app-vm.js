@@ -34,17 +34,27 @@ export class AppVM {
   // Processed perceptions are the perceptions that have been shared among agents
   processedPerceptions = [];
 
+  /**
+   * UTILITY PROPERTIES
+   */
+
+  _perceptionCheckInterval;
+
   constructor() {
     this._appVMApi = { deleteAgent: this.deleteAgent, logs: this.logs, fileReader: this.fileReader, log: this.log };
 
     // Interval for checking recently added perceptions
-    setInterval(() => {
+    this._perceptionCheckInterval = setInterval(() => {
       if (this.perceptions.length > 0) {
         this.agents.forEach(a => a.addPerceptions(this.perceptions));
         this.processedPerceptions.concat(this.perceptions);
         this.perceptions = [];
       }
     }, 1000);
+  }
+
+  destroy() {
+    clearInterval(this._perceptionCheckInterval);
   }
 
   // Registers FileReader instance

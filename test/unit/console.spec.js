@@ -3,10 +3,7 @@ import { update, executeTest, expectElement, expectElementAttribute, expectEleme
 describe('Test console component', () => {
   const resources = ['../../src/components/console', '../../src/components/terminal-line', '../../src/components/text-field'];
 
-  const html = `
-  <console
-  terminal-lines.two-way="terminalLines"
-  ></console>`;
+  const html = `<console terminal-lines.two-way="terminalLines"></console>`;
 
   const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
@@ -19,8 +16,9 @@ describe('Test console component', () => {
   });
 
   /**
-   * Attributes
+   * ATTRIBUTES
    */
+  
   it('display terminal lines correctly (terminalLines attribute)', done => {
     runTest(
       {
@@ -30,6 +28,8 @@ describe('Test console component', () => {
             text: 'test',
             time: new Date(),
             color: 'rgba(255, 255, 255,0.5)',
+            status: {},
+            isResponse: false,
           },
         ],
       },
@@ -43,7 +43,7 @@ describe('Test console component', () => {
   });
 
   /**
-   * Functions
+   * FUNCTIONS
    */
 
   it('creates a new terminal line correctly (_enterPressed function)', done => {
@@ -59,7 +59,7 @@ describe('Test console component', () => {
         bubbles: true,
       });
       document.querySelector('.text-field__input-element').dispatchEvent(keyboardEvent);
-      await update();
+      await update(0);
       expectElement('.terminal-line__text', 'innerHTML').toBe('test!');
       expect(component.viewModel.value).toBe('');
     });

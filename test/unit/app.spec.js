@@ -1,11 +1,9 @@
-import { update, executeTest, expectElement, expectElementAttribute, expectElementNumber, expectViewModelProperty } from '../test-utils';
+import { executeTest, expectElement, expectElementNumber} from '../test-utils';
 
 describe('Stage App Component', () => {
   const resources = ['../../src/app'];
 
-  const html = `
-  <app
-  ></app>`;
+  const html = `<app></app>`;
 
   const runTest = (viewModel, done, test) => executeTest(resources, html, viewModel, done, test);
 
