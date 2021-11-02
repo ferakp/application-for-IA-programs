@@ -39,6 +39,10 @@ export class TerminalLine {
     }, 1000);
   }
 
+  detached() {
+    if(this.errorMessageInterval) clearInterval(this.errorMessageInterval);
+  }
+
   _isObjectEmpty(obj){
     let isEmpty = true;
     for (let key in obj) {
