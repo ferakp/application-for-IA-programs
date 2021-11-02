@@ -24,6 +24,7 @@ export class TerminalLine {
   errorMessageInterval;
 
   attached() {
+    if(this._isObjectEmpty(this.terminalLine)) return;
     this._text = this.terminalLine.text;
     this._time = this._formatTime(this.terminalLine.time);
     this._color = this.terminalLine.color;
@@ -38,13 +39,26 @@ export class TerminalLine {
     }, 1000);
   }
 
+  detached() {
+    if(this.errorMessageInterval) clearInterval(this.errorMessageInterval);
+  }
+
+  _isObjectEmpty(obj){
+    let isEmpty = true;
+    for (let key in obj) {
+      isEmpty = false;
+      break;
+    }
+    return isEmpty;
+  }
+
   _formatTime(date) {
     if (date && Object.getPrototypeOf(date).constructor.name === 'Date') {
       let prefixMinutes = '0';
       let prefixHours = '0';
       if (date.getHours() > 9) prefixHours = '';
       if (date.getMinutes() > 9) prefixMinutes = '';
-      return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + +prefixHours + date.getHours() + ':' + prefixMinutes + date.getMinutes();
+      return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + prefixHours + date.getHours() + ':' + prefixMinutes + date.getMinutes();
     }
   }
 
