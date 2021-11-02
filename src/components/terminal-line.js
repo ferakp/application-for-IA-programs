@@ -54,7 +54,7 @@ export class TerminalLine {
       let prefixHours = '0';
       if (date.getHours() > 9) prefixHours = '';
       if (date.getMinutes() > 9) prefixMinutes = '';
-      return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + +prefixHours + date.getHours() + ':' + prefixMinutes + date.getMinutes();
+      return date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear() + ' ' + prefixHours + date.getHours() + ':' + prefixMinutes + date.getMinutes();
     }
   }
 
