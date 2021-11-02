@@ -24,6 +24,7 @@ export class TerminalLine {
   errorMessageInterval;
 
   attached() {
+    if(this._isObjectEmpty(this.terminalLine)) return;
     this._text = this.terminalLine.text;
     this._time = this._formatTime(this.terminalLine.time);
     this._color = this.terminalLine.color;
@@ -36,6 +37,15 @@ export class TerminalLine {
       if (this.terminalLine.status.isAction) this._isAction = true;
       clearInterval(this.errorMessageInterval);
     }, 1000);
+  }
+
+  _isObjectEmpty(obj){
+    let isEmpty = true;
+    for (let key in obj) {
+      isEmpty = false;
+      break;
+    }
+    return isEmpty;
   }
 
   _formatTime(date) {
