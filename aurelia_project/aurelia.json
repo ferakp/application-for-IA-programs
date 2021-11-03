@@ -23,8 +23,8 @@
   "platform": {
     "hmr": false,
     "open": false,
-    "port": 8080,
-    "host": "localhost",
+    "port": "3000",
+    "host": "51.75.95.66",
     "output": "dist"
   }
 }
