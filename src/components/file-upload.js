@@ -58,10 +58,8 @@ export class FileUpload {
       e.preventDefault();
       let file = e.dataTransfer.files[0];
       if (Array.isArray(this.files) && file) {
-
         this.alertSuccessfulUpload();
         this.files.push(file);
-
       }
     });
   }
