@@ -23,17 +23,26 @@ export class LogsView {
   filters = [];
 
   // Looks for new logs every 2000 seconds
-  updateCycleTime = 2000;
+  updateCycleTime = 1000;
+  updateInterval;
 
   // Variables for comparing old logs and filters with new ones
-  
+
   previousFiltersLength = 0;
   previousLogsLength = 0;
 
   attached() {
-    setInterval(() => {
+    this.updateInterval = setInterval(() => {
       this.update();
     }, this.updateCycleTime);
+  }
+
+  dispose() {
+    this.detached();
+  }
+
+  detached() {
+    if (this.updateInterval) clearInterval(this.updateInterval);
   }
 
   update() {
@@ -47,6 +56,7 @@ export class LogsView {
 
   logsChanged(newValue) {
     if (Array.isArray(newValue) && this.consoleVM) {
+      this.consoleVM.emptyConsole();
       newValue.forEach(element => {
         if (Array.isArray(this.filters) && this.filters.length > 0) {
           this.filters.forEach(e => {
