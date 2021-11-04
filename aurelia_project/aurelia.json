@@ -24,7 +24,7 @@
     "hmr": false,
     "open": false,
     "port": "3000",
-    "host": "51.75.95.66",
+    "host": "simple-ia-app.ferakp.ovh",
     "output": "dist"
   }
 }
