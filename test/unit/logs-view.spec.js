@@ -33,6 +33,7 @@ describe('Test logs-view component ', () => {
       component.viewModel.filters = ["Text: test1"];
       await update(1300);
       expectElementNumber('terminal-line').toBe(1);
+      component.viewModel.detached();
     });
   });
 
