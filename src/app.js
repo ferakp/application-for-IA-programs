@@ -30,6 +30,7 @@ export class App {
         this.navBar.addMainFAIcon('fas fa-square-root-alt');
         this.navBar.addLink('Homepage', '/');
         this.navBar.addLink('Dashboard', '/dashboard');
+        this.navBar.addFAIcon("fab fa-github", "https://github.com/ferakp/application-for-IA-programs");
       } catch (err) {
         // skip
       }
