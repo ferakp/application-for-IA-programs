@@ -1,6 +1,6 @@
 import { update, createFile, executeTest, expectElement, expectElementAttribute, expectElementNumber, expectViewModelProperty } from '../test-utils';
 
-describe('Test logs-view component ', () => {
+describe('Test files-view component ', () => {
   const resources = ['../../src/components/files-view', '../../src/components/file-upload'];
 
   const html = `
