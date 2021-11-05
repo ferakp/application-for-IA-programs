@@ -13,7 +13,7 @@
         <console class="dashboard__console d-flex" terminal-lines.two-way="appVM.terminalLines" view-model.ref="dashboardConsole"></console>
       </div>
     </div>
-    <div class="dashboard__right-window d-flex flex-row ${expansionMode === true ? 'dashboard__hide-window' : ''}">
+    <div class="dashboard__right-window d-flex flex-row" show.bind="!expansionMode">
       <dashboard-menu active-view.two-way="activeView"></dashboard-menu>
       <div class="dashboard__right-window-view-container d-flex flex-column">
         <p class="dashboard__right-window-view-title opacity-half h4">${activeView ? activeView.replace('-view', '') : ''}</p>
