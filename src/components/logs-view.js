@@ -37,10 +37,6 @@ export class LogsView {
     }, this.updateCycleTime);
   }
 
-  dispose() {
-    this.detached();
-  }
-
   detached() {
     if (this.updateInterval) clearInterval(this.updateInterval);
   }

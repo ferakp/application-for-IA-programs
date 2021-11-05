@@ -13,7 +13,7 @@ describe('Test logs-view component ', () => {
 
   it('renders component', done => {
     runTest({}, done, () => {
-      expectElement('.logs-view__container ').not.toEqual(null);
+      expectElement('.logs-view__container').not.toEqual(null);
       expectElement('.logs-view__console').not.toEqual(null);
     });
   });

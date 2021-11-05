@@ -20,7 +20,7 @@
         <hr class="mt-0" />
         <agents-view show.bind="activeView === 'Agents-view'" agents.two-way="appVM.agents"></agents-view>
         <logs-view show.bind="activeView === 'Logs-view'" logs.to-view="appVM.logs" filters.two-way="logsViewFilters"></logs-view>
-        <files-view show.bind="activeView === 'Files-view'" label="Upload files" files.two-way="appVM.files"></files-view>
+        <files-view show.bind="activeView === 'Files-view'" files.two-way="appVM.files"></files-view>
       </div>
     </div>
   </div>

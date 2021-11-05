@@ -1,4 +1,5 @@
 import { CustomFileReader } from '../../src/custom-file-reader/custom-file-reader';
+import { createFile } from '../test-utils';
 
 describe('Test CustomFileReader class', () => {
   let customFileReader;
@@ -10,11 +11,6 @@ describe('Test CustomFileReader class', () => {
   afterEach(() => {
     customFileReader = null;
   });
-
-  const createFile = (text, name, type) => {
-    if (!type) type = 'txt';
-    return new File([text], name + '.' + type, { type: 'text/plain' });
-  };
 
   it('returns correct amount of rows from the file', async () => {
     let sampleText = `Row1
