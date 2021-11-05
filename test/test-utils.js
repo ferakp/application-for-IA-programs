@@ -25,6 +25,11 @@ export function expectElementAttribute(selector, attributeName) {
   return expect(document.querySelector(selector).getAttribute(attributeName));
 }
 
+export function createFile(text, name, type) {
+  if (!type) type = 'txt';
+  return new File([text], name + '.' + type, { type: 'text/plain' });
+};
+
 export function executeTest(resources, html, viewModel, done, testC) {
   const component = StageComponent.withResources(resources);
   component

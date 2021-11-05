@@ -1,6 +1,10 @@
 import { bindable, inject } from 'aurelia-framework';
 import { EventAggregator } from 'aurelia-event-aggregator';
-
+/**
+ * A class (view model) for files-view component
+ * 
+ * The files-view component is a view for handling files, it allows upload, deletion and view of files
+ */
 @inject(EventAggregator)
 export class FilesView {
   @bindable
@@ -9,7 +13,8 @@ export class FilesView {
   @bindable
   files;
 
-  supportedFileFormats;
+  // Restricted file formats (Array)
+  restrictedFileFormats;
 
   eventAggregator;
   activateUploadingSubscriber;
@@ -22,9 +27,14 @@ export class FilesView {
   }
 
   attached() {
-    this.supportedFileFormats = ['txt'];
+    // Restricts uploaded file type to .txt type
+    this.restrictedFileFormats = ['txt'];
   }
 
+  /**
+   * Deletes file by comparing the name and size of file with others
+   * @param {File} file 
+   */
   deleteFile = file => {
     for (let i = 0; i < this.files.length; i++) {
       if (this.files[i].name === file.name && this.files[i].size === file.size) this.files.splice(i, 1);
