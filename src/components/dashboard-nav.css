@@ -34,11 +34,12 @@ dashboard-nav {
 
 .dashboard-nav__expand-tooltip-text {
   position: absolute;
-  left: -45px;
-  top: -25px;
+  left: -65px;
+  top: -15px;
   padding-left: 10px;
   padding-right: 10px;
   color: white;
   background-color: black;
   font-size: 13px;
+  z-index: 99999999;
 }
