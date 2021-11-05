@@ -4,15 +4,15 @@
 
   <!-- Child components-->
   <div class="dashboard-menu__container d-flex flex-column">
-    <a class="dashboard-menu__item ${activeView === 'Agents-view' ? 'dashboard-menu__item-active' : ''}" click.delegate="menuItemClicked('Agents-view')">
+    <a class="dashboard-menu__agents-view-element dashboard-menu__item ${activeView === 'Agents-view' ? 'dashboard-menu__item-active' : ''}" click.delegate="menuItemClicked('Agents-view')">
       <i class="dashboard-menu__item-icon fas fa-cubes"></i>
       <div class="dashboard-menu__item-tooltip-container"><p>Intelligent Agents</p></div>
     </a>
-    <a class="dashboard-menu__item mt-2 ${activeView === 'Files-view' ? 'dashboard-menu__item-active' : ''}" click.delegate="menuItemClicked('Files-view')">
+    <a class="dashboard-menu__files-view-element dashboard-menu__item mt-2 ${activeView === 'Files-view' ? 'dashboard-menu__item-active' : ''}" click.delegate="menuItemClicked('Files-view')">
       <i class="dashboard-menu__item-icon fas fa-folder"></i>
       <div class="dashboard-menu__item-tooltip-container"><p>Files</p></div>
     </a>
-    <a class="dashboard-menu__item mt-2 ${activeView === 'Logs-view' ? 'dashboard-menu__item-active' : ''}" click.delegate="menuItemClicked('Logs-view')">
+    <a class="dashboard-menu__logs-view-element dashboard-menu__item mt-2 ${activeView === 'Logs-view' ? 'dashboard-menu__item-active' : ''}" click.delegate="menuItemClicked('Logs-view')">
       <i class="dashboard-menu__item-icon fas fa-history"></i>
       <div class="dashboard-menu__item-tooltip-container"><p>Log</p></div>
     </a>
