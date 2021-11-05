@@ -1,8 +1,7 @@
-
 describe('E2E test for upload component', () => {
   beforeEach(() => {
     cy.visit('/dashboard');
-    //cy.get(".dashboard-menu__files-view-element").click();
+    cy.get(".dashboard-menu__files-view-element").click();
   });
 
   it('should activate upload component', () => {
