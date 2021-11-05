@@ -38,3 +38,7 @@ node_modules
 
 # Prettier file
 prettier.config.js
+
+# e2e test folders
+cypress/videos
+cypress/screenshots
