@@ -47,7 +47,7 @@ export class Dashboard {
   }
 
   initialize() {
-    this.appVM = this.viewModelProvider.getAppVM();
+    if(this.viewModelProvider) this.appVM = this.viewModelProvider.getAppVM();
     if (this.interpreter) this.interpreter.setAppVM(this.appVM);
     if (this.appVM) this.appVM.registerFileReader(this.fileReader);
   }
