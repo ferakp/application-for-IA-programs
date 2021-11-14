@@ -65,16 +65,16 @@ export class App {
           roles: [],
         },
       },
-      // {
-      //   route: 'instructions',
-      //   name: 'Instructions',
-      //   moduleId: PLATFORM.moduleName('./components/instructions'),
-      //   nav: true,
-      //   title: 'Instructions',
-      //   settings: {
-      //     roles: [],
-      //   },
-      // },
+      {
+        route: 'instructions',
+        name: 'Instructions',
+        moduleId: PLATFORM.moduleName('./components/instructions'),
+        nav: true,
+        title: 'Instructions',
+        settings: {
+          roles: [],
+        },
+      },
     ]);
     this.router = router;
   }

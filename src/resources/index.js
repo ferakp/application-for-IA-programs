@@ -4,6 +4,7 @@ export function configure(config) {
   config.globalResources([
     PLATFORM.moduleName('../components/text-field'),
     PLATFORM.moduleName('../components/file-upload'),
+    PLATFORM.moduleName('../components/instructions'),
     PLATFORM.moduleName('../components/agents-view'),
     PLATFORM.moduleName('../components/logs-view'),
     PLATFORM.moduleName('../components/files-view'),
