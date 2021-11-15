@@ -3,6 +3,28 @@
   <require from="./instructions.css"></require>
 
   <!-- Child components-->
-  <div class="instructions__container flex-column">
+  <div class="instructions__container d-flex d-row">
+    <div class="instructions__documentation col-sm-6">
+      <p class="instructions_text pt-2"><b>Documentation</b></p>
+      <p class="instructions_text">
+        This application provides simple and comprehensive functionalities for testing different intelligent agents. It's intendend to highlight differences between different intelligent agent classes
+        that are <b>reflex agents</b>, <b>model-based reflex agents</b>, <b>goal-based agents</b> and <b>utility agents</b>.
+      </p>
+      <p class="instructions_text pt-1">
+        A reflex agent is a simple agent which reacts to perceptions according to its if-then rule table. A if-then rule table is made of conditions and their actions. 
+      </p>
+      <p class="instructions_text pt-1">
+        A model-based reflex agent is a type of agent which reacts to perceptions according to its if-then rule table and stores perceptions. This type of agent is much more developed than simple reflex agent
+        and it keeps a state of its environment. Thus, it doesn't only use if-then table but also information about its state.
+      </p>
+      <p class="instructions_text pt-2">
+        A goal-based agent is a type of agent which has a goal instead of if-then table. It uses the state about its environment, perceptions and internal knowledge to choose actions which takes
+        its closer to its goal. 
+      </p>
+      <p class="instructions_text pt-2">
+        An utility agent differs from other agents with its utility function which selects actions based on how useful it is. 
+      </p>
+    </div>
+    <div class="instructions__tables col-sm-6"></div>
   </div>
 </template>
