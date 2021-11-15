@@ -30,6 +30,7 @@ export class App {
         this.navBar.addMainFAIcon('fas fa-square-root-alt');
         this.navBar.addLink('Homepage', '/');
         this.navBar.addLink('Dashboard', '/dashboard');
+        this.navBar.addLink('Instructions', '/instructions');
         this.navBar.addFAIcon("fab fa-github", "https://github.com/ferakp/application-for-IA-programs");
       } catch (err) {
         // skip
@@ -65,16 +66,16 @@ export class App {
           roles: [],
         },
       },
-      // {
-      //   route: 'instructions',
-      //   name: 'Instructions',
-      //   moduleId: PLATFORM.moduleName('./components/instructions'),
-      //   nav: true,
-      //   title: 'Instructions',
-      //   settings: {
-      //     roles: [],
-      //   },
-      // },
+      {
+        route: 'instructions',
+        name: 'Instructions',
+        moduleId: PLATFORM.moduleName('./components/instructions'),
+        nav: true,
+        title: 'Instructions',
+        settings: {
+          roles: [],
+        },
+      },
     ]);
     this.router = router;
   }

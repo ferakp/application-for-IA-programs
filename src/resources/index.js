@@ -16,5 +16,6 @@ export function configure(config) {
     PLATFORM.moduleName('../components/dashboard-menu'),
     PLATFORM.moduleName('../components/console'),
     PLATFORM.moduleName('../components/terminal-line'),
+    PLATFORM.moduleName('../components/instructions'),
   ]);
 }
