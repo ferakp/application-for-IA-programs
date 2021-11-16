@@ -56,6 +56,7 @@ export class AppVM {
     }, 1000);
   }
 
+  // Closes open listeners and intervals
   destroy() {
     clearInterval(this._perceptionCheckInterval);
     this.agents.forEach(a => a.terminate());
@@ -80,7 +81,12 @@ export class AppVM {
     if (this.agents.length > 0) this.agents = this.agents.filter(e => e.id !== agentId);
   };
 
-  // Creates a new agent with given type and file containing rules
+  /**
+   * Creates a new agent with given type and file
+   * Add created agent to the agent's array
+   * @param {integer} type 
+   * @param {File} file 
+   */
   createAgent = (type, file) => {
     let agent = new Agent(this._appVMApi, type, file, null);
     this.agents.push(agent);
