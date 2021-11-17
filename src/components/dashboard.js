@@ -64,6 +64,10 @@ export class Dashboard {
     if (this.interpreterInterval) clearInterval(this.interpreterInterval);
   }
 
+  /**
+   * Initializes component
+   * Creates a new AppVM model, registers AppVM model reference to FileReader module and add FileReader module to AppVM model
+   */
   initialize() {
     if (this.viewModelProvider) this.appVM = this.viewModelProvider.getAppVM();
     if (this.interpreter) this.interpreter.setAppVM(this.appVM);

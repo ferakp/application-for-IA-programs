@@ -104,6 +104,11 @@ export class Interpreter {
     } else return { response: false, errorMessage: 'Invalid instruction structure' };
   };
 
+  /**
+   * Validates generate instruction
+   * @param {string} text full trimmed instruction
+   * @return {object} {response, errorMessage}
+   */
   isGenerateInstructionValid = text => {
     let fText = text.split(' ');
     if (
@@ -122,6 +127,11 @@ export class Interpreter {
     } else return { response: false, errorMessage: 'Invalid instruction structure' };
   };
 
+  /**
+   * Validates upload instruction
+   * @param {string} text full trimmed instruction
+   * @return {object} {response, errorMessage}
+   */
   isUploadInstructionValid = text => {
     if (this.isInstructionStructureValid(text, true, true) && this.readCommand(text) === 'upload') {
       let args = this.readArguments(text);
@@ -134,6 +144,11 @@ export class Interpreter {
     }
   };
 
+  /**
+   * Validates create instruction
+   * @param {string} text full trimmed instruction
+   * @return {object} {response, errorMessage, parameters}
+   */
   isCreateInstructionValid = text => {
     if (!this.isInstructionStructureValid(text, false, false) || this.readCommand(text) !== 'create') return { response: false, errorMessage: 'Invalid instruction structure' };
     let receivedArguments = this.readArguments(text);
@@ -157,11 +172,11 @@ export class Interpreter {
   };
 
   /**
-   * High level instruction structure validator
+   * Structure validator for upload and create instructions
    * @param {string} text
    * @param {boolean} isArgumentsOptional
    * @param {boolean} isOptionsOptional
-   * @returns {boolean}
+   * @returns {boolean} is correct
    */
   isInstructionStructureValid = (text, isArgumentsOptional, isOptionsOptional) => {
     if (this.hasValidCommand(text) && this.hasValidArguments(text, isArgumentsOptional) && this.hasValidOptions(text, isOptionsOptional)) {
@@ -177,11 +192,22 @@ export class Interpreter {
     }
   };
 
+  /**
+   * Validates command (program) of instruction 
+   * @param {string} text full trimmed instruction
+   * @returns {boolean} is correct
+   */
   hasValidCommand = text => {
     if (this.supportedInstructions.commands.includes(this.readCommand(text))) return true;
     else return false;
   };
 
+  /**
+   * Validates arguments of instruction 
+   * @param {string} text full trimmed instruction
+   * @param {boolean} isArgumentsOptional are arguments optional
+   * @returns {boolean} is correct
+   */
   hasValidArguments = (text, isArgumentsOptional) => {
     let args = this.readArguments(text);
     if (isArgumentsOptional) return true;
@@ -189,6 +215,12 @@ export class Interpreter {
     else return false;
   };
 
+  /**
+   * Validates options of instruction 
+   * @param {string} text full trimmed instruction
+   * @param {boolean} isOptionsOptional are options optional
+   * @returns {boolean} correctness
+   */
   hasValidOptions = (text, isOptionsOptional) => {
     let options = this.readOptions(text);
     let hasInvalidOption = false;
