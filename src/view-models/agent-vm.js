@@ -15,8 +15,8 @@ export class Agent {
   /**
    * Type 0 agent has structure of [id, target, [rule](2), action]
    * Type 1 agent has structure of [id, target, [rule](3), action]
-   * Type 2 agent has structure of [id, target, [rule](2), action]
-   * Type 3 agent has structure of [id, target, [rule](2), action]
+   * Type 2 agent has structure of [id, target, [rule](2), [actions]]
+   * Type 3 agent has structure of [id, target, [rule](2), [actions]]
    */
   ruleActionList = [];
 
@@ -286,7 +286,7 @@ export class Agent {
   };
 
   /**
-   * Executes rule's operator on perception's value
+   * Executes the rule's operator on perception's value
    * @param {Array} perceptions perceptions [id, target, value, time]
    * @param {string} rule [operator, value]
    * @return {boolean} return true if value passes the rule otherwise false
@@ -349,12 +349,13 @@ export class Agent {
   };
 
   /**
-   * The function parse rules in textual format and adds them to ruleActionList array
+   * The function parse rules and adds them to ruleActionList array
    * The rules are parsed in three different phases
    * Phase 1 - Validates general structure of rule is valid
    * Phase 2 - Validates agent specific rule structure
    * Phase 3 - Validates values occuring in rule
    * @param {Array} rules
+   * @returns {boolean} was parsing successful or not
    */
   parseRules = rules => {
     if (!this.isRulesValid(rules)) {

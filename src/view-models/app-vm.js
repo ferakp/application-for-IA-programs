@@ -31,7 +31,7 @@ export class AppVM {
 
   /**
    * Array for storing global perceptions
-   * An array of arrays with following structure [id, generate, perception, target, value]
+   * An array of arrays with following structure [id, target, value]
    */
   perceptions = [];
   // Processed perceptions are the perceptions that have been shared among agents
@@ -41,6 +41,7 @@ export class AppVM {
    * UTILITY PROPERTIES
    */
 
+  // Interval of perception checker
   _perceptionCheckInterval;
 
   constructor() {
@@ -82,9 +83,9 @@ export class AppVM {
   };
 
   /**
-   * Creates a new agent with given type and file
+   * Creates a new agent with given type (0-3) and file
    * Add created agent to the agent's array
-   * @param {integer} type 
+   * @param {number} type 
    * @param {File} file 
    */
   createAgent = (type, file) => {
