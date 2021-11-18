@@ -15,11 +15,11 @@ describe('Test dashboard component ', () => {
   beforeEach(() => {
     interpreter = new Interpreter();
     appVM = new AppVM();
-  })
+  });
 
   afterEach(() => {
     appVM.destroy();
-  })
+  });
 
   it('renders component', done => {
     runTest({}, done, (component) => {
