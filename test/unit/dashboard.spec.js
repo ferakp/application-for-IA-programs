@@ -36,7 +36,7 @@ describe('Test dashboard component ', () => {
   });
 
   /**
-   * ATTRIBUTES
+   * FUNCTIONS
    */
 
   it('sends commands to interpreter correctly (runInterpreter function)', done => {
@@ -46,6 +46,25 @@ describe('Test dashboard component ', () => {
       component.viewModel.appVM.terminalLines = [{ text: "generate perception id 1 target tmp value 2", id: 222 }];
       await update(2000);
       expectElementNumber("terminal-line").toBe(1);
+      component.viewModel.destroy();
+    });
+  });
+
+  /**
+   * ATTRIBUTES
+   */
+
+  it('expands/minimizes terminal view correctly (expandMode attribute)', done => {
+    runTest({}, done, async (component) => {
+      component.interpreter = interpreter;
+      component.viewModel.appVM = appVM;
+      expectElement(".dashboard__expanded-window").toBe(null);
+      document.querySelector(".dashboard-nav__expand-link").click();
+      await update(500);
+      expectElement(".dashboard__expanded-window").not.toBe(null);
+      document.querySelector(".dashboard-nav__expand-link").click();
+      await update(500);
+      expectElement(".dashboard__expanded-window").toBe(null);
       component.viewModel.destroy();
     });
   });
