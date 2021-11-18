@@ -30,7 +30,8 @@ describe('Test agents-view component ', () => {
     sampleAppVM.registerFileReader(new CustomFileReader());
     let sampleAgent = new Agent(sampleAppVM, 0, file, null);
     runTest({ agents: [sampleAgent] }, done, async (component) => {
-      await update(500);
+      console.log(component.viewModel.agents[0]);
+      await update(1500);
       expectElement('agent-box').not.toEqual(null);
       expectElement('.agent-box__name', 'innerHTML').toBe(sampleAgent.name);
       expectElement('.agent-box__id', 'innerHTML').toBe((sampleAgent.id).toString());

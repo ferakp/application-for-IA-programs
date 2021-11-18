@@ -34,6 +34,7 @@ export class Interpreter {
   // Map pointing commands to their validators
   commandValidators;
 
+  // Aurelia module for handling events
   eventAggregator;
   appVM;
 
