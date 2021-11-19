@@ -11,5 +11,5 @@ agents-view {
 
 .agents-view__agent-container {
   overflow-y: auto;
-  height: 100%;
+  height: 90%;
 }
