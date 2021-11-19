@@ -1,3 +1,30 @@
 .instructions_text {
   margin-left: 10px;
+  font-size: 15px;
+  opacity: 0.8;
+}
+
+.instructions__documentation-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.instructions__container table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.instructions__container td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 13px;
+}
+
+.instructions__container tr:nth-child(even) {
+  background-color: #dddddd;
 }
