@@ -1,10 +1,12 @@
-# `n-service-system`
+# `simple-ia-application`
 
 This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
 
 For more information, go to https://aurelia.io/docs/cli/webpack
 
 ## Run dev app
+
+Open aurelia.json file and replace host and port properties with your localhost and port number
 
 Run `npm start`, then open `http://localhost:8080`
 
