@@ -28,11 +28,11 @@
           most optimal ones.
         </p>
         <p class="instructions_text pt-1"><b>Instructions for creating a sample reflex agent</b></p>
-        <p class="instructions_text mb-0 mt-0">Phase 1 - Create an empty text (txt) file on your Desktop. Write following if-then rule <br><em><u>id 1 target temperature rule <22 action warmUp</u></em> and then save file. </p>
+        <p class="instructions_text mb-0 mt-0">Phase 1 - Create an empty text (txt) file on your Desktop. Write following if-then rule</p> <br><p><em><u>id 1 target temperature rule &lt;22 action warmUp</u></em> and then save file. </p>
         <p class="instructions_text mb-0 mt-0">Phase 2 - Write <em><u>upload</u></em> to terminal. Then press enter. Select the text file you just created.</p>
         <p class="instructions_text mb-0 mt-0">Phase 3 - Create an agent with following instruction <em><u>create agent -file 0 -class reflex</u></em></p>
         <p class="instructions_text mb-0 mt-0">Phase 4 - Run agent with following instruction <em><u>run agent AGENTID</u></em>. Replace AGENTID with the id of recently created agent.</p>
-        <p class="instructions_text mb-0 mt-0">Phase 5 - Generate a perception with following instruction <em><u>generate perception id ID target TARGET value VALUE</u></em>. <br>Replace ID, TARGET and VALUE with real ones.</p>
+        <p class="instructions_text mb-0 mt-0">Phase 5 - Generate a perception with following instruction <em><u>generate perception id ID target TARGET value VALUE</u></em>.</p><br><p>Replace ID, TARGET and VALUE with real ones.</p>
         <p class="instructions_text mb-0 mt-0">Phase 6 - Open logs-view and read the log(s) the agent wrote.</p>
       </div>
     </div>
@@ -48,23 +48,23 @@
           <tr>
             <td>Reflex agent</td>
             <td>ID <em>NUMBER</em> TARGET <em>STRING</em> VALUE <em>NUMBER</em></td>
-            <td>ID <em>NUMBER</em> TARGET <em>STRING</em> RULE <em>[< | > | =]</em> <em>NUMBER</em> ACTION <em>STRING</em></td>
+            <td>ID <em>NUMBER</em> TARGET <em>STRING</em> RULE <em>[&lt; | &gt; | =]</em> <em>NUMBER</em> ACTION <em>STRING</em></td>
             <td>
-              <b>Perception sample</b></br>
-              generate perception id 1 target temperature value 22</br>
+             <b>Perception sample</b></br>
+              <p>generate perception id 1 target temperature value 22</p></br>
               <b>Rule sample</b></br>
-              id 1 target temperature rule <22 action warm_up</br>
+              <p>id 1 target temperature rule &lt;22 action warm_up</p></br>
             </td>
           </tr>
           <tr>
             <td>Model-based reflex agent</td>
             <td>ID <em>NUMBER</em> TARGET <em>STRING</em> VALUE <em>NUMBER</em></td>
-            <td>ID <em>NUMBER</em> TARGET <em>STRING</em> RULE <em>[< | > | =]</em> <em>NUMBER</em>:<em>NUMBER</em> ACTION <em>STRING</em></td>
+            <td>ID <em>NUMBER</em> TARGET <em>STRING</em> RULE <em>[&lt; | &gt; | =]</em> <em>NUMBER</em>:<em>NUMBER</em> ACTION <em>STRING</em></td>
             <td>
               <b>Perception sample</b></br>
-              generate perception id 1 target temperature value 22</br>
+              <p>generate perception id 1 target temperature value 22</p></br>
               <b>Rule sample</b></br>
-              id 1 target temperature rule <22:500 action warm_up</br>
+              <p>id 1 target temperature rule &lt;22:500 action warm_up</p></br>
             </td>
           </tr>
           <tr>
